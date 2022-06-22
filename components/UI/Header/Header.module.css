@@ -1,0 +1,25 @@
+.header {
+    font-style: normal;
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 28px;
+}
+
+.subheader {
+    color: var(--accent2);
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+}
+
+.container {
+    display: grid;
+
+    grid-template-columns: 1fr 150px;
+}
+
+.cta {
+    display: flex;
+    justify-content: right;
+    align-items: center;
+}

@@ -1,11 +1,25 @@
 import s from './Input.module.css'
 
+import View from '@/icons/view.svg'
+import { useState } from 'react'
+
 export default function Input({ label, ...props }) {
+    const [isVisible, setIsVisible] = useState(false)
+
+    const handleShow = () => { setIsVisible(!isVisible) }
+
+    const { type } = props
+    const passwordButton = type === 'password' ? <View className={s.icon} onClick={handleShow} /> : ''
+    const typeOfInput = (isVisible && type === 'password') || type === 'text' || type === undefined ? 'text' : 'password'
+
     return <div className={s.container}>
         <label className={s.label}>
             {label}
         </label>
         <br />
-        <input className={s.input} {...props} />
+        <div className={s.inputContainer}>
+            {passwordButton}
+            <input className={s.input} {...props} type={typeOfInput} />
+        </div>
     </div>
 }

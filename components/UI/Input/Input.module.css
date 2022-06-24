@@ -27,3 +27,17 @@
     border: none;
     outline: 1px solid var(--accent1);
 }
+
+.inputContainer {
+    position: relative;
+}
+
+.icon {
+    right: 3px;
+    top: 5px;
+    position: absolute;
+
+    cursor: pointer;
+
+    transition: 0.2s ease-in-out;
+}

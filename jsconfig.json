@@ -10,6 +10,9 @@
             ],
             "@/img/*": [
                 "public/img/*"
+            ],
+            "@/icons/*": [
+                "public/icons/*"
             ]
         }
     }

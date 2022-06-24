@@ -15,6 +15,7 @@
     "react-hook-form": "^7.32.2"
   },
   "devDependencies": {
+    "@svgr/webpack": "^6.2.1",
     "eslint": "8.18.0",
     "eslint-config-next": "12.1.6"
   }

@@ -1,35 +1,35 @@
-import Center from '@/components/skeleton/Center';
-import FlexRow from '@/components/skeleton/FlexRow';
-import FocusPanel from '@/components/skeleton/FocusPanel';
-import Margin from '@/components/skeleton/Margin';
-import Button from '@/components/UI/Button';
-import Header from '@/components/UI/Header';
-import Input from '@/components/UI/Input';
-import Subtext from '@/components/UI/Subtext';
-import Link from 'next/link';
-import { useState } from 'react';
-import { Controller, useForm } from 'react-hook-form';
+import Center from '@/components/skeleton/Center'
+import FlexRow from '@/components/skeleton/FlexRow'
+import FocusPanel from '@/components/skeleton/FocusPanel'
+import Margin from '@/components/skeleton/Margin'
+import Button from '@/components/UI/Button'
+import Header from '@/components/UI/Header'
+import Input from '@/components/UI/Input'
+import Subtext from '@/components/UI/Subtext'
+import Link from 'next/link'
+import { useState } from 'react'
+import { Controller, useForm } from 'react-hook-form'
 
 const registerOptions = {
     username: {
-        required: "Username is required",
+        required: 'Username is required',
         pattern: {
             value: /^\S+$/,
             message: 'Username can not contain any spaces'
         }
     },
     email: {
-        required: "Email is required",
+        required: 'Email is required',
         pattern: {
             value: /^(.+)@(.+)$/,
             message: 'Please, enter valid email'
         }
     },
     password: {
-        required: "Password is required",
+        required: 'Password is required',
         minLength: {
             value: 8,
-            message: "Password must have at least 8 characters"
+            message: 'Password must have at least 8 characters'
         }
     }
 }
@@ -43,6 +43,7 @@ export default function Signup() {
         setIsLoading(true)
         console.log(data)
         alert(JSON.stringify(data))
+        // tuta tipa     zaloginitsa()
         // setIsLoading(false)
     }
 
@@ -57,7 +58,7 @@ export default function Signup() {
                     {/* username */}
                     <Controller
                         defaultValue=''
-                        name="username"
+                        name='username'
                         control={control}
                         rules={registerOptions.username}
                         render={({ field }) => <Input label={'Username'} {...field} />}
@@ -69,7 +70,7 @@ export default function Signup() {
                     {/* email */}
                     <Controller
                         defaultValue=''
-                        name="email"
+                        name='email'
                         control={control}
                         rules={registerOptions.email}
                         render={({ field }) => <Input label={'Email'} {...field} />}
@@ -81,10 +82,10 @@ export default function Signup() {
                     {/* password */}
                     <Controller
                         defaultValue=''
-                        name="password"
+                        name='password'
                         control={control}
                         rules={registerOptions.password}
-                        render={({ field }) => <Input label={'Password'} {...field} />}
+                        render={({ field }) => <Input label={'Password'} type='password' {...field} />}
                     />
                     <Margin height='5px' />
                     <Subtext type='error'>{errors.password && errors.password?.message}</Subtext>
@@ -95,7 +96,7 @@ export default function Signup() {
 
                     <Margin height='20px' />
                     <FlexRow flexDirection={'row-reverse'}>
-                        <Button type="submit" disabled={isLoading}>Sign up</Button>
+                        <Button type='submit' disabled={isLoading}>Sign up</Button>
                     </FlexRow>
                 </form>
             </Center>

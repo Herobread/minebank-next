@@ -27,13 +27,25 @@
 
 .button:hover {
     outline: 1px solid var(--accent1);
-    background-color: var(--accent1);
-    color: black;
 }
 
 .button:active {
     transition: 0s ease-in-out;
-    outline: 1px solid var(--accent2);
-    background-color: var(--accent-1);
-    color: var(--accent1);
+    background-color: var(--accent3);
+}
+
+.disabled {
+    cursor: not-allowed;
+
+    outline: 1px solid var(--accent3);
+    color: var(--accent3);
+}
+
+.disabled:active {
+    background-color: transparent;
+}
+
+.disabled:hover,
+.disabled:focus {
+    outline: 1px solid var(--accent3);
 }

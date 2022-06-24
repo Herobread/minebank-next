@@ -21,7 +21,7 @@
     transition: 0.2s ease-in-out;
 }
 
-.input:hover,
+/* .input:hover, */
 .input:focus {
     color: var(--accent1);
     border: none;

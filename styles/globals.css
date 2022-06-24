@@ -17,6 +17,12 @@ body {
 a {
   text-decoration: none;
   color: inherit;
+
+  transition: 0.2s ease-in-out;
+}
+
+a:hover {
+  color: white;
 }
 
 .mc {
@@ -27,8 +33,9 @@ a {
   --accent1: #FFFFFF;
   --accent2: #9A9A9A;
   --accent3: #666666;
-  --accent4: #222222;
-  --accent5: #111111;
+  --accent4: #444444;
+  --accent5: #222222;
+  --accent6: #111111;
 
   --accent-1: #000000;
 }

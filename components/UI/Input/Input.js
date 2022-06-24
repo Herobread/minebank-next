@@ -6,7 +6,6 @@ export default function Input({ label, ...props }) {
             {label}
         </label>
         <br />
-
         <input className={s.input} {...props} />
     </div>
 }

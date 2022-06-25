@@ -2,6 +2,7 @@ import s from './Input.module.css'
 
 import View from '@/icons/view.svg'
 import ViewClosed from '@/icons/viewClosed.svg'
+
 import { useState } from 'react'
 
 export default function Input({ label, ...props }) {

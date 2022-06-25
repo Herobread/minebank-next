@@ -1,6 +1,7 @@
 import s from './Input.module.css'
 
 import View from '@/icons/view.svg'
+import ViewClosed from '@/icons/viewClosed.svg'
 import { useState } from 'react'
 
 export default function Input({ label, ...props }) {
@@ -9,7 +10,8 @@ export default function Input({ label, ...props }) {
     const handleShow = () => { setIsVisible(!isVisible) }
 
     const { type } = props
-    const passwordButton = type === 'password' ? <View className={s.icon} onClick={handleShow} /> : ''
+    const passwordButtonType = isVisible ? <View className={s.icon} onClick={handleShow} /> : <ViewClosed className={s.icon} onClick={handleShow} />
+    const passwordButton = type === 'password' ? passwordButtonType : ''
     const typeOfInput = (isVisible && type === 'password') || type === 'text' || type === undefined ? 'text' : 'password'
 
     return <div className={s.container}>

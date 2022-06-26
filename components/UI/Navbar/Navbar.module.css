@@ -1,0 +1,56 @@
+.container {
+    padding: 10px 0;
+    position: fixed;
+    width: 100vw;
+    backdrop-filter: blur(16px);
+}
+
+.container ul {
+    overflow: auto;
+    white-space: nowrap;
+}
+
+.container ul {
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+
+    list-style-type: none;
+    color: var(--accent3);
+
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.container ul li a {
+    padding: 0 20px;
+}
+
+
+.container ul li a:hover {
+    color: var(--accent1);
+}
+
+@media screen and (max-width:500px) {
+    .container ul {
+        justify-content: unset;
+    }
+
+    .container {
+        background-color: rgba(var(--accent5-rgb), 0.9);
+    }
+}
+
+
+
+.container ul {
+    -ms-overflow-style: none;
+    /* Internet Explorer 10+ */
+    scrollbar-width: none;
+    /* Firefox */
+}
+
+.container ul::-webkit-scrollbar {
+    display: none;
+    /* Safari and Chrome */
+}

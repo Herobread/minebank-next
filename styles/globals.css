@@ -30,6 +30,8 @@ a:hover {
 }
 
 :root {
+  color-scheme: dark;
+
   --accent1: #FFFFFF;
   --accent2: #9A9A9A;
   --accent3: #666666;
@@ -38,4 +40,22 @@ a:hover {
   --accent6: #111111;
 
   --accent-1: #000000;
+
+
+  --accent1-rgb: 255, 255, 255;
+  --accent2-rgb: 154, 154, 154;
+  --accent3-rgb: 102, 102, 102;
+  --accent4-rgb: 68, 68, 68;
+  --accent5-rgb: 34, 34, 34;
+  --accent6-rgb: 17, 17, 17;
+
+  --accent-1-rgb: 0, 0, 0;
+}
+
+input,
+textarea,
+button,
+select,
+a {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }

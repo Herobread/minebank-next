@@ -71,7 +71,7 @@ export default function Login() {
           <Subtext type='error'>{errors.password && errors.password?.message}</Subtext>
           <Margin height='5px' />
 
-          <Subtext>Don`t have an account? <Link href='/'><a>Sign up</a></Link></Subtext>
+          <Subtext>Don`t have an account? <Link href='/signup'><a>Sign up</a></Link></Subtext>
 
           <Margin height='10px' />
           <FlexRow flexDirection={'row-reverse'}>

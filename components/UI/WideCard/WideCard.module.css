@@ -1,0 +1,72 @@
+.container {
+    min-height: 50px;
+
+    grid-template-columns: 50px 1fr 90px 1fr;
+
+    display: grid;
+    grid-template-areas:
+        "img title info amount"
+        "img description info amount";
+}
+
+.img {
+    height: 50px;
+    grid-area: img;
+    background-color: #111111;
+    border-radius: 50%;
+}
+
+.title {
+    grid-area: title;
+
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 21px;
+
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+}
+
+.description {
+    grid-area: description;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    color: var(--accent2);
+    padding-left: 10px;
+}
+
+.info {
+    grid-area: info;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 21px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: var(--accent2)
+}
+
+.amount {
+    grid-area: amount;
+
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 21px;
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    color: var(--accent1);
+}
+
+@media screen and (max-width:900px) {
+    .container {
+        grid-template-columns: 50px 1fr 60px 60px;
+    }
+}

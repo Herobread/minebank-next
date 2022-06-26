@@ -1,7 +1,7 @@
 import s from './Input.module.css'
 
 import View from '@/icons/view.svg'
-import ViewClosed from '@/icons/viewClosed.svg'
+import ViewClosed from '@/icons/closed.svg'
 
 import { useState } from 'react'
 

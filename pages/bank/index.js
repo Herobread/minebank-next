@@ -8,6 +8,7 @@ import Navbar from "@/components/UI/Navbar";
 import Subtext from "@/components/UI/Subtext";
 import VerticalList from "@/components/UI/VerticalList";
 import WideCard from "@/components/UI/WideCard";
+import WideSelect from "@/components/UI/WideSelect";
 import { useState } from "react";
 
 export default function Bank() {
@@ -39,6 +40,35 @@ export default function Bank() {
         }
     ])
 
+    const selectOptions = [
+        {
+            name: 'All',
+            value: 'all'
+        },
+        {
+            name: 'Shop',
+            value: 'shop'
+        },
+        {
+            name: 'Transfers',
+            value: 'transfers'
+        },
+        {
+            name: 'In',
+            value: 'in'
+        },
+        {
+            name: 'Out',
+            value: 'out'
+        },
+    ]
+
+    const [filter, setFilter] = useState('all')
+    const changeFilter = (filter) => {
+        console.log(filter)
+        setFilter(filter)
+    }
+
     return <div>
         <Navbar />
         <ContentWrapper>
@@ -58,7 +88,11 @@ export default function Bank() {
                     </Header>
                     <Margin height={'20px'} />
 
+                    <WideSelect options={selectOptions} selectedAtStart={'all'} callback={changeFilter} />
+                    <Margin height={'20px'} />
+
                     <Subtext>26 June</Subtext>
+                    Cross component state 0_o: {filter}
                     <Margin height={'10px'} />
                     <WideCard title='title' description='desc' info='12:34' amount='10' />
                     <Margin height={'10px'} />

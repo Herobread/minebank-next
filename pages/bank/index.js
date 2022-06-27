@@ -6,21 +6,46 @@ import Header from "@/components/UI/Header";
 import Mc from "@/components/UI/Mc";
 import Navbar from "@/components/UI/Navbar";
 import Subtext from "@/components/UI/Subtext";
+import VerticalList from "@/components/UI/VerticalList";
 import WideCard from "@/components/UI/WideCard";
-
+import { useState } from "react";
 
 export default function Bank() {
+    const [list, setList] = useState([
+        {
+            name: 'Username',
+            isHighlighted: true,
+            to: '/profile'
+        },
+        {
+            name: 'Bank',
+            isHighlighted: false,
+            to: '/bank'
+        },
+        {
+            name: 'Business',
+            isHighlighted: false,
+            to: '/business'
+        },
+        {
+            name: 'Shop',
+            isHighlighted: false,
+            to: '/shop'
+        },
+        {
+            name: 'Orders',
+            isHighlighted: false,
+            to: '/orders'
+        }
+    ])
+
     return <div>
         <Navbar />
         <ContentWrapper>
             <Layout>
                 <div>
                     <Margin height={'95px'} mobile={'0'} />
-                    Content<br />
-                    Content<br />
-                    Content<br />
-                    Content<br />
-                    Content<br />
+                    <VerticalList list={list} />
                 </div>
                 <div>
 

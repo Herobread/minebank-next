@@ -25,6 +25,6 @@ export default function WideSelect({ options, callback, selectedAtStart }) {
 
     return <div className={s.container}>
         {buttons}
-        //todo:fix css
+        todo:fix css
     </div >
 }

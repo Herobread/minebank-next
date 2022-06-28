@@ -1,3 +1,4 @@
+import cn from 'common/cn'
 import { useState } from 'react'
 import Button from '../Button'
 import s from './WideSelect.module.css'
@@ -16,15 +17,17 @@ export default function WideSelect({ options, callback, selectedAtStart }) {
     let buttons = []
 
     options.forEach(item => {
-        buttons.push(<Button onClick={handleClick}
+        const buttonStyle = item.value === selected ? cn([s.button, s.active]) : s.button
+
+        buttons.push(<button onClick={handleClick}
             disabled={item.value === selected}
             value={item.value}
-            key={item.value}>{item.name}</Button>
+            className={buttonStyle}
+            key={item.value}>{item.name}</button>
         )
     })
 
     return <div className={s.container}>
         {buttons}
-        todo:fix css
     </div >
 }

@@ -92,6 +92,7 @@ export default function Bank() {
                     <Margin height={'20px'} />
 
                     <Subtext>26 June</Subtext>
+                    <Margin height={'5px'} />
                     Cross component state 0_o: {filter}
                     <Margin height={'10px'} />
                     <WideCard title='title' description='desc' info='12:34' amount='10' />

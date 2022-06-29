@@ -6,6 +6,7 @@ import Button from '@/components/UI/Button'
 import Header from '@/components/UI/Header'
 import Input from '@/components/UI/Input'
 import Subtext from '@/components/UI/Subtext'
+import { useAuth } from '@/context/AuthContext'
 import Link from 'next/link'
 import { useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
@@ -36,22 +37,20 @@ const registerOptions = {
 
 export default function Signup() {
     const { control, formState: { errors }, handleSubmit } = useForm()
+    const { signup, user } = useAuth()
 
     const [isLoading, setIsLoading] = useState(false)
 
     const onSubmit = (data) => {
         setIsLoading(true)
-        console.log(data)
-        alert(JSON.stringify(data))
-        // tuta tipa     zaloginitsa()
-        // setIsLoading(false)
+        signup(data)
     }
 
     return <div>
         <FocusPanel>
             <Center>
                 <Header>Welcome!</Header>
-
+                uid: {user.uid}
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <Margin height='20px' />
 

@@ -65,7 +65,6 @@ export default function Bank() {
 
     const [filter, setFilter] = useState('all')
     const changeFilter = (filter) => {
-        console.log(filter)
         setFilter(filter)
     }
 
@@ -93,7 +92,7 @@ export default function Bank() {
 
                     <Subtext>26 June</Subtext>
                     <Margin height={'5px'} />
-                    Cross component state 0_o: {filter}
+                    Cross component state 0_o: {filter}(sort is not working yet, because I don`t have any data)
                     <Margin height={'10px'} />
                     <WideCard title='title' description='desc' info='12:34' amount='10' />
                     <Margin height={'10px'} />

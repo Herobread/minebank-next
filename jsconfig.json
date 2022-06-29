@@ -13,6 +13,12 @@
             ],
             "@/icons/*": [
                 "public/icons/*"
+            ],
+            "@/lib/*": [
+                "lib/*"
+            ],
+            "@/context/*": [
+                "context/*"
             ]
         }
     }

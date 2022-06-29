@@ -9,8 +9,6 @@ export default function WideSelect({ options, callback, selectedAtStart }) {
     const handleClick = (e) => {
         e.preventDefault()
         setSelected(e.target.value)
-
-        console.log(e.target)
         callback(e.target.value)
     }
 

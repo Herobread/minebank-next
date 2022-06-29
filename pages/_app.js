@@ -1,9 +1,12 @@
 import { AuthContextProvider } from '@/context/AuthContext'
+import { DataContextProvider } from '@/context/dataContext'
 import '../styles/globals.css'
 
 function MyApp({ Component, pageProps }) {
   return <AuthContextProvider>
-    <Component {...pageProps} />
+    <DataContextProvider>
+      <Component {...pageProps} />
+    </DataContextProvider>
   </AuthContextProvider>
 }
 

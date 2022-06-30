@@ -1,6 +1,7 @@
 import ContentWrapper from "@/components/skeleton/ContentWrapper";
 import Layout from "@/components/skeleton/Layout";
 import Margin from "@/components/skeleton/Margin";
+import GenerateTransactionList from "@/components/tools/GenerateTransactionList";
 import Protected from "@/components/tools/Protected";
 import Button from "@/components/UI/Button";
 import Header from "@/components/UI/Header";
@@ -11,7 +12,6 @@ import Subtext from "@/components/UI/Subtext";
 import VerticalList from "@/components/UI/VerticalList";
 import WideCard from "@/components/UI/WideCard";
 import WideSelect from "@/components/UI/WideSelect";
-import { useData } from "@/context/DataContext";
 import { useState } from "react";
 
 export default function Bank() {
@@ -71,8 +71,6 @@ export default function Bank() {
         setFilter(filter)
     }
 
-    const { userData } = useData()
-
     return <div>
         <Protected requiredUserType={'user'} />
         <Navbar />
@@ -95,65 +93,7 @@ export default function Bank() {
                     <WideSelect options={selectOptions} selectedAtStart={'all'} callback={changeFilter} />
                     <Margin height={'20px'} />
 
-                    {JSON.stringify(userData)}
-
-                    <Subtext>26 June</Subtext>
-                    <Margin height={'5px'} />
-                    sort: {filter}
-                    <Margin height={'10px'} />
-                    <WideCard title='title' description='desc' info='12:34' amount='10' img={<ProfilePicture name={'a'} src={''} />} />
-                    <Margin height={'10px'} />
-                    <WideCard title='title' description='desc' info='12:34' amount='10' img={<ProfilePicture name='asd' src={'https://i.picsum.photos/id/569/200/200.jpg?hmac=rzX0dRJRyZs2NIa_h_87CJVeoetRLtTlweCZmYrYlCA'} />} />
-                    <Margin height={'10px'} />
-
-                    <Subtext>26 June</Subtext>
-                    <Margin height={'10px'} />
-                    <WideCard title='title' description='desc' info='12:34' amount='10' />
-                    <Margin height={'10px'} />
-                    <WideCard title='title' description='desc' info='12:34' amount='10' />
-                    <Margin height={'10px'} />
-
-                    <Subtext>26 June</Subtext>
-                    <Margin height={'10px'} />
-                    <WideCard title='title' description='desc' info='12:34' amount='10' />
-                    <Margin height={'10px'} />
-                    <WideCard title='title' description='desc' info='12:34' amount='10' />
-                    <Margin height={'10px'} />
-
-                    <Subtext>26 June</Subtext>
-                    <Margin height={'10px'} />
-                    <WideCard title='title' description='desc' info='12:34' amount='10' />
-                    <Margin height={'10px'} />
-                    <WideCard title='title' description='desc' info='12:34' amount='10' />
-                    <Margin height={'10px'} />
-
-                    <Subtext>26 June</Subtext>
-                    <Margin height={'10px'} />
-                    <WideCard title='title' description='desc' info='12:34' amount='10' />
-                    <Margin height={'10px'} />
-                    <WideCard title='title' description='desc' info='12:34' amount='10' />
-                    <Margin height={'10px'} />
-
-                    <Subtext>26 June</Subtext>
-                    <Margin height={'10px'} />
-                    <WideCard title='title' description='desc' info='12:34' amount='10' />
-                    <Margin height={'10px'} />
-                    <WideCard title='title' description='desc' info='12:34' amount='10' />
-                    <Margin height={'10px'} />
-
-                    <Subtext>26 June</Subtext>
-                    <Margin height={'10px'} />
-                    <WideCard title='title' description='desc' info='12:34' amount='10' />
-                    <Margin height={'10px'} />
-                    <WideCard title='title' description='desc' info='12:34' amount='10' />
-                    <Margin height={'10px'} />
-
-                    <Subtext>26 June</Subtext>
-                    <Margin height={'10px'} />
-                    <WideCard title='title' description='desc' info='12:34' amount='10' />
-                    <Margin height={'10px'} />
-                    <WideCard title='title' description='desc' info='12:34' amount='10' />
-                    <Margin height={'10px'} />
+                    <GenerateTransactionList data={[{ aaa: 'bbb' }]} />
                 </div>
             </Layout>
         </ContentWrapper>

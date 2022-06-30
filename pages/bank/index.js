@@ -10,7 +10,7 @@ import Subtext from "@/components/UI/Subtext";
 import VerticalList from "@/components/UI/VerticalList";
 import WideCard from "@/components/UI/WideCard";
 import WideSelect from "@/components/UI/WideSelect";
-import { useData } from "@/context/dataContext";
+import { useData } from "@/context/DataContext";
 import { useState } from "react";
 
 export default function Bank() {

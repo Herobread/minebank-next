@@ -2,12 +2,14 @@ import Center from '@/components/skeleton/Center'
 import FlexRow from '@/components/skeleton/FlexRow'
 import FocusPanel from '@/components/skeleton/FocusPanel'
 import Margin from '@/components/skeleton/Margin'
+import Protected from '@/components/tools/Protected'
 import Button from '@/components/UI/Button'
 import Header from '@/components/UI/Header'
 import Input from '@/components/UI/Input'
 import Subtext from '@/components/UI/Subtext'
 import { useAuth } from '@/context/AuthContext'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 import { useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 
@@ -30,21 +32,26 @@ const loginOptions = {
 
 export default function Login() {
 	const { control, formState: { errors }, handleSubmit } = useForm()
-	const { user, login } = useAuth()
-	console.log(user)
+	const { login } = useAuth()
+	const router = useRouter()
 
 	const [isLoading, setIsLoading] = useState(false)
 	const [serverErrors, setServerErrors] = useState('')
 
+	const destination = router.query?.from ? router.query.from : '/bank'
+
 	const onSubmit = async (data) => {
 		setIsLoading(true)
-		console.log(user)
 		await login(data)
+			.catch(error => { setServerErrors(error.message) })
+
+		router.push(destination)
 
 		setIsLoading(false)
 	}
 
 	return <div>
+		<Protected requiredUserType={null} redirect={destination} />
 		<FocusPanel>
 			<Center>
 				<Header>Welcome back!</Header>
@@ -76,6 +83,9 @@ export default function Login() {
 					<Margin height='5px' />
 
 					<Subtext>Don`t have an account? <Link href='/signup'><a>Sign up</a></Link></Subtext>
+
+					<Margin height='5px' />
+					<Subtext type='error'>{serverErrors && serverErrors}</Subtext>
 
 					<Margin height='10px' />
 					<FlexRow flexDirection={'row-reverse'}>

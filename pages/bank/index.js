@@ -1,6 +1,7 @@
 import ContentWrapper from "@/components/skeleton/ContentWrapper";
 import Layout from "@/components/skeleton/Layout";
 import Margin from "@/components/skeleton/Margin";
+import Protected from "@/components/tools/Protected";
 import Button from "@/components/UI/Button";
 import Header from "@/components/UI/Header";
 import Mc from "@/components/UI/Mc";
@@ -9,10 +10,11 @@ import Subtext from "@/components/UI/Subtext";
 import VerticalList from "@/components/UI/VerticalList";
 import WideCard from "@/components/UI/WideCard";
 import WideSelect from "@/components/UI/WideSelect";
+import { useData } from "@/context/dataContext";
 import { useState } from "react";
 
 export default function Bank() {
-    const [list, setList] = useState([
+    const list = [
         {
             name: 'Username',
             isHighlighted: true,
@@ -38,7 +40,7 @@ export default function Bank() {
             isHighlighted: false,
             to: '/orders'
         }
-    ])
+    ]
 
     const selectOptions = [
         {
@@ -68,7 +70,10 @@ export default function Bank() {
         setFilter(filter)
     }
 
+    const { userData } = useData()
+
     return <div>
+        <Protected requiredUserType={'user'} />
         <Navbar />
         <ContentWrapper>
             <Layout>
@@ -77,7 +82,6 @@ export default function Bank() {
                     <VerticalList list={list} />
                 </div>
                 <div>
-
                     <Margin height={'20px'} />
 
                     <Header
@@ -89,6 +93,8 @@ export default function Bank() {
 
                     <WideSelect options={selectOptions} selectedAtStart={'all'} callback={changeFilter} />
                     <Margin height={'20px'} />
+
+                    {JSON.stringify(userData)}
 
                     <Subtext>26 June</Subtext>
                     <Margin height={'5px'} />

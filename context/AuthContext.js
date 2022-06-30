@@ -11,7 +11,6 @@ export const AuthContextProvider = ({ children }) => {
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
-        console.log('here')
         const unsubscribe = onAuthStateChanged(auth, (user) => {
             if (user) {
                 setUser({ uid: user.uid, email: user.email })
@@ -22,7 +21,6 @@ export const AuthContextProvider = ({ children }) => {
         })
 
         return () => {
-            console.log('unsub')
             unsubscribe()
         }
     }, [])
@@ -30,8 +28,6 @@ export const AuthContextProvider = ({ children }) => {
     const signup = async ({ email, password, username }) => {
         return await createUserWithEmailAndPassword(auth, email, password)
             .then((res) => {
-                console.log(res)
-                console.log(username)
             })
     }
 

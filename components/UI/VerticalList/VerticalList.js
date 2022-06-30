@@ -8,7 +8,7 @@ export default function VerticalList({ list }) {
     list.forEach(item => {
         const style = item.isHighlighted ? cn([s.item, s.highlight]) : s.item
 
-        items.push(<li className={style}>
+        items.push(<li className={style} key={item.name}>
             <Link href={item.to}>
                 <a>
                     {item.name}

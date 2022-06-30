@@ -2,6 +2,7 @@ import Center from '@/components/skeleton/Center'
 import FlexRow from '@/components/skeleton/FlexRow'
 import FocusPanel from '@/components/skeleton/FocusPanel'
 import Margin from '@/components/skeleton/Margin'
+import Protected from '@/components/tools/Protected'
 import Button from '@/components/UI/Button'
 import Header from '@/components/UI/Header'
 import Input from '@/components/UI/Input'
@@ -37,20 +38,24 @@ const registerOptions = {
 
 export default function Signup() {
     const { control, formState: { errors }, handleSubmit } = useForm()
-    const { signup, user } = useAuth()
+    const { signup } = useAuth()
 
     const [isLoading, setIsLoading] = useState(false)
+    const [serverErrors, setServerErrors] = useState('')
 
-    const onSubmit = (data) => {
+    const onSubmit = async (data) => {
         setIsLoading(true)
-        signup(data)
+        await signup(data)
+            .catch(error => { setServerErrors(error.message) })
+
+        setIsLoading(false)
     }
 
     return <div>
+        <Protected requiredUserType={null} redirect='/bank' />
         <FocusPanel>
             <Center>
                 <Header>Welcome!</Header>
-                uid: {user.uid}
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <Margin height='20px' />
 
@@ -91,6 +96,9 @@ export default function Signup() {
                     <Margin height='5px' />
 
                     <Subtext>Already have an account? <Link href='/login'><a>Log in</a></Link></Subtext>
+
+                    <Margin height='5px' />
+                    <Subtext type='error'>{serverErrors && serverErrors}</Subtext>
 
                     <Margin height='10px' />
                     <FlexRow flexDirection={'row-reverse'}>

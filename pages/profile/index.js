@@ -1,4 +1,5 @@
 import ContentWrapper from "@/components/skeleton/ContentWrapper";
+import Protected from "@/components/tools/Protected";
 import Button from "@/components/UI/Button";
 import Navbar from "@/components/UI/Navbar";
 import Subtext from "@/components/UI/Subtext";
@@ -13,11 +14,11 @@ export default function Profile() {
     }
 
     return <div>
+        <Protected requiredUserType={'user'} />
         <Navbar />
         <ContentWrapper>
             uid: {user?.uid}
             <Button onClick={handleClick}>Sign out</Button>
-
             <Subtext>
                 <Link href='/'><a>Home</a></Link>
             </Subtext>

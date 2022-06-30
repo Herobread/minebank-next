@@ -1,5 +1,5 @@
 import { AuthContextProvider } from '@/context/AuthContext'
-import { DataContextProvider } from '@/context/dataContext'
+import { DataContextProvider } from '@/context/DataContext'
 import '../styles/globals.css'
 
 function MyApp({ Component, pageProps }) {

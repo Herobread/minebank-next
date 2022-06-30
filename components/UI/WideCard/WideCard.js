@@ -4,7 +4,7 @@ import s from './WideCard.module.css'
 export default function WideCard({ img, title, description, info, amount }) {
     return <div className={s.container}>
         <div className={s.img}>
-
+            {img}
         </div>
         <div className={s.title}>
             {title}

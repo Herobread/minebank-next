@@ -6,6 +6,7 @@ import Button from "@/components/UI/Button";
 import Header from "@/components/UI/Header";
 import Mc from "@/components/UI/Mc";
 import Navbar from "@/components/UI/Navbar";
+import ProfilePicture from "@/components/UI/ProfilePicture/ProfilePicture";
 import Subtext from "@/components/UI/Subtext";
 import VerticalList from "@/components/UI/VerticalList";
 import WideCard from "@/components/UI/WideCard";
@@ -98,11 +99,11 @@ export default function Bank() {
 
                     <Subtext>26 June</Subtext>
                     <Margin height={'5px'} />
-                    Cross component state 0_o: {filter}(sort is not working yet, because I don`t have any data)
+                    sort: {filter}
                     <Margin height={'10px'} />
-                    <WideCard title='title' description='desc' info='12:34' amount='10' />
+                    <WideCard title='title' description='desc' info='12:34' amount='10' img={<ProfilePicture name={'a'} src={''} />} />
                     <Margin height={'10px'} />
-                    <WideCard title='title' description='desc' info='12:34' amount='10' />
+                    <WideCard title='title' description='desc' info='12:34' amount='10' img={<ProfilePicture name='asd' src={'https://i.picsum.photos/id/569/200/200.jpg?hmac=rzX0dRJRyZs2NIa_h_87CJVeoetRLtTlweCZmYrYlCA'} />} />
                     <Margin height={'10px'} />
 
                     <Subtext>26 June</Subtext>

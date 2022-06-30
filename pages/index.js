@@ -9,6 +9,7 @@ export default function Home() {
         <ContentWrapper>
             <Header>Welcome!</Header>
             <Link href='login'><a>login</a></Link>
+            <br />
             <Link href='bank'><a>bank</a></Link>
         </ContentWrapper>
     </div>

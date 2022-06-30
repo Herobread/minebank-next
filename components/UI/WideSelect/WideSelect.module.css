@@ -29,8 +29,14 @@
 
 .active {
     background-color: var(--accent6);
+    cursor: not-allowed;
 
     color: var(--accent1);
+}
+
+.active:hover {
+    background-color: var(--accent6);
+    padding: 8px 2px;
 }
 
 @media screen and (max-width:700px) {

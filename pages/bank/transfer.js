@@ -2,25 +2,21 @@ import ContentWrapper from "@/components/skeleton/ContentWrapper";
 import FlexRow from "@/components/skeleton/FlexRow";
 import Layout from "@/components/skeleton/Layout";
 import Margin from "@/components/skeleton/Margin";
-import GenerateTransactionList from "@/components/tools/GenerateTransactionList";
 import Protected from "@/components/tools/Protected";
 import Button from "@/components/UI/Button";
 import Header from "@/components/UI/Header";
 import Input from "@/components/UI/Input";
 import Mc from "@/components/UI/Mc";
 import Navbar from "@/components/UI/Navbar";
-import ProfilePicture from "@/components/UI/ProfilePicture/ProfilePicture";
 import Subtext from "@/components/UI/Subtext";
 import VerticalList from "@/components/UI/VerticalList";
-import WideCard from "@/components/UI/WideCard";
-import WideSelect from "@/components/UI/WideSelect";
 import { useAuth } from "@/context/AuthContext";
 import { formVerifiers } from "@/lib/configs";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 
-export default function Bank() {
+export default function Transfer() {
     const list = [
         {
             name: 'Username',
@@ -72,9 +68,13 @@ export default function Bank() {
             comment: comment
         })
             .then((res) => console.log(res))
-            .catch((err) => setError('error'))
+            .catch((err) => {
+                console.log(err)
+                setError('err')
+            })
             .finally(() => {
                 console.log('not loading')
+                console.log(error)
                 setIsLoading(false)
             })
     }
@@ -133,7 +133,6 @@ export default function Bank() {
                         <Subtext type='error'>{errors.comment && errors.comment?.message}</Subtext>
                         <Margin height='5px' />
 
-                        <Margin height='10px' />
                         <Subtext type='error'>{error ? error : ''}</Subtext>
                         <Margin height='5px' />
                         <FlexRow flexDirection={'row-reverse'}>

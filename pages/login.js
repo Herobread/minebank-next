@@ -14,23 +14,6 @@ import { useRouter } from 'next/router'
 import { useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 
-const loginOptions = {
-	email: {
-		required: 'Email is required',
-		pattern: {
-			value: /^(.+)@(.+)$/,
-			message: 'Enter valid email'
-		}
-	},
-	password: {
-		required: 'Password is required',
-		minLength: {
-			value: 8,
-			message: 'Password must have at least 8 characters'
-		}
-	}
-}
-
 export default function Login() {
 	const { control, formState: { errors }, handleSubmit } = useForm()
 	const { login } = useAuth()
@@ -43,10 +26,16 @@ export default function Login() {
 
 	const onSubmit = async (data) => {
 		setIsLoading(true)
-		await login(data)
-			.catch(error => { setServerErrors(error.message) })
 
-		router.push(destination)
+		let ok = true
+
+		await login(data)
+			.catch(error => {
+				setServerErrors(error.message)
+				ok = false
+			})
+		if (ok)
+			router.push(destination)
 
 		setIsLoading(false)
 	}
@@ -86,7 +75,7 @@ export default function Login() {
 					<Subtext>Don`t have an account? <Link href='/signup'><a>Sign up</a></Link></Subtext>
 
 					<Margin height='5px' />
-					<Subtext type='error'>{serverErrors && serverErrors}</Subtext>
+					<Subtext type='error'>{serverErrors ? serverErrors : ''}</Subtext>
 
 					<Margin height='10px' />
 					<FlexRow flexDirection={'row-reverse'}>

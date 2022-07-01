@@ -23,7 +23,7 @@ export const AuthContextProvider = ({ children }) => {
                 setUserData(null)
             }
 
-            if (user)
+            if (user) {
                 unsubscribeUserData = onSnapshot(doc(db, 'users', user.uid), (doc) => {
                     if (doc.data() === undefined) {
                         createUserDocument(user.uid, {
@@ -34,6 +34,7 @@ export const AuthContextProvider = ({ children }) => {
                     }
                     setUserData(doc.data())
                 })
+            }
 
             setLoading(false)
         })
@@ -112,68 +113,58 @@ export const AuthContextProvider = ({ children }) => {
     }
 
     const transfer = async ({ sender, senderUid, recipient, recipientUid, amount, comment }) => {
-        let res = ''
+        senderUid = senderUid || await getUserUid(sender)
+        recipientUid = recipientUid || await getUserUid(recipient)
 
-        runTransaction(db, async (transaction) => {
-            senderUid = senderUid || await getUserUid(sender)
-            recipientUid = recipientUid || await getUserUid(recipient)
+        let senderData = await getUserData({ uid: senderUid })
+        let recipientData = await getUserData({ uid: recipientUid })
 
-            let senderData = await getUserData({ uid: senderUid })
-            let recipientData = await getUserData({ uid: recipientUid })
+        if (senderData.minecoins < amount) {
+            throw 'You don`t have enough money to make this transfer'
+        }
 
-            if (senderData.minecoins < amount) {
-                res = 'Not enough money'
-                return Promise.reject("Not enough money")
-            }
+        if (recipientData === null) {
+            throw 'User was not found'
+        }
 
-            if (recipientData === null) {
-                res = 'User not found'
-                return Promise.reject("User not found")
-            }
+        let timestamp = new Date()
+        timestamp = timestamp.getTime()
 
-            let timestamp = new Date()
-            timestamp = timestamp.getTime()
+        if (senderData['transactions'] === undefined) {
+            senderData['transactions'] = []
+        }
+        if (recipientData['transactions'] === undefined) {
+            recipientData['transactions'] = []
+        }
 
-            if (senderData['transactions'] === undefined) {
-                senderData['transactions'] = []
-            }
-            if (recipientData['transactions'] === undefined) {
-                recipientData['transactions'] = []
-            }
+        const senderImg = senderData.img || null
+        const recipientImg = recipientData.img || null
 
-            const senderImg = senderData.img || null
-            const recipientImg = recipientData.img || null
+        const newSenderData = {
+            minecoins: (parseInt(senderData['minecoins']) - parseInt(amount)),
+            transactions: senderData['transactions'].concat([{
+                timestamp: timestamp,
+                amount: `-${amount}`,
+                user: recipientData['username'],
+                img: recipientImg,
+                tags: ['transfer', 'out'],
+                comment: comment
+            }])
+        }
+        const newRecipientData = {
+            minecoins: (parseInt(recipientData['minecoins']) + parseInt(amount)),
+            transactions: recipientData['transactions'].concat([{
+                timestamp: timestamp,
+                amount: `${amount}`,
+                user: senderData['username'],
+                img: senderImg,
+                tags: ['transfer', 'in'],
+                comment: comment
+            }])
+        }
 
-            const newSenderData = {
-                minecoins: (parseInt(senderData['minecoins']) - parseInt(amount)),
-                transactions: senderData['transactions'].concat([{
-                    timestamp: timestamp,
-                    amount: `-${amount}`,
-                    user: recipientData['username'],
-                    img: recipientImg,
-                    tags: ['transfer', 'out'],
-                    comment: comment
-                }])
-            }
-            const newRecipientData = {
-                minecoins: (parseInt(recipientData['minecoins']) + parseInt(amount)),
-                transactions: recipientData['transactions'].concat([{
-                    timestamp: timestamp,
-                    amount: `${amount}`,
-                    user: senderData['username'],
-                    img: senderImg,
-                    tags: ['transfer', 'in'],
-                    comment: comment
-                }])
-            }
-
-            transaction.update(doc(db, 'users', senderUid), newSenderData)
-            transaction.update(doc(db, 'users', recipientUid), newRecipientData)
-
-            return 'ok'
-        })
-
-        return res
+        await setDoc(doc(db, 'users', senderUid), newSenderData, { merge: true })
+        await setDoc(doc(db, 'users', recipientUid), newRecipientData, { merge: true })
     }
 
     return <AuthContext.Provider value={{

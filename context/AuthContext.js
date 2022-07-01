@@ -23,16 +23,17 @@ export const AuthContextProvider = ({ children }) => {
                 setUserData(null)
             }
 
-            unsubscribeUserData = onSnapshot(doc(db, 'users', user.uid), (doc) => {
-                if (doc.data() === undefined) {
-                    createUserDocument(user.uid, {
-                        minecoins: 100,
-                        username: user.uid,
-                        transactions: []
-                    })
-                }
-                setUserData(doc.data())
-            })
+            if (user)
+                unsubscribeUserData = onSnapshot(doc(db, 'users', user.uid), (doc) => {
+                    if (doc.data() === undefined) {
+                        createUserDocument(user.uid, {
+                            minecoins: 100,
+                            username: user.uid,
+                            transactions: []
+                        })
+                    }
+                    setUserData(doc.data())
+                })
 
             setLoading(false)
         })
@@ -111,6 +112,8 @@ export const AuthContextProvider = ({ children }) => {
     }
 
     const transfer = async ({ sender, senderUid, recipient, recipientUid, amount, comment }) => {
+        let res = ''
+
         runTransaction(db, async (transaction) => {
             senderUid = senderUid || await getUserUid(sender)
             recipientUid = recipientUid || await getUserUid(recipient)
@@ -119,10 +122,12 @@ export const AuthContextProvider = ({ children }) => {
             let recipientData = await getUserData({ uid: recipientUid })
 
             if (senderData.minecoins < amount) {
+                res = 'Not enough money'
                 return Promise.reject("Not enough money")
             }
 
             if (recipientData === null) {
+                res = 'User not found'
                 return Promise.reject("User not found")
             }
 
@@ -164,7 +169,11 @@ export const AuthContextProvider = ({ children }) => {
 
             transaction.update(doc(db, 'users', senderUid), newSenderData)
             transaction.update(doc(db, 'users', recipientUid), newRecipientData)
+
+            return 'ok'
         })
+
+        return res
     }
 
     return <AuthContext.Provider value={{

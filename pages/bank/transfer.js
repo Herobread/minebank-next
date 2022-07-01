@@ -54,13 +54,16 @@ export default function Bank() {
     const { transfer, user, userData } = useAuth()
 
     const [isLoading, setIsLoading] = useState(false)
+    const [error, setError] = useState('')
 
     const handleClick = () => {
         router.push('/bank')
     }
 
     const onSubmit = async ({ username, amount, comment }) => {
+        setError('')
         setIsLoading(true)
+        console.log('loading')
         await transfer({
             senderUid: user.uid,
             recipient: username,
@@ -69,9 +72,11 @@ export default function Bank() {
             comment: comment
         })
             .then((res) => console.log(res))
-            .catch((err) => console.log(err))
-
-        setIsLoading(false)
+            .catch((err) => setError('error'))
+            .finally(() => {
+                console.log('not loading')
+                setIsLoading(false)
+            })
     }
 
     return <div>
@@ -129,6 +134,8 @@ export default function Bank() {
                         <Margin height='5px' />
 
                         <Margin height='10px' />
+                        <Subtext type='error'>{error ? error : ''}</Subtext>
+                        <Margin height='5px' />
                         <FlexRow flexDirection={'row-reverse'}>
                             <Button type='submit' disabled={isLoading}>Transfer</Button>
                         </FlexRow>

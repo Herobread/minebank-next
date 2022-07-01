@@ -88,7 +88,7 @@ export default function Bank() {
                     <Header
                         subheader='your balance'
                         cta={<Button onClick={handleClick}>History</Button>}>
-                        {userData.minecoins} <Mc>Mc</Mc>
+                        {userData?.minecoins} <Mc>Mc</Mc>
                     </Header>
                     <Margin height={'20px'} />
 
@@ -122,12 +122,11 @@ export default function Bank() {
                             name='comment'
                             control={control}
                             rules={formVerifiers.comment}
-                            render={({ field }) => <Input label={'Comment'} {...field} />}
+                            render={({ field }) => <Input label={'Comment'} value='' {...field} />}
                         />
                         <Margin height='5px' />
                         <Subtext type='error'>{errors.comment && errors.comment?.message}</Subtext>
                         <Margin height='5px' />
-
 
                         <Margin height='10px' />
                         <FlexRow flexDirection={'row-reverse'}>

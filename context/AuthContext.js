@@ -24,15 +24,11 @@ export const AuthContextProvider = ({ children }) => {
             }
 
             unsubscribeUserData = onSnapshot(doc(db, 'users', user.uid), (doc) => {
-                console.log('snapshot')
-                console.log('reading', user.uid)
-                console.log(doc.data())
-
                 if (doc.data() === undefined) {
                     createUserDocument(user.uid, {
                         minecoins: 100,
-                        name: user.uid,
-                        isAdmin: false
+                        username: user.uid,
+                        transactions: []
                     })
                 }
                 setUserData(doc.data())
@@ -48,7 +44,6 @@ export const AuthContextProvider = ({ children }) => {
     }, [])
 
     const createUserDocument = async (uid, data) => {
-        console.log(uid, data)
         await setDoc(doc(db, 'users', uid), data)
             .catch(error => { console.log(error) })
     }
@@ -71,7 +66,6 @@ export const AuthContextProvider = ({ children }) => {
     }
 
     const logout = async () => {
-        console.log('log out')
         setUser(null)
         await signOut(auth)
     }
@@ -110,7 +104,6 @@ export const AuthContextProvider = ({ children }) => {
         const docSnap = await getDoc(docRef)
 
         if (docSnap.exists()) {
-            console.log(docSnap.data())
             return docSnap.data()
         } else {
             return null
@@ -122,12 +115,8 @@ export const AuthContextProvider = ({ children }) => {
             senderUid = senderUid || await getUserUid(sender)
             recipientUid = recipientUid || await getUserUid(recipient)
 
-            console.log(recipient, recipientUid, recipientData)
-
             let senderData = await getUserData({ uid: senderUid })
             let recipientData = await getUserData({ uid: recipientUid })
-
-            console.log(recipient, recipientUid, recipientData)
 
             if (senderData.minecoins < amount) {
                 return Promise.reject("Not enough money")
@@ -137,6 +126,9 @@ export const AuthContextProvider = ({ children }) => {
                 return Promise.reject("User not found")
             }
 
+            let timestamp = new Date()
+            timestamp = timestamp.getTime()
+
             if (senderData['transactions'] === undefined) {
                 senderData['transactions'] = []
             }
@@ -144,22 +136,27 @@ export const AuthContextProvider = ({ children }) => {
                 recipientData['transactions'] = []
             }
 
+            const senderImg = senderData.img || null
+            const recipientImg = recipientData.img || null
+
             const newSenderData = {
                 minecoins: (parseInt(senderData['minecoins']) - parseInt(amount)),
-                transfers: senderData['transactions'].concat([{
-                    timestamp: '123456',
+                transactions: senderData['transactions'].concat([{
+                    timestamp: timestamp,
                     amount: `-${amount}`,
                     user: recipientData['username'],
+                    img: recipientImg,
                     tags: ['transfer', 'out'],
                     comment: comment
                 }])
             }
             const newRecipientData = {
                 minecoins: (parseInt(recipientData['minecoins']) + parseInt(amount)),
-                transfers: recipientData['transactions'].concat([{
-                    timestamp: '123456',
+                transactions: recipientData['transactions'].concat([{
+                    timestamp: timestamp,
                     amount: `${amount}`,
                     user: senderData['username'],
+                    img: senderImg,
                     tags: ['transfer', 'in'],
                     comment: comment
                 }])

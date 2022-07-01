@@ -96,14 +96,14 @@ export default function Bank() {
                     <Header
                         subheader='your balance'
                         cta={<Button onClick={handleClick}>Transfer</Button>}>
-                        {userData.minecoins} <Mc>Mc</Mc>
+                        {userData?.minecoins} <Mc>Mc</Mc>
                     </Header>
                     <Margin height={'20px'} />
 
                     <WideSelect options={selectOptions} selectedAtStart={'all'} callback={changeFilter} />
                     <Margin height={'20px'} />
 
-                    <GenerateTransactionList data={[{ aaa: 'bbb' }]} sort={filter} />
+                    <GenerateTransactionList data={userData?.transactions} sort={filter} />
                 </div>
             </Layout>
         </ContentWrapper>

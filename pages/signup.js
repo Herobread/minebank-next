@@ -8,33 +8,10 @@ import Header from '@/components/UI/Header'
 import Input from '@/components/UI/Input'
 import Subtext from '@/components/UI/Subtext'
 import { useAuth } from '@/context/AuthContext'
+import { formVerifiers } from '@/lib/configs'
 import Link from 'next/link'
 import { useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
-
-const registerOptions = {
-    username: {
-        required: 'Username is required',
-        pattern: {
-            value: /^\S+$/,
-            message: 'Username can not contain any spaces'
-        }
-    },
-    email: {
-        required: 'Email is required',
-        pattern: {
-            value: /^(.+)@(.+)$/,
-            message: 'Enter valid email'
-        }
-    },
-    password: {
-        required: 'Password is required',
-        minLength: {
-            value: 8,
-            message: 'Password must have at least 8 characters'
-        }
-    }
-}
 
 export default function Signup() {
     const { control, formState: { errors }, handleSubmit } = useForm()
@@ -64,7 +41,7 @@ export default function Signup() {
                         defaultValue=''
                         name='username'
                         control={control}
-                        rules={registerOptions.username}
+                        rules={formVerifiers.username}
                         render={({ field }) => <Input label={'Username'} {...field} />}
                     />
                     <Margin height='5px' />
@@ -76,7 +53,7 @@ export default function Signup() {
                         defaultValue=''
                         name='email'
                         control={control}
-                        rules={registerOptions.email}
+                        rules={formVerifiers.email}
                         render={({ field }) => <Input label={'Email'} {...field} />}
                     />
                     <Margin height='5px' />
@@ -88,7 +65,7 @@ export default function Signup() {
                         defaultValue=''
                         name='password'
                         control={control}
-                        rules={registerOptions.password}
+                        rules={formVerifiers.password}
                         render={({ field }) => <Input label={'Password'} type='password' {...field} />}
                     />
                     <Margin height='5px' />

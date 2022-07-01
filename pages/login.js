@@ -8,6 +8,7 @@ import Header from '@/components/UI/Header'
 import Input from '@/components/UI/Input'
 import Subtext from '@/components/UI/Subtext'
 import { useAuth } from '@/context/AuthContext'
+import { formVerifiers } from '@/lib/configs'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
@@ -63,7 +64,7 @@ export default function Login() {
 						defaultValue=''
 						name='email'
 						control={control}
-						rules={loginOptions.email}
+						rules={formVerifiers.email}
 						render={({ field }) => <Input label={'Email'} {...field} />}
 					/>
 					<Margin height='5px' />
@@ -75,7 +76,7 @@ export default function Login() {
 						defaultValue=''
 						name='password'
 						control={control}
-						rules={loginOptions.password}
+						rules={formVerifiers.password}
 						render={({ field }) => <Input label={'Password'} type='password' {...field} />}
 					/>
 					<Margin height='5px' />

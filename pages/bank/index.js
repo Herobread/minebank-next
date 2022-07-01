@@ -12,6 +12,8 @@ import Subtext from "@/components/UI/Subtext";
 import VerticalList from "@/components/UI/VerticalList";
 import WideCard from "@/components/UI/WideCard";
 import WideSelect from "@/components/UI/WideSelect";
+import { useAuth } from "@/context/AuthContext";
+import { useRouter } from "next/router";
 import { useState } from "react";
 
 export default function Bank() {
@@ -67,8 +69,16 @@ export default function Bank() {
     ]
 
     const [filter, setFilter] = useState('all')
+
+    const router = useRouter()
+    const { userData } = useAuth()
+
     const changeFilter = (filter) => {
         setFilter(filter)
+    }
+
+    const handleClick = () => {
+        router.push('/bank/transfer')
     }
 
     return <div>
@@ -85,15 +95,15 @@ export default function Bank() {
 
                     <Header
                         subheader='your balance'
-                        cta={<Button>Transfer</Button>}>
-                        100 <Mc>Mc</Mc>
+                        cta={<Button onClick={handleClick}>Transfer</Button>}>
+                        {userData.minecoins} <Mc>Mc</Mc>
                     </Header>
                     <Margin height={'20px'} />
 
                     <WideSelect options={selectOptions} selectedAtStart={'all'} callback={changeFilter} />
                     <Margin height={'20px'} />
 
-                    <GenerateTransactionList data={[{ aaa: 'bbb' }]} />
+                    <GenerateTransactionList data={[{ aaa: 'bbb' }]} sort={filter} />
                 </div>
             </Layout>
         </ContentWrapper>

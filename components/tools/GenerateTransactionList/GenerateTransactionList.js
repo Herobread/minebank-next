@@ -1,5 +1,5 @@
-export default function GenerateTransactionList({ data }) {
-    return <div>{JSON.stringify(data)}</div>
+export default function GenerateTransactionList({ data, sort }) {
+    return <div>{JSON.stringify(data)}{sort}</div>
 }
 
 

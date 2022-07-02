@@ -56,7 +56,7 @@ export default function Bank() {
         },
         {
             name: 'Transfers',
-            value: 'transfers'
+            value: 'transfer'
         },
         {
             name: 'In',
@@ -101,7 +101,6 @@ export default function Bank() {
                     <Margin height={'20px'} />
 
                     <WideSelect options={selectOptions} selectedAtStart={'all'} callback={changeFilter} />
-                    <Margin height={'20px'} />
 
                     <GenerateTransactionList data={userData?.transactions} sort={filter} />
                 </div>

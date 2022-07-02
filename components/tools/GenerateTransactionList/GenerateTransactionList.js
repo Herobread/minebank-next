@@ -15,7 +15,8 @@ export default function GenerateTransactionList({ data, sort }) {
     const animations = {
         initial: { opacity: 0 },
         animate: { opacity: 1 },
-        exit: { opacity: 0 }
+        exit: { opacity: 0 },
+        transition: { type: 'spring', stiffness: 700, damping: 70 }
     }
 
     let res = []
@@ -87,6 +88,11 @@ export default function GenerateTransactionList({ data, sort }) {
 
         temp = day
     })
+
+    if (!res.length) {
+        res.push(<Margin height={'11px'} key={'notransactionsm'} />)
+        res.push(<Subtext key={'notransactions'}>No transactions found</Subtext>)
+    }
 
     return <div>
         <AnimatePresence>

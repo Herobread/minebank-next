@@ -1,5 +1,6 @@
 .container {
     min-height: 50px;
+    padding: 3px;
 
     grid-template-columns: 50px 1fr 90px 1fr;
 
@@ -7,12 +8,14 @@
     grid-template-areas:
         "img title info amount"
         "img description info amount";
+
+    transition: 0.1s ease-in-out;
 }
 
 .container:hover {
     background-color: var(--accent6);
     cursor: pointer;
-    border-radius: 8px;
+    border-radius: 10px;
 }
 
 .img {

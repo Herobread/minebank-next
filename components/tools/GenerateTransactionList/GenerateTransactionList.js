@@ -45,12 +45,12 @@ export default function GenerateTransactionList({ data, sort }) {
 
                 res.push(<Margin
                     key={timestamp + 'margin1'}
-                    height={'15px'} />)
+                    height={'11px'} />)
                 res.push(<Subtext
                     key={timestamp + 'subtext'}
                 >{header}</Subtext>)
             }
-            res.push(<Margin height={'15px'}
+            res.push(<Margin height={'11px'}
                 key={timestamp + 'margin2'}
             />)
             res.push(<WideCard

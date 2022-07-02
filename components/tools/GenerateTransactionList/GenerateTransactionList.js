@@ -19,7 +19,9 @@ export default function GenerateTransactionList({ data, sort }) {
 
     data = [...data].reverse()
 
-    data.forEach((transaction) => {
+    let length = data.length - 1
+
+    data.forEach((transaction, i) => {
         const { user, comment, timestamp, amount, img } = transaction
 
         let date = new Date(timestamp)
@@ -52,6 +54,7 @@ export default function GenerateTransactionList({ data, sort }) {
                 key={timestamp + 'margin2'}
             />)
             res.push(<WideCard
+                id={length - i}
                 key={timestamp}
                 title={user}
                 info={time}

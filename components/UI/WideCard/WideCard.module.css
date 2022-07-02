@@ -9,6 +9,12 @@
         "img description info amount";
 }
 
+.container:hover {
+    background-color: var(--accent6);
+    cursor: pointer;
+    border-radius: 8px;
+}
+
 .img {
     height: 50px;
     grid-area: img;
@@ -36,6 +42,14 @@
     line-height: 17px;
     color: var(--accent2);
     padding-left: 10px;
+
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+
+    display: -inline-block;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
 }
 
 .info {

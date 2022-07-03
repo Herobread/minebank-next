@@ -8,6 +8,7 @@ import Header from "@/components/UI/Header";
 import Input from "@/components/UI/Input";
 import Mc from "@/components/UI/Mc";
 import Navbar from "@/components/UI/Navbar";
+import PanelSelect from "@/components/UI/PanelSelect";
 import Subtext from "@/components/UI/Subtext";
 import VerticalList from "@/components/UI/VerticalList";
 import { useAuth } from "@/context/AuthContext";
@@ -45,15 +46,21 @@ export default function Transfer() {
         }
     ]
 
-    const { control, formState: { errors }, handleSubmit } = useForm()
+    const { control, formState: { errors }, handleSubmit, setValue } = useForm()
     const router = useRouter()
     const { transfer, user, userData } = useAuth()
 
     const [isLoading, setIsLoading] = useState(false)
     const [error, setError] = useState('')
+    const [selectedUser, setSelectedUser] = useState('')
 
     const handleClick = () => {
         router.push('/bank')
+    }
+
+    const panelCallback = (user) => {
+        setSelectedUser(user)
+        setValue('username', user)
     }
 
     const onSubmit = async ({ username, amount, comment }) => {
@@ -109,6 +116,9 @@ export default function Transfer() {
                         <Subtext type='error'>{errors.username && errors.username?.message}</Subtext>
                         <Margin height='5px' />
 
+                        {/* <Subtext>Or select one from previous transfers</Subtext> */}
+                        {/* <Margin height={'10px'} /> */}
+                        <PanelSelect callback={panelCallback} selected={selectedUser} data={userData?.recent} />
 
                         <Controller
                             defaultValue=''

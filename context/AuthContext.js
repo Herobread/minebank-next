@@ -133,8 +133,21 @@ export const AuthContextProvider = ({ children }) => {
         if (senderData['transactions'] === undefined) {
             senderData['transactions'] = []
         }
+        if (senderData['recent'] === undefined) {
+            senderData['recent'] = []
+        }
+        if (!senderData['recent'].includes(recipientData['username'])) {
+            senderData['recent'].push(recipientData['username'])
+        }
+
         if (recipientData['transactions'] === undefined) {
             recipientData['transactions'] = []
+        }
+        if (recipientData['recent'] === undefined) {
+            recipientData['recent'] = []
+        }
+        if (!recipientData['recent'].includes(senderData['username'])) {
+            recipientData['recent'].push(senderData['username'])
         }
 
         const senderImg = senderData.img || null
@@ -149,7 +162,8 @@ export const AuthContextProvider = ({ children }) => {
                 img: recipientImg,
                 tags: ['transfer', 'out'],
                 comment: comment
-            }])
+            }]),
+            recent: senderData['recent']
         }
         const newRecipientData = {
             minecoins: (parseInt(recipientData['minecoins']) + parseInt(amount)),
@@ -160,7 +174,8 @@ export const AuthContextProvider = ({ children }) => {
                 img: senderImg,
                 tags: ['transfer', 'in'],
                 comment: comment
-            }])
+            }]),
+            recent: recipientData['recent']
         }
 
         await setDoc(doc(db, 'users', senderUid), newSenderData, { merge: true })

@@ -10,16 +10,32 @@ import { motion } from "framer-motion";
 import Margin from "@/components/skeleton/Margin";
 import VerticalList from "@/components/UI/VerticalList";
 import { fadeAnimations } from "@/lib/animations";
-import { navList } from "@/lib/configs";
+import { formVerifiers, navList } from "@/lib/configs";
 import Header from "@/components/UI/Header";
+import { Controller, useForm } from "react-hook-form";
+import Input from "@/components/UI/Input";
+import { useEffect } from "react";
+import FlexRow from "@/components/skeleton/FlexRow";
 
 
 export default function Profile() {
-    const { user, logout, userData } = useAuth()
+    const { control, formState: { errors }, handleSubmit, setValue } = useForm()
+    const { logout, userData } = useAuth()
 
     const handleClick = () => {
         logout()
     }
+
+    const onSubmit = async (data) => {
+        console.log(data)
+    }
+
+    useEffect(() => {
+        setValue('username', userData?.username)
+
+        return () => { }
+    }, [setValue, userData])
+
 
     return <div>
         <Protected requiredUserType={'user'} />
@@ -32,13 +48,41 @@ export default function Profile() {
                 </div>
                 <motion.div {...fadeAnimations}>
                     <Margin height={'20px'} />
-                    <Header subheader={'Your profile'}>{userData?.username}</Header>
+                    <Header
+                        subheader={'Your profile'}
+                        cta={<Button onClick={handleClick}>Sign out</Button>}>{userData?.username}</Header>
                     <Margin height={'20px'} />
-                    uid: {user?.uid}
-                    <Button onClick={handleClick}>Sign out</Button>
-                    <Subtext>
-                        <Link href='/'><a>Home</a></Link>
-                    </Subtext>
+
+
+                    <form onSubmit={handleSubmit(onSubmit)}>
+                        {/* username */}
+                        <Controller
+                            defaultValue=''
+                            name='username'
+                            control={control}
+                            rules={formVerifiers.username}
+                            render={({ field }) => <Input label={'Username'} {...field} />}
+                        />
+                        <Margin height='5px' />
+                        <Subtext type='error'>{errors.username && errors.username?.message}</Subtext>
+                        <Margin height='5px' />
+
+                        {/* username */}
+                        <Controller
+                            defaultValue=''
+                            name='url'
+                            control={control}
+                            rules={formVerifiers.url}
+                            render={({ field }) => <Input label={'Profile image url'} {...field} />}
+                        />
+                        <Margin height='5px' />
+                        <Subtext type='error'>{errors.url && errors.url?.message}</Subtext>
+                        <Margin height='5px' />
+
+                        <FlexRow flexDirection={'row-reverse'}>
+                            <Button type='submit'>Save</Button>
+                        </FlexRow>
+                    </form>
                 </motion.div>
             </Layout>
         </ContentWrapper >

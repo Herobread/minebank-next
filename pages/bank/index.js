@@ -14,6 +14,7 @@ import { fadeAnimations } from "@/lib/animations";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { motion } from 'framer-motion'
+import TagSelect from "@/components/UI/TagSelect";
 
 
 export default function Bank() {
@@ -100,7 +101,7 @@ export default function Bank() {
                     </Header>
                     <Margin height={'20px'} />
 
-                    <WideSelect options={selectOptions} selectedAtStart={'all'} callback={changeFilter} />
+                    <TagSelect options={selectOptions} selectedAtStart={'all'} callback={changeFilter} />
 
                     <GenerateTransactionList data={userData?.transactions} sort={filter} />
                 </motion.div>

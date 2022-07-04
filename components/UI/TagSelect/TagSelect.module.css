@@ -1,0 +1,34 @@
+.container {
+    display: flex;
+    gap: 7px;
+}
+
+.item {
+    padding: 7px 16px;
+
+    cursor: pointer;
+
+    background-color: var(--accent5);
+
+    border: none;
+    border-radius: 10px;
+
+    transition: 0.2s ease-in-out;
+}
+
+.item:focus {
+    border: none;
+}
+
+.item:hover {
+    background-color: var(--accent4);
+}
+
+.active {
+    outline: var(--accent4) 2px solid;
+}
+
+.active:hover {
+    cursor: not-allowed;
+    background-color: var(--accent5);
+}

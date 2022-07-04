@@ -2,6 +2,7 @@ import Margin from "@/components/skeleton/Margin"
 import ProfilePicture from "@/components/UI/ProfilePicture/ProfilePicture"
 import Subtext from "@/components/UI/Subtext"
 import WideCard from "@/components/UI/WideCard"
+import { fadeAnimationVertical } from "@/lib/animations"
 import twoDigits from "common/twoDigits"
 import { motion, AnimatePresence } from 'framer-motion'
 
@@ -15,13 +16,6 @@ export default function GenerateTransactionList({ data, sort }) {
 
     const monthes = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
 
-    const animations = {
-        initial: { opacity: 0 },
-        animate: { opacity: 1 },
-        exit: { opacity: 0 },
-        transition: { type: 'spring', stiffness: 700, damping: 70 }
-    }
-
     let res = []
     let temp = ''
     let today = new Date()
@@ -30,7 +24,7 @@ export default function GenerateTransactionList({ data, sort }) {
 
     data = [...data].reverse()
 
-    let length = data.length - 1
+    // let length = data.length - 1
 
     data = data.filter(transaction => {
         return sort === 'all' || transaction.tags.includes(sort)
@@ -39,6 +33,7 @@ export default function GenerateTransactionList({ data, sort }) {
     data.forEach(transaction => {
         const { user, comment, timestamp, amount, img } = transaction
 
+        let tempRes = []
         let date = new Date(timestamp)
         let time = `${twoDigits(date.getHours())}:${twoDigits(date.getMinutes())} `
         let day = `${date.getDate()} ${monthes[date.getMonth()]} `
@@ -46,8 +41,6 @@ export default function GenerateTransactionList({ data, sort }) {
         let comment_ = comment || 'Transfer'
 
         const isNewHeader = temp !== day
-
-        console.log(timestamp)
 
         if (isNewHeader) {
             const isToday = today.toDateString() === date.toDateString()
@@ -61,40 +54,48 @@ export default function GenerateTransactionList({ data, sort }) {
                 header = `Yesterday, ${day} `
             }
 
-            res.push(
+            tempRes.push(
                 <Margin
+                    layout
                     key={timestamp + 'margin1'}
                     height={'11px'} />
             )
 
-            res.push(
-                <motion.div layout key={header} {...animations}>
-                    <Subtext>{header}</Subtext>
-                </motion.div>
-            )
+            tempRes.push(<Subtext key={header}>{header}</Subtext>)
         }
 
-        res.push(<Margin height={'11px'}
+        tempRes.push(<Margin height={'11px'}
+            layout
             key={timestamp + 'margin2'}
         />)
 
-        res.push(<motion.div layout key={timestamp} {...animations}>
+        tempRes.push(
             <WideCard
+                layout
+                key={timestamp}
                 title={user}
                 info={time}
                 amount={amount}
                 description={comment_}
                 img={<ProfilePicture name={user} src={img} />}
             />
-        </motion.div>
         )
 
         temp = day
+
+        tempRes = <motion.div layout key={timestamp} {...fadeAnimationVertical}>
+            {tempRes}
+        </motion.div>
+
+        res.push(tempRes)
     })
 
     if (!res.length) {
-        res.push(<Margin height={'11px'} key={'notransactionsm'} />)
-        res.push(<Subtext key={'notransactions'}>No transactions found</Subtext>)
+        res.push(<motion.div layout key={'notransactions'} {...fadeAnimationVertical}>
+            <Margin height={'11px'} />
+            <Subtext key={'notransactions'}>No transactions found</Subtext>
+        </motion.div>
+        )
     }
 
     return <div>

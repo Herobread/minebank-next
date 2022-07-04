@@ -7,7 +7,10 @@ import { motion, AnimatePresence } from 'framer-motion'
 
 export default function GenerateTransactionList({ data, sort }) {
     if (!data) {
-        return <Subtext>You haven`t made any transactions yet.</Subtext>
+        return <div>
+            <Margin height={'11px'} />
+            <Subtext>You haven`t made any transactions yet.</Subtext>
+        </div>
     }
 
     const monthes = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']

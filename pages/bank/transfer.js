@@ -16,6 +16,8 @@ import { formVerifiers } from "@/lib/configs";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
+import { motion } from 'framer-motion'
+import { fadeAnimations } from "@/lib/animations";
 
 export default function Transfer() {
     const list = [
@@ -74,14 +76,10 @@ export default function Transfer() {
             amount: amount,
             comment: comment
         })
-            .then((res) => console.log(res))
             .catch((err) => {
-                console.log(err)
-                setError('err')
+                setError(err)
             })
             .finally(() => {
-                console.log('not loading')
-                console.log(error)
                 setIsLoading(false)
             })
     }
@@ -95,7 +93,7 @@ export default function Transfer() {
                     <Margin height={'95px'} mobile={'0'} />
                     <VerticalList list={list} />
                 </div>
-                <div>
+                <motion.div {...fadeAnimations}>
                     <Margin height={'20px'} />
                     <Header
                         subheader='your balance'
@@ -144,12 +142,13 @@ export default function Transfer() {
                         <Margin height='5px' />
 
                         <Subtext type='error'>{error ? error : ''}</Subtext>
+
                         <Margin height='5px' />
                         <FlexRow flexDirection={'row-reverse'}>
                             <Button type='submit' disabled={isLoading}>Transfer</Button>
                         </FlexRow>
                     </form>
-                </div>
+                </motion.div>
             </Layout>
         </ContentWrapper>
     </div>

@@ -51,6 +51,15 @@ export const AuthContextProvider = ({ children }) => {
     }
 
     const signup = async ({ email, password, username }) => {
+        const isSameName = await getUserUid(username)
+
+        console.log('here')
+        if (isSameName) {
+            console.log('here2')
+            throw { message: 'User with this name already exists' }
+        }
+        console.log('here3')
+
         return await createUserWithEmailAndPassword(auth, email, password)
             .then((res) => {
                 const { uid } = res.user
@@ -125,6 +134,10 @@ export const AuthContextProvider = ({ children }) => {
 
         if (recipientData === null) {
             throw 'User was not found'
+        }
+
+        if (recipientData['username'] === senderData['username']) {
+            throw 'You can`t transfer money to yourself'
         }
 
         let timestamp = new Date()

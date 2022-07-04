@@ -14,12 +14,8 @@ import { navList } from "@/lib/configs";
 import Header from "@/components/UI/Header";
 
 
-export default function Profile() {
-    const { user, logout, userData } = useAuth()
-
-    const handleClick = () => {
-        logout()
-    }
+export default function Shop() {
+    const { userData } = useAuth()
 
     return <div>
         <Protected requiredUserType={'user'} />
@@ -32,13 +28,8 @@ export default function Profile() {
                 </div>
                 <motion.div {...fadeAnimations}>
                     <Margin height={'20px'} />
-                    <Header subheader={'Your profile'}>{userData?.username}</Header>
+                    <Header subheader={'subheader'}>Header</Header>
                     <Margin height={'20px'} />
-                    uid: {user?.uid}
-                    <Button onClick={handleClick}>Sign out</Button>
-                    <Subtext>
-                        <Link href='/'><a>Home</a></Link>
-                    </Subtext>
                 </motion.div>
             </Layout>
         </ContentWrapper >

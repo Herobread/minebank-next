@@ -1,9 +1,12 @@
 import { AuthContextProvider } from '@/context/AuthContext'
+import { AnimatePresence } from 'framer-motion'
 import '../styles/globals.css'
 
 function MyApp({ Component, pageProps }) {
   return <AuthContextProvider>
-    <Component {...pageProps} />
+    <AnimatePresence>
+      <Component {...pageProps} />
+    </AnimatePresence>
   </AuthContextProvider>
 }
 

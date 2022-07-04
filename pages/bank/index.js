@@ -7,14 +7,14 @@ import Button from "@/components/UI/Button";
 import Header from "@/components/UI/Header";
 import Mc from "@/components/UI/Mc";
 import Navbar from "@/components/UI/Navbar";
-import ProfilePicture from "@/components/UI/ProfilePicture/ProfilePicture";
-import Subtext from "@/components/UI/Subtext";
 import VerticalList from "@/components/UI/VerticalList";
-import WideCard from "@/components/UI/WideCard";
 import WideSelect from "@/components/UI/WideSelect";
 import { useAuth } from "@/context/AuthContext";
+import { fadeAnimations } from "@/lib/animations";
 import { useRouter } from "next/router";
 import { useState } from "react";
+import { motion } from 'framer-motion'
+
 
 export default function Bank() {
     const list = [
@@ -90,7 +90,7 @@ export default function Bank() {
                     <Margin height={'95px'} mobile={'0'} />
                     <VerticalList list={list} />
                 </div>
-                <div>
+                <motion.div {...fadeAnimations}>
                     <Margin height={'20px'} />
 
                     <Header
@@ -103,7 +103,7 @@ export default function Bank() {
                     <WideSelect options={selectOptions} selectedAtStart={'all'} callback={changeFilter} />
 
                     <GenerateTransactionList data={userData?.transactions} sort={filter} />
-                </div>
+                </motion.div>
             </Layout>
         </ContentWrapper>
     </div>

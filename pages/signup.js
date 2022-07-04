@@ -22,8 +22,13 @@ export default function Signup() {
 
     const onSubmit = async (data) => {
         setIsLoading(true)
+
         await signup(data)
-            .catch(error => { setServerErrors(error.message) })
+            .then(res => { console.log(res) })
+            .catch(error => {
+                console.log(error)
+                setServerErrors(error.message)
+            })
 
         setIsLoading(false)
     }

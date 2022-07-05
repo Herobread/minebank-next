@@ -16,6 +16,10 @@
     transition: 0.2s ease-in-out;
 }
 
+.item:disabled {
+    color: var(--accent1);
+}
+
 .item:focus {
     border: none;
 }

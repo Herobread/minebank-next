@@ -54,6 +54,11 @@ a:hover {
   --accent-1-rgb: 0, 0, 0;
 }
 
+::selection {
+  background: var(--accent4);
+  color: var(--accent1)
+}
+
 input,
 textarea,
 button,

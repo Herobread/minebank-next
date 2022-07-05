@@ -81,7 +81,7 @@ export const AuthContextProvider = ({ children }) => {
         await signOut(auth)
     }
 
-    const updateUser = async (uid, data) => {
+    const updateUserData = async (uid, data) => {
         return await setDoc(doc(db, 'users', uid), data, { merge: true })
     }
 
@@ -133,6 +133,14 @@ export const AuthContextProvider = ({ children }) => {
         }
 
         if (recipientData === null) {
+            const index = senderData?.recent.indexOf(recipient)
+
+            if (index !== -1) {
+                senderData.recent.splice(index, 1)
+                const newSenderData = { recent: senderData.recent }
+                await setDoc(doc(db, 'users', senderUid), newSenderData, { merge: true })
+            }
+
             throw 'User was not found'
         }
 
@@ -198,7 +206,9 @@ export const AuthContextProvider = ({ children }) => {
     return <AuthContext.Provider value={{
         user,
         userData,
+        getUserUid,
         createUserDocument,
+        updateUserData,
         transfer,
         login,
         signup,

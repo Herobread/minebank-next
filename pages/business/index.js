@@ -5,7 +5,6 @@ import Button from "@/components/UI/Button";
 import Navbar from "@/components/UI/Navbar";
 import Subtext from "@/components/UI/Subtext";
 import { useAuth } from "@/context/AuthContext";
-import Link from "next/link";
 import { motion } from "framer-motion";
 import Margin from "@/components/skeleton/Margin";
 import VerticalList from "@/components/UI/VerticalList";
@@ -14,7 +13,7 @@ import { navList } from "@/lib/configs";
 import Header from "@/components/UI/Header";
 
 
-export default function Shop() {
+export default function Business() {
     const { userData } = useAuth()
 
     return <div>
@@ -26,7 +25,7 @@ export default function Shop() {
                     <Margin height={'95px'} mobile={'0'} />
                     <VerticalList list={navList} />
                 </div>
-                <motion.div {...fadeAnimations}>
+                <motion.div key={'Business'}{...fadeAnimations}>
                     <Margin height={'20px'} />
                     <Header subheader={'subheader'}>Header</Header>
                     <Margin height={'20px'} />

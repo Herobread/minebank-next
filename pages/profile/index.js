@@ -5,7 +5,6 @@ import Button from "@/components/UI/Button";
 import Navbar from "@/components/UI/Navbar";
 import Subtext from "@/components/UI/Subtext";
 import { useAuth } from "@/context/AuthContext";
-import Link from "next/link";
 import { motion } from "framer-motion";
 import Margin from "@/components/skeleton/Margin";
 import VerticalList from "@/components/UI/VerticalList";
@@ -17,24 +16,33 @@ import Input from "@/components/UI/Input";
 import { useEffect } from "react";
 import FlexRow from "@/components/skeleton/FlexRow";
 
-
 export default function Profile() {
     const { control, formState: { errors }, handleSubmit, setValue } = useForm()
-    const { logout, userData } = useAuth()
+    const { logout, user, userData, updateUserData, getUserUid } = useAuth()
 
     const handleClick = () => {
         logout()
     }
 
     const onSubmit = async (data) => {
-        console.log(data)
+        const usernameOwner = await getUserUid(data.username)
+
+        const isAvailableName = !usernameOwner
+        const isSameName = usernameOwner === user.uid
+
+        if (isAvailableName || isSameName) {
+            await updateUserData(user.uid, data)
+        } else {
+            throw `Username "${data.username}" is not available`
+        }
     }
 
     useEffect(() => {
         setValue('username', userData?.username)
+        setValue('img', userData?.img)
 
         return () => { }
-    }, [setValue, userData])
+    }, [userData])
 
 
     return <div>
@@ -67,16 +75,16 @@ export default function Profile() {
                         <Subtext type='error'>{errors.username && errors.username?.message}</Subtext>
                         <Margin height='5px' />
 
-                        {/* username */}
+                        {/* img */}
                         <Controller
                             defaultValue=''
-                            name='url'
+                            name='img'
                             control={control}
                             rules={formVerifiers.url}
                             render={({ field }) => <Input label={'Profile image url'} {...field} />}
                         />
                         <Margin height='5px' />
-                        <Subtext type='error'>{errors.url && errors.url?.message}</Subtext>
+                        <Subtext type='error'>{errors.img && errors.img?.message}</Subtext>
                         <Margin height='5px' />
 
                         <FlexRow flexDirection={'row-reverse'}>

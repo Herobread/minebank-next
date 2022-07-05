@@ -14,6 +14,9 @@ import { useRouter } from 'next/router'
 import { useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 
+import { AnimatePresence, motion } from 'framer-motion'
+import { fadeAnimationHeight, fadeAnimationVertical, scrollAnimation } from '@/lib/animations'
+
 export default function Login() {
 	const { control, formState: { errors }, handleSubmit } = useForm()
 	const { login } = useAuth()
@@ -44,44 +47,48 @@ export default function Login() {
 		<Protected requiredUserType={null} redirect={destination} />
 		<FocusPanel>
 			<Center>
-				<Header>Welcome back!</Header>
-				<Margin height='20px' />
+				<AnimatePresence>
+					<motion.div key={'login'} {...fadeAnimationVertical}>
+						<Header>Welcome back!</Header>
+						<Margin height='20px' />
 
-				<form onSubmit={handleSubmit(onSubmit)}>
-					{/* email */}
-					<Controller
-						defaultValue=''
-						name='email'
-						control={control}
-						rules={formVerifiers.email}
-						render={({ field }) => <Input label={'Email'} {...field} />}
-					/>
-					<Margin height='5px' />
-					<Subtext type='error'>{errors.email && errors.email?.message}</Subtext>
-					<Margin height='5px' />
+						<form onSubmit={handleSubmit(onSubmit)}>
+							{/* email */}
+							<Controller
+								defaultValue=''
+								name='email'
+								control={control}
+								rules={formVerifiers.email}
+								render={({ field }) => <Input label={'Email'} {...field} />}
+							/>
+							<Margin height='5px' />
+							<Subtext type='error'>{errors.email && errors.email?.message}</Subtext>
+							<Margin height='5px' />
 
-					{/* password */}
-					<Controller
-						defaultValue=''
-						name='password'
-						control={control}
-						rules={formVerifiers.password}
-						render={({ field }) => <Input label={'Password'} type='password' {...field} />}
-					/>
-					<Margin height='5px' />
-					<Subtext type='error'>{errors.password && errors.password?.message}</Subtext>
-					<Margin height='5px' />
+							{/* password */}
+							<Controller
+								defaultValue=''
+								name='password'
+								control={control}
+								rules={formVerifiers.password}
+								render={({ field }) => <Input label={'Password'} type='password' {...field} />}
+							/>
+							<Margin height='5px' />
+							<Subtext type='error'>{errors.password && errors.password?.message}</Subtext>
+							<Margin height='5px' />
 
-					<Subtext>Don`t have an account? <Link href='/signup'><a>Sign up</a></Link></Subtext>
+							<Subtext>Don`t have an account? <Link href='/signup'><a>Sign up</a></Link></Subtext>
 
-					<Margin height='5px' />
-					<Subtext type='error'>{serverErrors ? serverErrors : ''}</Subtext>
+							<Margin height='5px' />
+							<Subtext type='error'>{serverErrors ? serverErrors : ''}</Subtext>
 
-					<Margin height='10px' />
-					<FlexRow flexDirection={'row-reverse'}>
-						<Button type='submit' disabled={isLoading}>Log in</Button>
-					</FlexRow>
-				</form>
+							<Margin height='10px' />
+							<FlexRow flexDirection={'row-reverse'}>
+								<Button type='submit' disabled={isLoading}>Log in</Button>
+							</FlexRow>
+						</form>
+					</motion.div>
+				</AnimatePresence>
 			</Center>
 		</FocusPanel>
 	</div>

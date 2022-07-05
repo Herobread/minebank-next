@@ -13,18 +13,24 @@ import { formVerifiers, navList } from "@/lib/configs";
 import Header from "@/components/UI/Header";
 import { Controller, useForm } from "react-hook-form";
 import Input from "@/components/UI/Input";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import FlexRow from "@/components/skeleton/FlexRow";
 
 export default function Profile() {
     const { control, formState: { errors }, handleSubmit, setValue } = useForm()
     const { logout, user, userData, updateUserData, getUserUid } = useAuth()
 
+    const [isLoading, setisLoading] = useState(false)
+    const [serverError, setServerError] = useState('')
+    const [success, setSuccess] = useState('')
+
     const handleClick = () => {
         logout()
     }
 
     const onSubmit = async (data) => {
+        setisLoading(true)
+
         const usernameOwner = await getUserUid(data.username)
 
         const isAvailableName = !usernameOwner
@@ -32,15 +38,23 @@ export default function Profile() {
 
         if (isAvailableName || isSameName) {
             await updateUserData(user.uid, data)
+
+            setServerError('')
+            setSuccess('Data updated successfully')
+
+            setisLoading(false)
+            return
         } else {
-            throw `Username "${data.username}" is not available`
+            setServerError(`Username "${data.username}" is already taken`)
+
+            setisLoading(false)
+            return
         }
     }
 
     useEffect(() => {
         setValue('username', userData?.username)
         setValue('img', userData?.img)
-
         return () => { }
     }, [userData])
 
@@ -87,8 +101,12 @@ export default function Profile() {
                         <Subtext type='error'>{errors.img && errors.img?.message}</Subtext>
                         <Margin height='5px' />
 
+                        <Subtext timeout={4000} type='ok'>{success && success}</Subtext>
+                        <Subtext type='error'>{serverError && serverError}</Subtext>
+                        <Margin height='5px' />
+
                         <FlexRow flexDirection={'row-reverse'}>
-                            <Button type='submit'>Save</Button>
+                            <Button type='submit' disabled={isLoading}>Save</Button>
                         </FlexRow>
                     </form>
                 </motion.div>

@@ -55,6 +55,7 @@ export default function Transfer() {
     const [isLoading, setIsLoading] = useState(false)
     const [error, setError] = useState('')
     const [selectedUser, setSelectedUser] = useState('')
+    const [success, setSuccess] = useState('')
 
     const handleClick = () => {
         router.push('/bank')
@@ -62,13 +63,18 @@ export default function Transfer() {
 
     const panelCallback = (user) => {
         setSelectedUser(user)
-        setValue('username', user)
+        setValue('username', user, { shouldValidate: true })
     }
 
     const onSubmit = async ({ username, amount, comment }) => {
         setError('')
+        setSuccess('')
+
         setIsLoading(true)
-        console.log('loading')
+
+        const tempAmount = amount
+        const tempUsername = username
+
         await transfer({
             senderUid: user.uid,
             recipient: username,
@@ -76,6 +82,9 @@ export default function Transfer() {
             amount: amount,
             comment: comment
         })
+            .then(() => {
+                setSuccess(`Successfully transfered ${amount} Mc to ${tempUsername}`)
+            })
             .catch((err) => {
                 setError(err)
             })
@@ -141,7 +150,8 @@ export default function Transfer() {
                         <Subtext type='error'>{errors.comment && errors.comment?.message}</Subtext>
                         <Margin height='5px' />
 
-                        <Subtext type='error'>{error ? error : ''}</Subtext>
+                        <Subtext type='error'>{error && error}</Subtext>
+                        <Subtext type='ok'>{success && success}</Subtext>
 
                         <Margin height='5px' />
                         <FlexRow flexDirection={'row-reverse'}>

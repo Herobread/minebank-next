@@ -133,10 +133,10 @@ export const AuthContextProvider = ({ children }) => {
         }
 
         if (recipientData === null) {
-            const index = senderData?.recent.indexOf(recipient)
+            const indexOfOutdatedName = senderData?.recent.indexOf(recipient)
 
-            if (index !== -1) {
-                senderData.recent.splice(index, 1)
+            if (indexOfOutdatedName !== -1) {
+                senderData.recent.splice(indexOfOutdatedName, 1)
                 const newSenderData = { recent: senderData.recent }
                 await setDoc(doc(db, 'users', senderUid), newSenderData, { merge: true })
             }

@@ -4,6 +4,9 @@
 
     display: flex;
     justify-content: center;
-    align-items: middle;
     flex-direction: column;
+}
+
+.horizontal {
+    align-items: center;
 }

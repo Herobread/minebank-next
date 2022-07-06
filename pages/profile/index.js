@@ -15,16 +15,19 @@ import { Controller, useForm } from "react-hook-form";
 import Input from "@/components/UI/Input";
 import { useEffect, useState } from "react";
 import FlexRow from "@/components/skeleton/FlexRow";
+import { useRouter } from "next/router";
 
 export default function Profile() {
     const { control, formState: { errors }, handleSubmit, setValue } = useForm()
     const { logout, user, userData, updateUserData, getUserUid } = useAuth()
+    const router = useRouter()
 
     const [isLoading, setisLoading] = useState(false)
     const [serverError, setServerError] = useState('')
     const [success, setSuccess] = useState('')
 
     const handleClick = () => {
+        router.push('/login')
         logout()
     }
 

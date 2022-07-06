@@ -83,7 +83,7 @@ export default function Transfer() {
             comment: comment
         })
             .then(() => {
-                setSuccess(`Successfully transfered ${amount} Mc to ${tempUsername}`)
+                setSuccess(`Successfully transfered ${tempAmount} Mc to ${tempUsername}`)
             })
             .catch((err) => {
                 setError(err)

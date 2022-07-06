@@ -129,7 +129,7 @@ export const AuthContextProvider = ({ children }) => {
         let recipientData = await getUserData({ uid: recipientUid })
 
         if (senderData.minecoins < amount) {
-            throw 'You don`t have enough money to make this transfer'
+            throw 'You don`t have enough money to make this payment'
         }
 
         if (recipientData === null) {

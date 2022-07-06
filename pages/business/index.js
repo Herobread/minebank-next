@@ -11,6 +11,9 @@ import VerticalList from "@/components/UI/VerticalList";
 import { fadeAnimations } from "@/lib/animations";
 import { navList } from "@/lib/configs";
 import Header from "@/components/UI/Header";
+import SplitPanel from "@/components/UI/SplitPanel";
+import Center from "@/components/skeleton/Center";
+import WideCardWithOptions from "@/components/UI/WideCardWithOptions";
 
 
 export default function Business() {
@@ -27,8 +30,18 @@ export default function Business() {
                 </div>
                 <motion.div key={'Business'}{...fadeAnimations}>
                     <Margin height={'20px'} />
-                    <Header subheader={'subheader'}>Header</Header>
+                    <Header
+                        cta={<Button>Manage</Button>}
+                        subheader={'Dashboard'}>Header</Header>
                     <Margin height={'20px'} />
+                    <SplitPanel>
+                        <Center isHorizontal={true}>asdad1</Center>
+                        <Center isHorizontal={true}>asdad</Center>
+                    </SplitPanel>
+                    <Margin height={'10px'} />
+                    <Subtext>New orders</Subtext>
+                    <Margin height={'10px'} />
+                    <WideCardWithOptions />
                 </motion.div>
             </Layout>
         </ContentWrapper >

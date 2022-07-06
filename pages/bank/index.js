@@ -95,7 +95,7 @@ export default function Bank() {
                     <Margin height={'20px'} />
 
                     <Header
-                        subheader='your balance'
+                        subheader='Your balance'
                         cta={<Button onClick={handleClick}>Transfer</Button>}>
                         {userData?.minecoins} <Mc>Mc</Mc>
                     </Header>

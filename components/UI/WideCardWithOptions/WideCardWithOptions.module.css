@@ -21,8 +21,6 @@
 .img {
     height: 50px;
     grid-area: img;
-    background-color: #111111;
-    border-radius: 50%;
 }
 
 .title {

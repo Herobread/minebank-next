@@ -1,0 +1,14 @@
+.button {
+    border: none;
+    background-color: transparent;
+
+    transition: 0.2s ease-in-out;
+}
+
+.button:hover>svg>path {
+    fill: var(--accent1);
+}
+
+.button>svg>path {
+    fill: var(--accent2);
+}

@@ -10,10 +10,22 @@ export const useAuth = () => { return useContext(AuthContext) }
 export const AuthContextProvider = ({ children }) => {
     const [user, setUser] = useState(null)
     const [userData, setUserData] = useState(null)
+    const [shopData, setShopData] = useState(null)
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
         let unsubscribeUserData = () => { }
+
+        const unsubscribeShopData = onSnapshot(collection(db, 'products'), (docs) => {
+            const products = []
+
+            docs.forEach(doc => {
+                products.push(doc.data())
+            })
+
+            setShopData(products)
+        })
+
 
         const unsubscribe = onAuthStateChanged(auth, (user) => {
             if (user) {
@@ -204,11 +216,47 @@ export const AuthContextProvider = ({ children }) => {
     }
 
     const createProduct = async (uid, userData, data) => {
-        console.log(uid, userData, data)
+        let { name, price, inStock, img, description } = data
 
-        await setDoc(doc(db, 'products', uid), newUserData, { merge: true })
+        description ??= ''
 
-        const newUserData = {}
+        let timestamp = new Date()
+        timestamp = timestamp.getTime()
+
+        const id = name + timestamp.toString()
+
+        let productData = {
+            createdBy: uid,
+            author: userData['username'],
+            product: {
+                name: name,
+                price: parseInt(price),
+                inStock: parseInt(inStock),
+                img: img,
+                description: description,
+                created: timestamp
+            },
+            reviews: [
+                {
+                    img: 'imgggg',
+                    by: 'name',
+                    text: 'aaaaaaaaaa',
+                    rating: 5
+                }
+            ]
+        }
+
+        let productDoc = await setDoc(doc(db, 'products', id), productData)
+
+        console.log(productDoc)
+
+        if (!userData['products']) {
+            userData['products'] = []
+        }
+
+        const newUserData = {
+            products: userData['products'].concat([id])
+        }
 
         await setDoc(doc(db, 'users', uid), newUserData, { merge: true })
     }
@@ -216,6 +264,7 @@ export const AuthContextProvider = ({ children }) => {
     return <AuthContext.Provider value={{
         user,
         userData,
+        shopData,
         getUserUid,
         createUserDocument,
         updateUserData,

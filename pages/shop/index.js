@@ -12,10 +12,14 @@ import VerticalList from "@/components/UI/VerticalList";
 import { fadeAnimations } from "@/lib/animations";
 import { navList } from "@/lib/configs";
 import Header from "@/components/UI/Header";
+import Mc from "@/components/UI/Mc";
+import WideCard from "@/components/UI/WideCard";
 
 
 export default function Shop() {
-    const { userData } = useAuth()
+    const { userData, shopData } = useAuth()
+
+    const availableProductsAmount = shopData?.length
 
     return <div>
         <Protected requiredUserType={'user'} />
@@ -28,8 +32,14 @@ export default function Shop() {
                 </div>
                 <motion.div {...fadeAnimations}>
                     <Margin height={'20px'} />
-                    <Header subheader={'subheader'}>Header</Header>
+                    <Header subheader={`${availableProductsAmount} products are available`}>Shop</Header>
                     <Margin height={'20px'} />
+                    {/* {JSON.stringify(shopData[0])} */}
+                    {shopData?.map(item => {
+                        return <WideCard title={item.product?.name} amount={item.product?.price} />
+                    })}
+
+                    <Subtext>Want to sell your own production? <Link href='/business'><a>Add product in 'business' page</a></Link></Subtext>
                 </motion.div>
             </Layout>
         </ContentWrapper >

@@ -5,7 +5,7 @@ import Button from "@/components/UI/Button";
 import Navbar from "@/components/UI/Navbar";
 import Subtext from "@/components/UI/Subtext";
 import { useAuth } from "@/context/AuthContext";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import Margin from "@/components/skeleton/Margin";
 import VerticalList from "@/components/UI/VerticalList";
 import { fadeAnimations } from "@/lib/animations";
@@ -25,13 +25,25 @@ import Clock from '@/icons/clock.svg'
 import Edit from '@/icons/edit.svg'
 import FlexRow from "@/components/skeleton/FlexRow";
 import { useRouter } from "next/router";
+import Modal from "@/components/UI/Modal";
+import { useState } from "react";
 
 export default function Business() {
     const { userData } = useAuth()
     const router = useRouter()
 
+    const [isOpen, setIsOpen] = useState(false)
+
     const handleRedirectManage = () => {
         router.push('/business/manage')
+    }
+
+    const handleOpen = () => {
+        setIsOpen(true)
+    }
+
+    const handleClose = () => {
+        setIsOpen(false)
     }
 
     return <div>
@@ -111,7 +123,7 @@ export default function Business() {
                         description={'10 Mc'}
                         info={'10 sold'}
                         img={<ProfilePicture name={'p'} src={'https://i.ibb.co/xDcCYr4/Baked-Potato-JE4-BE2.png'} />}
-                        buttons={<OptionButton img={<Edit />} />}
+                        buttons={<OptionButton onClick={handleOpen} img={<Edit />} />}
                     />
                     <Margin height={'10px'} />
                     <FlexRow flexDirection={'row-reverse'}>
@@ -120,6 +132,16 @@ export default function Business() {
 
                 </motion.div>
             </Layout>
+
+            <AnimatePresence initial={false} exitBeforeEnter={true}>
+                {isOpen &&
+                    <Modal isOpen={isOpen} onClose={handleClose}>
+
+                    </Modal>
+                }
+            </AnimatePresence>
+
+
         </ContentWrapper >
     </div >
 }

@@ -20,7 +20,7 @@
     position: relative;
     top: 0;
     left: 0;
-    max-width: 500px;
+    width: clamp(50%, 600px, 100%);
     padding: 20px;
 
     background-color: var(--accent5);

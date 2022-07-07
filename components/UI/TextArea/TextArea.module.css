@@ -1,0 +1,45 @@
+.container {
+    width: 100%;
+}
+
+.label {
+    color: var(--accent2);
+    font-size: 14px;
+    line-height: 30px;
+}
+
+.input {
+    width: 100%;
+    min-width: none;
+    padding: 9px;
+    color: var(--accent1);
+    background-color: transparent;
+    border: none;
+    outline: 1px solid var(--accent3);
+    border-radius: 5px;
+    resize: vertical;
+    max-height: 200px;
+
+    transition: 0.2s ease-in-out;
+}
+
+/* .input:hover, */
+.input:focus {
+    color: var(--accent1);
+    border: none;
+    outline: 1px solid var(--accent1);
+}
+
+.inputContainer {
+    position: relative;
+}
+
+.icon {
+    right: 3px;
+    top: 5px;
+    position: absolute;
+
+    cursor: pointer;
+
+    transition: 0.2s ease-in-out;
+}

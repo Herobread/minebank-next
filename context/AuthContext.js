@@ -203,6 +203,16 @@ export const AuthContextProvider = ({ children }) => {
         await setDoc(doc(db, 'users', recipientUid), newRecipientData, { merge: true })
     }
 
+    const createProduct = async (uid, userData, data) => {
+        console.log(uid, userData, data)
+
+        await setDoc(doc(db, 'products', uid), newUserData, { merge: true })
+
+        const newUserData = {}
+
+        await setDoc(doc(db, 'users', uid), newUserData, { merge: true })
+    }
+
     return <AuthContext.Provider value={{
         user,
         userData,
@@ -213,6 +223,7 @@ export const AuthContextProvider = ({ children }) => {
         login,
         signup,
         logout,
+        createProduct,
     }}>
         {loading ? 'Loading' : children}
     </AuthContext.Provider>

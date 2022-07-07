@@ -27,23 +27,37 @@ import FlexRow from "@/components/skeleton/FlexRow";
 import { useRouter } from "next/router";
 import Modal from "@/components/UI/Modal";
 import { useState } from "react";
+import Input from "@/components/UI/Input";
+import Split from "@/components/skeleton/Split";
+import TextArea from "@/components/UI/TextArea";
+import EditProductModal from "@/components/Modals/EditProductModal";
+import AddProductModal from "@/components/Modals/AddProductModal";
 
 export default function Business() {
-    const { userData } = useAuth()
+    // const { userData } = useAuth()
     const router = useRouter()
 
-    const [isOpen, setIsOpen] = useState(false)
+    const [isProductModalOpened, setIsProductModalOpened] = useState(false)
+    const [isEditProductModalOpened, setIsEditProductModalOpened] = useState(false)
 
     const handleRedirectManage = () => {
         router.push('/business/manage')
     }
 
-    const handleOpen = () => {
-        setIsOpen(true)
+    const handleProductModalOpen = () => {
+        setIsProductModalOpened(true)
     }
 
-    const handleClose = () => {
-        setIsOpen(false)
+    const handleProductModalClose = () => {
+        setIsProductModalOpened(false)
+    }
+
+    const handleEditProductModalOpen = () => {
+        setIsEditProductModalOpened(true)
+    }
+
+    const handleEditProductModalClose = () => {
+        setIsEditProductModalOpened(false)
     }
 
     return <div>
@@ -123,25 +137,19 @@ export default function Business() {
                         description={'10 Mc'}
                         info={'10 sold'}
                         img={<ProfilePicture name={'p'} src={'https://i.ibb.co/xDcCYr4/Baked-Potato-JE4-BE2.png'} />}
-                        buttons={<OptionButton onClick={handleOpen} img={<Edit />} />}
+                        buttons={<OptionButton onClick={handleProductModalOpen} img={<Edit />} />}
                     />
                     <Margin height={'10px'} />
                     <FlexRow flexDirection={'row-reverse'}>
-                        <Button>Add new</Button>
+                        <Button onClick={handleEditProductModalOpen}>Add new</Button>
                     </FlexRow>
-
                 </motion.div>
             </Layout>
 
-            <AnimatePresence initial={false} exitBeforeEnter={true}>
-                {isOpen &&
-                    <Modal isOpen={isOpen} onClose={handleClose}>
 
-                    </Modal>
-                }
-            </AnimatePresence>
+            <EditProductModal isOpen={isProductModalOpened} onClose={handleProductModalClose} />
 
-
+            <AddProductModal isOpen={isEditProductModalOpened} onClose={handleEditProductModalClose} />
         </ContentWrapper >
     </div >
 }

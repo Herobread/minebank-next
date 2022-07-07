@@ -39,7 +39,7 @@ export default function Shop() {
                         return <WideCard key={item.product?.timestamp} title={item.product?.name} amount={item.product?.price} />
                     })}
 
-                    <Subtext>Want to sell your own production? <Link href='/business'><a>Add product in 'business' page</a></Link></Subtext>
+                    <Subtext>Want to sell your own production? <Link href='/business'><a>Add product in &apos;business&apos; page</a></Link></Subtext>
                 </motion.div>
             </Layout>
         </ContentWrapper >

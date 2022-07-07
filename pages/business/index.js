@@ -23,9 +23,16 @@ import Tick from '@/icons/tick.svg'
 import Cross from '@/icons/cross.svg'
 import Clock from '@/icons/clock.svg'
 import Edit from '@/icons/edit.svg'
+import FlexRow from "@/components/skeleton/FlexRow";
+import { useRouter } from "next/router";
 
 export default function Business() {
     const { userData } = useAuth()
+    const router = useRouter()
+
+    const handleRedirectManage = () => {
+        router.push('/business/manage')
+    }
 
     return <div>
         <Protected requiredUserType={'user'} />
@@ -39,8 +46,8 @@ export default function Business() {
                 <motion.div key={'Business'}{...fadeAnimations}>
                     <Margin height={'20px'} />
                     <Header
-                        cta={<Button>Manage</Button>}
-                        subheader={'Dashboard'}>Header</Header>
+                        cta={<Button onClick={handleRedirectManage}>Manage</Button>}
+                        subheader={'Dashboard'}>Business</Header>
                     <Margin height={'20px'} />
                     <SplitPanel>
                         <Center isHorizontal={true}>
@@ -94,16 +101,22 @@ export default function Business() {
                         </>}
                     />
                     <Margin height={'10px'} />
+                    <FlexRow flexDirection={'row-reverse'}>
+                        <Button>View all</Button>
+                    </FlexRow>
+                    <Margin height={'10px'} />
                     <Subtext>All products</Subtext>
                     <Margin height={'10px'} />
                     <WideCardWithOptions title={'Potato'}
                         description={'10 Mc'}
                         info={'10 sold'}
                         img={<ProfilePicture name={'p'} src={'https://i.ibb.co/xDcCYr4/Baked-Potato-JE4-BE2.png'} />}
-                        buttons={<>
-                            <OptionButton img={<Edit />} />
-                        </>}
+                        buttons={<OptionButton img={<Edit />} />}
                     />
+                    <Margin height={'10px'} />
+                    <FlexRow flexDirection={'row-reverse'}>
+                        <Button>Add new</Button>
+                    </FlexRow>
 
                 </motion.div>
             </Layout>

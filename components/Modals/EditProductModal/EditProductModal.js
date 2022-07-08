@@ -14,16 +14,8 @@ import { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 
 export default function EditProductModal({ isOpen, onClose, data }) {
-    if (!data)
-        return
     const { control, formState: { errors }, handleSubmit, setValue } = useForm()
     const { updateProduct } = useAuth()
-
-    const { name, price, inStock, img, description, created } = data?.product
-    const id = name + created
-
-    const [isLoading, setIsLoading] = useState(false)
-    const [success, setSuccess] = useState('')
 
     useEffect(() => {
         setValue('name', name, { shouldValidate: true })
@@ -35,6 +27,14 @@ export default function EditProductModal({ isOpen, onClose, data }) {
         return () => { }
     }, [name, price, inStock, img, description])
 
+    const [isLoading, setIsLoading] = useState(false)
+    const [success, setSuccess] = useState('')
+
+    if (!data)
+        return
+
+    const { name, price, inStock, img, description, created } = data?.product
+    const id = name + created
 
     const onSubmit = async (data) => {
         setIsLoading(true)

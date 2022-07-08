@@ -34,10 +34,10 @@ export default function Shop() {
                     <Margin height={'20px'} />
                     <Header subheader={`${availableProductsAmount} products are available`}>Shop</Header>
                     <Margin height={'20px'} />
-                    {/* {JSON.stringify(shopData[0])} */}
-                    {shopData?.map(item => {
-                        return <WideCard key={item.product?.timestamp} title={item.product?.name} amount={item.product?.price} />
-                    })}
+
+
+                    s
+
 
                     <Subtext>Want to sell your own products? <Link href='/business'><a>Add product in &apos;business&apos; page</a></Link></Subtext>
                 </motion.div>

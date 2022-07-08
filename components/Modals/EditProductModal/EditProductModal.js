@@ -15,9 +15,26 @@ import { Controller, useForm } from "react-hook-form";
 
 export default function EditProductModal({ isOpen, onClose, data }) {
     const { control, formState: { errors }, handleSubmit, setValue } = useForm()
-    const { updateProduct } = useAuth()
+    const { updateProduct, deleteProduct } = useAuth()
+
+    const handleClose = () => {
+        setSuccess('')
+        setIsLoading('')
+        onClose()
+    }
+
+    const name = data?.product?.name
+    const price = data?.product?.price
+    const inStock = data?.product?.inStock
+    const img = data?.product?.img
+    const description = data?.product?.description
+    const created = data?.product?.created
+    const id = `${created}`
 
     useEffect(() => {
+        if (!data)
+            return
+
         setValue('name', name, { shouldValidate: true })
         setValue('price', price, { shouldValidate: true })
         setValue('inStock', inStock, { shouldValidate: true })
@@ -29,25 +46,52 @@ export default function EditProductModal({ isOpen, onClose, data }) {
 
     const [isLoading, setIsLoading] = useState(false)
     const [success, setSuccess] = useState('')
-
-    if (!data)
-        return
-
-    const { name, price, inStock, img, description, created } = data?.product
-    const id = name + created
+    const [submitType, setSubmitType] = useState('save')
 
     const onSubmit = async (data) => {
         setIsLoading(true)
 
-        const data_ = { product: data }
-        await updateProduct(id, data_)
+        if (submitType === 'save') {
+            const data_ = {
+                product: {
+                    ...data,
+                    created: created
+                }
+            }
 
-        setIsLoading(false)
+            await updateProduct(id, data_)
+
+            setSuccess('Successfully updated product info')
+            setIsLoading(false)
+
+            return
+        }
+
+        if (submitType === 'delete') {
+            await deleteProduct(id)
+
+            setSuccess('Product successfully deleted')
+            handleClose()
+            setIsLoading(false)
+            setSuccess('')
+
+            return
+        }
+    }
+
+    const handleSave = () => {
+        console.log('save')
+        setSubmitType('save')
+    }
+
+    const handleDelete = () => {
+        console.log('delete')
+        setSubmitType('delete')
     }
 
     return <AnimatePresence exitBeforeEnter={true}>
         {isOpen &&
-            <Modal isOpen={isOpen} onClose={onClose}>
+            <Modal isOpen={isOpen} onClose={handleClose}>
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <Header>Edit {name}</Header>
                     <Margin height={'10px'} />
@@ -135,7 +179,8 @@ export default function EditProductModal({ isOpen, onClose, data }) {
 
                     <Margin height={'10px'} />
                     <FlexRow flexDirection={'row-reverse'}>
-                        <Button type='submit' disabled={isLoading}>Save</Button>
+                        <Button onClick={handleSave} disabled={isLoading}>Save</Button>
+                        <Button onClick={handleDelete}>Delete</Button>
                         {/* <Button onClick={onClose}>Cancel</Button> */}
                     </FlexRow>
                 </form>

@@ -9,7 +9,6 @@ import { useState } from "react"
 import Edit from '@/icons/edit.svg'
 
 export default function GenerateUserProducts({ user, data }) {
-    console.log(data)
     const { uid } = user
     const { shopData } = useAuth()
 
@@ -36,7 +35,7 @@ export default function GenerateUserProducts({ user, data }) {
             <WideCardWithOptions
                 title={product.name}
                 description={product.price}
-                info={'NaN sold'}
+                info={`${product.sold} sold`}
                 img={<ProfilePicture name={product.name} src={product.img} />}
                 buttons={<OptionButton onClick={() => { handleProductModalOpen(i) }} img={<Edit />} />}
             />
@@ -44,9 +43,9 @@ export default function GenerateUserProducts({ user, data }) {
         </div>)
     })
 
-    console.log()
     const handleProductModalOpen = (id) => {
         setProductModalData(filtered[id])
+
         setIsProductModalOpened(true)
     }
 
@@ -54,7 +53,6 @@ export default function GenerateUserProducts({ user, data }) {
         setIsProductModalOpened(false)
     }
 
-    console.log(productModalData)
     return <div>
         {res}
         <EditProductModal data={productModalData} isOpen={isProductModalOpened} onClose={handleProductModalClose} />

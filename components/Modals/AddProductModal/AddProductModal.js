@@ -23,12 +23,11 @@ export default function AddProductModal({ isOpen, onClose }) {
     const onSubmit = (data) => {
         setIsLoading(true)
         const { name } = data
-        console.log(data)
 
         createProduct(user.uid, userData, data)
 
-        setIsLoading(false)
         setSuccess(`Successfully created ${name}`)
+        setIsLoading(false)
     }
 
     return <AnimatePresence initial={false} exitBeforeEnter={true}>

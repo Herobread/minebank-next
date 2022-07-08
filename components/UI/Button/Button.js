@@ -5,8 +5,8 @@ export default function Button({ disabled, children, ...props }) {
     let style = disabled ? cn([s.disabled, s.button]) : s.button
     return <button
         className={style}
-        {...props}
         disabled={disabled}
+        {...props}
     >
         {children}
     </button>

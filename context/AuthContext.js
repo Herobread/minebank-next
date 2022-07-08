@@ -1,6 +1,6 @@
 import { auth, db } from "@/lib/firebase";
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "firebase/auth";
-import { collection, doc, getDoc, getDocs, limit, onSnapshot, query, runTransaction, setDoc, updateDoc, where } from "firebase/firestore";
+import { collection, deleteDoc, doc, getDoc, getDocs, limit, onSnapshot, query, runTransaction, setDoc, updateDoc, where } from "firebase/firestore";
 import { createContext, useContext, useEffect, useState } from "react";
 
 const AuthContext = createContext({})
@@ -223,46 +223,32 @@ export const AuthContextProvider = ({ children }) => {
         let timestamp = new Date()
         timestamp = timestamp.getTime()
 
-        const id = name + timestamp.toString()
+        const id = timestamp.toString()
 
         let productData = {
             authorUid: uid,
             authorUsername: userData['username'],
             product: {
+                sold: 0,
                 name: name,
                 price: parseInt(price),
                 inStock: parseInt(inStock),
                 img: img,
                 description: description,
-                created: timestamp
+                created: parseInt(timestamp)
             },
-            reviews: [
-                {
-                    img: 'imgggg',
-                    by: 'name',
-                    text: 'aaaaaaaaaa',
-                    rating: 5
-                }
-            ]
+            reviews: []
         }
 
-        let productDoc = await setDoc(doc(db, 'products', id), productData)
-
-        console.log(productDoc)
-
-        if (!userData['products']) {
-            userData['products'] = []
-        }
-
-        const newUserData = {
-            products: userData['products'].concat([id])
-        }
-
-        await setDoc(doc(db, 'users', uid), newUserData, { merge: true })
+        await setDoc(doc(db, 'products', id), productData)
     }
 
     async function updateProduct(id, data) {
         return await updateDoc(doc(db, "products", id), data, { merge: true })
+    }
+
+    async function deleteProduct(id) {
+        return await deleteDoc(doc(db, 'products', id))
     }
 
     return <AuthContext.Provider value={{
@@ -277,7 +263,8 @@ export const AuthContextProvider = ({ children }) => {
         signup,
         logout,
         createProduct,
-        updateProduct
+        updateProduct,
+        deleteProduct
     }}>
         {loading ? 'Loading' : children}
     </AuthContext.Provider>

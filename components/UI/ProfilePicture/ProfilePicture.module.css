@@ -12,6 +12,10 @@
     border-radius: 50%;
 }
 
+.sharp {
+    border-radius: unset;
+}
+
 .containerText {
     width: 100%;
     height: 100%;

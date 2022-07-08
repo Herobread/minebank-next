@@ -7,6 +7,7 @@ import OptionButton from "@/components/UI/WideCardWithOptions/OptionButton"
 import { useAuth } from "@/context/AuthContext"
 import { useState } from "react"
 import Edit from '@/icons/edit.svg'
+import Mc from "@/components/UI/Mc"
 
 export default function GenerateUserProducts({ user, data }) {
     const { uid } = user
@@ -34,9 +35,9 @@ export default function GenerateUserProducts({ user, data }) {
         res.push(<div key={i}>
             <WideCardWithOptions
                 title={product.name}
-                description={product.price}
+                description={product.price + ' Mc'}
                 info={`${product.sold} sold`}
-                img={<ProfilePicture name={product.name} src={product.img} />}
+                img={<ProfilePicture isSharp={true} name={product.name} src={product.img} />}
                 buttons={<OptionButton onClick={() => { handleProductModalOpen(i) }} img={<Edit />} />}
             />
             <Margin height={'10px'} />

@@ -14,6 +14,7 @@ import { navList } from "@/lib/configs";
 import Header from "@/components/UI/Header";
 import Mc from "@/components/UI/Mc";
 import WideCard from "@/components/UI/WideCard";
+import GenerateProducts from "@/components/tools/GenerateProducts";
 
 
 export default function Shop() {
@@ -35,9 +36,8 @@ export default function Shop() {
                     <Header subheader={`${availableProductsAmount} products are available`}>Shop</Header>
                     <Margin height={'20px'} />
 
-
-                    s
-
+                    <GenerateProducts />
+                    <Margin height={'10px'} />
 
                     <Subtext>Want to sell your own products? <Link href='/business'><a>Add product in &apos;business&apos; page</a></Link></Subtext>
                 </motion.div>

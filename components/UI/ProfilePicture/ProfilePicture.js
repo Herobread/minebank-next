@@ -1,9 +1,16 @@
+import cn from 'common/cn'
 import s from './ProfilePicture.module.css'
 
-export default function ProfilePicture({ name, src }) {
+export default function ProfilePicture({ name, src, isSharp }) {
+    let style = s.container
+
+    if (isSharp) {
+        style = cn([s.img, s.sharp])
+    }
+
     if (src) {
         return <div className={s.container}>
-            <img className={s.img} src={src} />
+            <img className={style} src={src} />
         </div>
     }
 

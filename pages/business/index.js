@@ -22,7 +22,6 @@ import OptionButton from "@/components/UI/WideCardWithOptions/OptionButton";
 import Tick from '@/icons/tick.svg'
 import Cross from '@/icons/cross.svg'
 import Clock from '@/icons/clock.svg'
-import Edit from '@/icons/edit.svg'
 import FlexRow from "@/components/skeleton/FlexRow";
 import { useRouter } from "next/router";
 import Modal from "@/components/UI/Modal";
@@ -32,25 +31,19 @@ import Split from "@/components/skeleton/Split";
 import TextArea from "@/components/UI/TextArea";
 import EditProductModal from "@/components/Modals/EditProductModal";
 import AddProductModal from "@/components/Modals/AddProductModal";
+import GenerateUserProducts from "@/components/tools/GenerateUserProducts";
 
 export default function Business() {
-    // const { userData } = useAuth()
+    const { userData, user } = useAuth()
     const router = useRouter()
 
-    const [isProductModalOpened, setIsProductModalOpened] = useState(false)
     const [isEditProductModalOpened, setIsEditProductModalOpened] = useState(false)
 
     const handleRedirectManage = () => {
         router.push('/business/manage')
     }
 
-    const handleProductModalOpen = () => {
-        setIsProductModalOpened(true)
-    }
 
-    const handleProductModalClose = () => {
-        setIsProductModalOpened(false)
-    }
 
     const handleEditProductModalOpen = () => {
         setIsEditProductModalOpened(true)
@@ -69,7 +62,7 @@ export default function Business() {
                     <Margin height={'95px'} mobile={'0'} />
                     <VerticalList list={navList} />
                 </div>
-                <motion.div key={'Business'}{...fadeAnimations}>
+                <motion.div key={'Business'} {...fadeAnimations}>
                     <Margin height={'20px'} />
                     <Header
                         cta={<Button onClick={handleRedirectManage}>Manage</Button>}
@@ -131,15 +124,15 @@ export default function Business() {
                         <Button>View all</Button>
                     </FlexRow>
                     <Margin height={'10px'} />
-                    <Subtext>All products</Subtext>
+                    <Subtext>Your products</Subtext>
                     <Margin height={'10px'} />
-                    <WideCardWithOptions title={'Potato'}
-                        description={'10 Mc'}
-                        info={'10 sold'}
-                        img={<ProfilePicture name={'p'} src={'https://i.ibb.co/xDcCYr4/Baked-Potato-JE4-BE2.png'} />}
-                        buttons={<OptionButton onClick={handleProductModalOpen} img={<Edit />} />}
-                    />
-                    <Margin height={'10px'} />
+
+
+
+                    <GenerateUserProducts data={userData} user={user} />
+
+
+
                     <FlexRow flexDirection={'row-reverse'}>
                         <Button onClick={handleEditProductModalOpen}>Add new</Button>
                     </FlexRow>
@@ -147,7 +140,6 @@ export default function Business() {
             </Layout>
 
 
-            <EditProductModal isOpen={isProductModalOpened} onClose={handleProductModalClose} />
 
             <AddProductModal isOpen={isEditProductModalOpened} onClose={handleEditProductModalClose} />
         </ContentWrapper >

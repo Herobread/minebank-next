@@ -1,6 +1,6 @@
 import { auth, db } from "@/lib/firebase";
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "firebase/auth";
-import { collection, doc, getDoc, getDocs, limit, onSnapshot, query, runTransaction, setDoc, where } from "firebase/firestore";
+import { collection, doc, getDoc, getDocs, limit, onSnapshot, query, runTransaction, setDoc, updateDoc, where } from "firebase/firestore";
 import { createContext, useContext, useEffect, useState } from "react";
 
 const AuthContext = createContext({})
@@ -226,8 +226,8 @@ export const AuthContextProvider = ({ children }) => {
         const id = name + timestamp.toString()
 
         let productData = {
-            createdBy: uid,
-            author: userData['username'],
+            authorUid: uid,
+            authorUsername: userData['username'],
             product: {
                 name: name,
                 price: parseInt(price),
@@ -261,6 +261,10 @@ export const AuthContextProvider = ({ children }) => {
         await setDoc(doc(db, 'users', uid), newUserData, { merge: true })
     }
 
+    async function updateProduct(id, data) {
+        return await updateDoc(doc(db, "products", id), data, { merge: true })
+    }
+
     return <AuthContext.Provider value={{
         user,
         userData,
@@ -273,6 +277,7 @@ export const AuthContextProvider = ({ children }) => {
         signup,
         logout,
         createProduct,
+        updateProduct
     }}>
         {loading ? 'Loading' : children}
     </AuthContext.Provider>

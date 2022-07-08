@@ -15,16 +15,19 @@ import { Controller, useForm } from "react-hook-form";
 
 export default function AddProductModal({ isOpen, onClose }) {
     const { control, formState: { errors }, handleSubmit } = useForm()
+    const [isLoading, setIsLoading] = useState(false)
     const [success, setSuccess] = useState('')
 
     const { createProduct, user, userData } = useAuth()
 
     const onSubmit = (data) => {
+        setIsLoading(true)
         const { name } = data
         console.log(data)
 
         createProduct(user.uid, userData, data)
 
+        setIsLoading(false)
         setSuccess(`Successfully created ${name}`)
     }
 
@@ -118,8 +121,8 @@ export default function AddProductModal({ isOpen, onClose }) {
 
                     <Margin height={'10px'} />
                     <FlexRow flexDirection={'row-reverse'}>
-                        <Button type='submit'>Create</Button>
-                        <Button onClick={onClose}>Cancel</Button>
+                        <Button type='submit' disabled={isLoading}>Create</Button>
+                        {/* <Button onClick={onClose}>Cancel</Button> */}
                     </FlexRow>
                 </form>
             </Modal>

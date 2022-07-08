@@ -3,6 +3,7 @@
     position: fixed;
     width: 100vw;
     backdrop-filter: blur(16px);
+    background-color: rgb(var(--accent5-rgb), 0.7);
 }
 
 .container ul {

@@ -29,6 +29,7 @@ export default function EditProductModal({ isOpen, onClose, data }) {
     const img = data?.product?.img
     const description = data?.product?.description
     const created = data?.product?.created
+    const sold = data?.product?.sold
     const id = `${created}`
 
     useEffect(() => {
@@ -51,10 +52,12 @@ export default function EditProductModal({ isOpen, onClose, data }) {
     const onSubmit = async (data) => {
         setIsLoading(true)
 
+        console.log(data)
         if (submitType === 'save') {
             const data_ = {
                 product: {
                     ...data,
+                    sold: sold,
                     created: created
                 }
             }

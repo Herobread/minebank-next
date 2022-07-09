@@ -37,6 +37,7 @@ export default function Shop() {
                     <Margin height={'20px'} />
 
                     <GenerateProducts />
+
                     <Margin height={'10px'} />
 
                     <Subtext>Want to sell your own products? <Link href='/business'><a>Add product in &apos;business&apos; page</a></Link></Subtext>

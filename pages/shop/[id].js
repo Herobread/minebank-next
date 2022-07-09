@@ -62,7 +62,12 @@ export default function ViewItem() {
                     >{name}</Header>
                     <Margin height={'20px'} />
                     <WideProductCard data={product} />
-                    <Margin height={'20px'} />
+
+                    <Margin height={'10px'} />
+                    <Subtext type={'ok'}>Order successfully created</Subtext>
+                    <Margin height={'10px'} />
+
+
                     <SubHeader>About this product</SubHeader>
                     <Margin height={'10px'} />
                     <Text>{description_}</Text>

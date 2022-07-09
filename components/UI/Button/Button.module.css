@@ -49,3 +49,10 @@
 .disabled:focus {
     outline: 1px solid var(--accent3);
 }
+
+
+
+.danger:hover {
+    color: var(--red);
+    outline: 1px solid var(--red);
+}

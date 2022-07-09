@@ -1,10 +1,23 @@
 import cn from 'common/cn'
 import s from './Button.module.css'
 
-export default function Button({ disabled, children, ...props }) {
-    let style = disabled ? cn([s.disabled, s.button]) : s.button
+export default function Button({ disabled, type, children, ...props }) {
+    let styles = []
+    styles.push(s.button)
+
+    if (disabled) {
+        styles.push(s.disabled)
+    }
+
+    if (type === 'danger') {
+        styles.push(s.danger)
+    }
+
+
+    styles = cn(styles)
+
     return <button
-        className={style}
+        className={styles}
         disabled={disabled}
         {...props}
     >

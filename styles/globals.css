@@ -51,6 +51,8 @@ a:hover {
   --accent5-rgb: 34, 34, 34;
   --accent6-rgb: 17, 17, 17;
 
+  --red: tomato;
+
   --accent-1-rgb: 0, 0, 0;
   /* --accent-2-rgb: #191919; */
 }

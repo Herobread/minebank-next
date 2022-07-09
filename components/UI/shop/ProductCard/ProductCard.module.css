@@ -7,6 +7,20 @@
     background-color: var(--accent6);
 
     cursor: pointer;
+
+}
+
+.container img {
+    transition: all 0.1s ease-in-out;
+}
+
+.container:hover {
+    background-color: var(--accent5);
+}
+
+.container:hover img {
+    transform: scale(1.1);
+    /* background-color: red; */
 }
 
 .item {

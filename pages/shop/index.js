@@ -33,7 +33,7 @@ export default function Shop() {
                 </div>
                 <motion.div {...fadeAnimations}>
                     <Margin height={'20px'} />
-                    <Header subheader={`${availableProductsAmount} products are available`}>Shop</Header>
+                    <Header subheader={`${availableProductsAmount} products found`}>Shop</Header>
                     <Margin height={'20px'} />
 
                     <GenerateProducts />

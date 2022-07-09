@@ -42,7 +42,7 @@ a:hover {
   --accent7: #111111;
 
   --accent-1: #000000;
-
+  --accent-2: #191919;
 
   --accent1-rgb: 255, 255, 255;
   --accent2-rgb: 154, 154, 154;
@@ -52,6 +52,7 @@ a:hover {
   --accent6-rgb: 17, 17, 17;
 
   --accent-1-rgb: 0, 0, 0;
+  /* --accent-2-rgb: #191919; */
 }
 
 ::selection {

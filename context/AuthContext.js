@@ -65,12 +65,9 @@ export const AuthContextProvider = ({ children }) => {
     const signup = async ({ email, password, username }) => {
         const isSameName = await getUserUid(username)
 
-        console.log('here')
         if (isSameName) {
-            console.log('here2')
             throw { message: 'User with this name already exists' }
         }
-        console.log('here3')
 
         return await createUserWithEmailAndPassword(auth, email, password)
             .then((res) => {
@@ -251,6 +248,13 @@ export const AuthContextProvider = ({ children }) => {
         return await deleteDoc(doc(db, 'products', id))
     }
 
+    const findProduct = (id) => {
+        return shopData?.find(item => {
+            if (item.product.created === parseInt(id))
+                return item
+        })
+    }
+
     return <AuthContext.Provider value={{
         user,
         userData,
@@ -264,7 +268,8 @@ export const AuthContextProvider = ({ children }) => {
         logout,
         createProduct,
         updateProduct,
-        deleteProduct
+        deleteProduct,
+        findProduct
     }}>
         {loading ? 'Loading' : children}
     </AuthContext.Provider>

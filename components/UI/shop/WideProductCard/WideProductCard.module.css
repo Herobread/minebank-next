@@ -1,0 +1,36 @@
+.container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 200px;
+
+    background-color: var(--accent6);
+    border-radius: 20px;
+}
+
+.container div {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.imgContainer {
+    background-color: var(--accent5);
+    border-radius: 20px;
+}
+
+.imgContainer img {
+    height: 75%;
+}
+
+.name {
+    font-size: 22px;
+    font-weight: 700;
+}
+
+.price {
+    font-weight: 400;
+    font-size: 16px;
+    color: var(--accent2);
+}

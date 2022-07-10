@@ -3,7 +3,7 @@ import Button from '../../Button'
 import Mc from '../../Mc'
 import s from './WideProductCard.module.css'
 import { AnimatePresence, motion } from 'framer-motion'
-import { opacityAnimation } from '@/lib/animations'
+import { fadeAnimationVertical, opacityAnimation, cardTranstion } from '@/lib/animations'
 
 export default function WideProductCard({ data, buy }) {
     const { name, img, price, created } = data
@@ -11,12 +11,12 @@ export default function WideProductCard({ data, buy }) {
     return <div className={s.container}>
         <AnimatePresence>
 
-            <motion.div className={s.imgContainer} layoutId={name + img} {...opacityAnimation}>
+            <motion.div className={s.imgContainer} layoutId={name + img} {...cardTranstion}>
                 <img src={img} layoutId={img} layout />
             </motion.div>
             <div className={s.contentContainer}>
-                <motion.p className={s.name} layoutId={name + created}>{name}</motion.p>
-                <motion.pre className={s.price} layoutId={name + price}>{price} <Mc>Mc</Mc></motion.pre>
+                <motion.p className={s.name} layoutId={name + created}  {...cardTranstion}>{name}</motion.p>
+                <motion.pre className={s.price} layoutId={name + price}  {...cardTranstion}>{price} <Mc>Mc</Mc></motion.pre>
                 <Margin height={'7px'} />
                 <Button onClick={buy}>Buy</Button>
             </div>

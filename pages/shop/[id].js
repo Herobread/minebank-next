@@ -23,6 +23,7 @@ import FlexRow from "@/components/skeleton/FlexRow";
 import Button from "@/components/UI/Button";
 import WideCard from "@/components/UI/WideCard";
 import WideCardWithOptions from "@/components/UI/WideCardWithOptions";
+import Center from "@/components/skeleton/Center";
 
 export default function ViewItem() {
     const router = useRouter()
@@ -64,7 +65,11 @@ export default function ViewItem() {
                     <WideProductCard data={product} />
 
                     <Margin height={'10px'} />
-                    <Subtext type={'ok'}>Order successfully created</Subtext>
+                    <div>
+                        <Center isHorizontal={true}>
+                            <Subtext type={'ok'}>Order successfully created</Subtext>
+                        </Center>
+                    </div>
                     <Margin height={'10px'} />
 
 
@@ -79,7 +84,7 @@ export default function ViewItem() {
                     <Margin height={'20px'} />
                     <SubHeader>Your review</SubHeader>
                     <Margin height={'10px'} />
-                    <Text>Want to share your opinion about this product? Add a new review</Text>
+                    <Text>Want to share your opinion about this product? Press a button below to add a new review</Text>
                     <Margin height={'10px'} />
                     <FlexRow flexDirection={'row-reverse'}>
                         <Button>Add review</Button>

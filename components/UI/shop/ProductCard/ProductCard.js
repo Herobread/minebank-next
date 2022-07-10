@@ -1,21 +1,24 @@
 import cn from 'common/cn'
 import Mc from '../../Mc'
 import s from './ProductCard.module.css'
+import { motion } from 'framer-motion'
 
 export default function ProductCard({ data, onClick }) {
-    const { name, price, img } = data.product
+    const { name, price, img, created } = data.product
     // authorUid: "F6Zy5tqIQcNL0Ggl34cll48Jcb53"
     // authorUsername: "asd"
     // product: { price: 2, name: '12', img: '3', created: 1657295564773, sold: 0, … }
-    return <div className={s.container} onClick={onClick}>
-        <div className={cn([s.name, s.item])}>
+    return <motion.div className={s.container} onClick={onClick} layoutId={name + img}>
+        <motion.div className={cn([s.name, s.item])} layoutId={name + created}>
             {name}
-        </div>
-        <div className={cn([s.imgContainer, s.item])}>
+        </motion.div>
+
+        <div layout className={cn([s.imgContainer, s.item])}>
             <img src={img} className={s.img} />
         </div>
-        <div className={cn([s.price, s.item])}>
+
+        <motion.div layoutId={name + price} className={cn([s.price, s.item])}>
             <pre>{price}<Mc> Mc</Mc></pre>
-        </div>
-    </div>
+        </motion.div>
+    </motion.div>
 }

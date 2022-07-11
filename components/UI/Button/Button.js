@@ -13,6 +13,9 @@ export default function Button({ disabled, type, children, ...props }) {
         styles.push(s.danger)
     }
 
+    if (type === 'accent') {
+        styles.push(s.accent)
+    }
 
     styles = cn(styles)
 

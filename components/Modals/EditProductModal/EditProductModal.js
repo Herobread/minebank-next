@@ -182,7 +182,7 @@ export default function EditProductModal({ isOpen, onClose, data }) {
 
                     <Margin height={'10px'} />
                     <FlexRow flexDirection={'row-reverse'}>
-                        <Button onClick={handleSave} disabled={isLoading}>Save</Button>
+                        <Button onClick={handleSave} disabled={isLoading} >Save</Button>
                         <Button onClick={handleDelete} disabled={isLoading} type={'danger'}>Delete</Button>
                         {/* <Button onClick={onClose}>Cancel</Button> */}
                     </FlexRow>

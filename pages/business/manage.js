@@ -15,7 +15,6 @@ import Header from "@/components/UI/Header";
 import { useRouter } from "next/router";
 
 export default function Shop() {
-    const { userData } = useAuth()
     const router = useRouter()
 
     const handleRedirectBusiness = () => {

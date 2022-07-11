@@ -51,6 +51,16 @@
 }
 
 
+.accent {
+    outline: 1px solid var(--accent1);
+    background-color: var(--accent1);
+    color: var(--accent-1);
+}
+
+.accent:hover {
+    color: var(--accent1);
+    background-color: transparent;
+}
 
 .danger:hover {
     color: var(--red);

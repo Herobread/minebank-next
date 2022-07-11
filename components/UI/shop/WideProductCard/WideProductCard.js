@@ -14,7 +14,7 @@ export default function WideProductCard({ data, buy }) {
             <p className={s.name} >{name}</p>
             <pre className={s.price} >{price} <Mc>Mc</Mc></pre>
             <Margin height={'7px'} />
-            <Button onClick={buy}>Buy</Button>
+            <Button onClick={buy} type={'accent'}>Buy</Button>
         </div>
     </div>
 }

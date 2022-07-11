@@ -18,6 +18,8 @@ import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { motion } from 'framer-motion'
 import { fadeAnimations } from "@/lib/animations";
+import OptionButton from "@/components/UI/WideCardWithOptions/OptionButton";
+import Cross from '@/icons/cross.svg'
 
 export default function Transfer() {
     const list = [
@@ -57,7 +59,7 @@ export default function Transfer() {
     const [selectedUser, setSelectedUser] = useState('')
     const [success, setSuccess] = useState('')
 
-    const handleClick = () => {
+    const handleReturn = () => {
         router.push('/bank')
     }
 
@@ -106,7 +108,7 @@ export default function Transfer() {
                     <Margin height={'20px'} />
                     <Header
                         subheader='your balance'
-                        cta={<Button onClick={handleClick}>History</Button>}>
+                        cta={<OptionButton onClick={handleReturn} img={<Cross />} />}>
                         {userData?.minecoins} <Mc>Mc</Mc>
                     </Header>
                     <Margin height={'20px'} />

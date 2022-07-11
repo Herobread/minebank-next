@@ -74,3 +74,11 @@ a {
 body.loading * {
   transition: none !important;
 }
+
+#nprogress .bar {
+  background: lime !important;
+}
+
+#nprogress .peg {
+  box-shadow: 0 0 10px #FFBB00, 0 0 5px #FFBB00 !important;
+}

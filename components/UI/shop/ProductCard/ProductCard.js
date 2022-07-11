@@ -9,8 +9,8 @@ export default function ProductCard({ data, onClick }) {
     // authorUid: "F6Zy5tqIQcNL0Ggl34cll48Jcb53"
     // authorUsername: "asd"
     // product: { price: 2, name: '12', img: '3', created: 1657295564773, sold: 0, … }
-    return <motion.div className={s.container} onClick={onClick} layoutId={name + img}  {...cardTranstion}>
-        <motion.div className={cn([s.name, s.item])} layoutId={name + created}  {...cardTranstion}>
+    return <motion.div className={s.container} onClick={onClick} layoutId={name + img}  >
+        <motion.div className={cn([s.name, s.item])} layoutId={name + created}  >
             {name}
         </motion.div>
 
@@ -18,7 +18,7 @@ export default function ProductCard({ data, onClick }) {
             <img src={img} className={s.img} />
         </div>
 
-        <motion.div layoutId={name + price} className={cn([s.price, s.item])}  {...cardTranstion}>
+        <motion.div layoutId={name + price} className={cn([s.price, s.item])}  >
             <pre>{price}<Mc> Mc</Mc></pre>
         </motion.div>
     </motion.div>

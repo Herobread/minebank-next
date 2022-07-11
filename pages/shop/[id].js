@@ -6,7 +6,7 @@ import Header from "@/components/UI/Header";
 import Navbar from "@/components/UI/Navbar";
 import VerticalList from "@/components/UI/VerticalList";
 import OptionButton from "@/components/UI/WideCardWithOptions/OptionButton";
-import { fadeAnimations } from "@/lib/animations";
+import { fadeAnimations, opacityAnimation } from "@/lib/animations";
 import { navList } from "@/lib/configs";
 
 import { motion } from 'framer-motion'
@@ -67,7 +67,7 @@ export default function ViewItem() {
                     <Margin height={'10px'} />
                     <div>
                         <Center isHorizontal={true}>
-                            <Subtext type={'ok'}>Order successfully created</Subtext>
+                            {/* <Subtext type={'ok'}>Order successfully created</Subtext> */}
                         </Center>
                     </div>
                     <Margin height={'10px'} />

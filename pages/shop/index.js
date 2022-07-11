@@ -9,16 +9,18 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import Margin from "@/components/skeleton/Margin";
 import VerticalList from "@/components/UI/VerticalList";
-import { fadeAnimations } from "@/lib/animations";
+import { fadeAnimations, opacityAnimation } from "@/lib/animations";
 import { navList } from "@/lib/configs";
 import Header from "@/components/UI/Header";
 import Mc from "@/components/UI/Mc";
 import WideCard from "@/components/UI/WideCard";
 import GenerateProducts from "@/components/tools/GenerateProducts";
+import { useRouter } from "next/router";
 
 
 export default function Shop() {
     const { userData, shopData } = useAuth()
+    const router = useRouter()
 
     const availableProductsAmount = shopData?.length
 

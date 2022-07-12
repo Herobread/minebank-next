@@ -14,7 +14,7 @@ import { motion } from 'framer-motion'
 import Cross from '@/icons/cross.svg'
 import { useRouter } from "next/router";
 import { useAuth } from "@/context/AuthContext";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import WideProductCard from "@/components/UI/shop/WideProductCard";
 import SubHeader from "@/components/UI/SubHeader";
 import Subtext from "@/components/UI/Subtext";
@@ -28,12 +28,10 @@ import Center from "@/components/skeleton/Center";
 export default function ViewItem() {
     const router = useRouter()
     const { shopData, findProduct } = useAuth()
-
     const { id } = router.query
 
-    const handleReturn = () => {
-        router.push('/shop')
-    }
+    const [isLoading, setIsLoading] = useState(false)
+
 
     const item = findProduct(id)
 
@@ -42,9 +40,22 @@ export default function ViewItem() {
     }
 
     const { product, authorUsername } = item
-    const { name, img, price, sold, inStock, description } = product
+    const { name, sold, inStock, description } = product
 
     const description_ = description ? description : 'No description provided'
+
+
+    const handleReturn = () => {
+        router.push('/shop')
+    }
+
+    const handleBuy = () => {
+        setIsLoading(true)
+
+        console.log('Buying')
+
+        setIsLoading(false)
+    }
 
     return <div>
         <Protected requiredUserType={'user'} />
@@ -62,7 +73,7 @@ export default function ViewItem() {
                         cta={<OptionButton onClick={handleReturn} img={<Cross />} />}
                     >{name}</Header>
                     <Margin height={'20px'} />
-                    <WideProductCard data={product} />
+                    <WideProductCard data={product} buy={handleBuy} isLoading={isLoading} />
 
                     <Margin height={'10px'} />
                     <div>

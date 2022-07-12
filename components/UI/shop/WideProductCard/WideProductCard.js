@@ -3,7 +3,7 @@ import Button from '../../Button'
 import Mc from '../../Mc'
 import s from './WideProductCard.module.css'
 
-export default function WideProductCard({ data, buy }) {
+export default function WideProductCard({ data, buy, isLoading }) {
     const { name, img, price, created } = data
 
     return <div className={s.container}>
@@ -14,7 +14,11 @@ export default function WideProductCard({ data, buy }) {
             <p className={s.name} >{name}</p>
             <pre className={s.price} >{price} <Mc>Mc</Mc></pre>
             <Margin height={'7px'} />
-            <Button onClick={buy} type={'accent'}>Buy</Button>
+            <Button
+                onClick={buy}
+                type={'accent'}
+                disabled={isLoading}
+            >Buy</Button>
         </div>
     </div>
 }

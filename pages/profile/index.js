@@ -16,6 +16,8 @@ import Input from "@/components/UI/Input";
 import { useEffect, useState } from "react";
 import FlexRow from "@/components/skeleton/FlexRow";
 import { useRouter } from "next/router";
+import Text from "@/components/UI/Text";
+import SubHeader from "@/components/UI/SubHeader";
 
 export default function Profile() {
     const { control, formState: { errors }, handleSubmit, setValue } = useForm()
@@ -78,6 +80,8 @@ export default function Profile() {
                         cta={<Button onClick={handleClick}>Sign out</Button>}>{userData?.username}</Header>
                     <Margin height={'20px'} />
 
+                    <SubHeader>Customise</SubHeader>
+                    {/* <Margin height={'10px'} /> */}
 
                     <form onSubmit={handleSubmit(onSubmit)}>
                         {/* username */}
@@ -111,6 +115,15 @@ export default function Profile() {
                         <FlexRow flexDirection={'row-reverse'}>
                             <Button type='submit' disabled={isLoading}>Save</Button>
                         </FlexRow>
+
+                        <SubHeader>Details</SubHeader>
+                        <Margin height='10px' />
+                        <Text>Email: {user.email}</Text>
+                        <Margin height='5px' />
+                        <Text>UID: {user.uid}</Text>
+                        <Margin height='10px' />
+                        {/* <Text>Joined on 12 septem</Text> */}
+
                     </form>
                 </motion.div>
             </Layout>

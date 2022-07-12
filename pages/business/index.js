@@ -5,7 +5,7 @@ import Button from "@/components/UI/Button";
 import Navbar from "@/components/UI/Navbar";
 import Subtext from "@/components/UI/Subtext";
 import { useAuth } from "@/context/AuthContext";
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
 import Margin from "@/components/skeleton/Margin";
 import VerticalList from "@/components/UI/VerticalList";
 import { fadeAnimations } from "@/lib/animations";
@@ -18,18 +18,12 @@ import BigFont from "@/components/tools/BigFont";
 import Mc from "@/components/UI/Mc";
 import ProfilePicture from "@/components/UI/ProfilePicture/ProfilePicture";
 import OptionButton from "@/components/UI/WideCardWithOptions/OptionButton";
-
 import Tick from '@/icons/tick.svg'
 import Cross from '@/icons/cross.svg'
 import Clock from '@/icons/clock.svg'
 import FlexRow from "@/components/skeleton/FlexRow";
 import { useRouter } from "next/router";
-import Modal from "@/components/UI/Modal";
 import { useState } from "react";
-import Input from "@/components/UI/Input";
-import Split from "@/components/skeleton/Split";
-import TextArea from "@/components/UI/TextArea";
-import EditProductModal from "@/components/Modals/EditProductModal";
 import AddProductModal from "@/components/Modals/AddProductModal";
 import GenerateUserProducts from "@/components/tools/GenerateUserProducts";
 

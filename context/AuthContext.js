@@ -304,6 +304,10 @@ export const AuthContextProvider = ({ children }) => {
         productData.product.inStock -= 1
 
         if (productData.product.inStock < 0) {
+            // for some reason it visually updated product data to some negative values 
+            //so I just returned value to previous values
+            productData.product.sold -= 1
+            productData.product.inStock += 1
             throw 'Not enough products in stock'
         }
 
@@ -312,6 +316,8 @@ export const AuthContextProvider = ({ children }) => {
         await setDoc(doc(db, 'users', buyerUid), buyerData, { merge: true })
 
         await setDoc(doc(db, 'products', productId.toString()), productData, { merge: true })
+
+        return
     }
 
     const updateOrderStatus = async ({ buyerUid, sellerUid, key, status }) => {
@@ -319,11 +325,9 @@ export const AuthContextProvider = ({ children }) => {
         let sellerData = await getUserData({ uid: sellerUid })
 
         const buyerOrderIndex = buyerData.personalOrders.findIndex(order => {
-            console.log(order.key, key)
             return order.key === key
         })
         const sellerOrderIndex = sellerData.businessOrders.findIndex(order => {
-            console.log(order.key, key)
             return order.key === key
         })
 

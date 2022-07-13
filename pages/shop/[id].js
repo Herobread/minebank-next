@@ -29,7 +29,8 @@ export default function ViewItem() {
     const { id } = router.query
 
     const [isLoading, setIsLoading] = useState(false)
-
+    const [error, setError] = useState('')
+    const [success, setSuccess] = useState('')
 
     const item = findProduct(id)
 
@@ -47,15 +48,18 @@ export default function ViewItem() {
         router.push('/shop')
     }
 
-    const handleBuy = () => {
+    const handleBuy = async () => {
         setIsLoading(true)
+        setSuccess('')
+        setError('')
 
-        orderProduct({
+        await orderProduct({
             productId: created,
             buyerUid: user.uid
         })
-
-        setIsLoading(false)
+            .then(res => setSuccess('Order successfully created'))
+            .catch(err => setError(err))
+            .finally(() => { setIsLoading(false) })
     }
 
     return <div>
@@ -75,11 +79,11 @@ export default function ViewItem() {
                     >{name}</Header>
                     <Margin height={'20px'} />
                     <WideProductCard data={product} buy={handleBuy} isLoading={isLoading} />
-
                     <Margin height={'10px'} />
                     <div>
                         <Center isHorizontal={true}>
-                            {/* <Subtext type={'ok'}>Order successfully created</Subtext> */}
+                            {success && <Subtext type={'ok'}>{success}</Subtext>}
+                            {error && <Subtext type={'error'}>{error}</Subtext>}
                         </Center>
                     </div>
                     <Margin height={'10px'} />

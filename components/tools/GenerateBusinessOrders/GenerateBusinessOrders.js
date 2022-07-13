@@ -8,6 +8,8 @@ import Tick from '@/icons/tick.svg'
 import Cross from '@/icons/cross.svg'
 import Clock from '@/icons/clock.svg'
 import toHHMM from 'common/toHHMM'
+import { motion, AnimatePresence } from 'framer-motion'
+import { fadeAnimationHeight } from '@/lib/animations'
 
 export default function GenerateBusinessOrders() {
     const { userData, updateOrderStatus } = useAuth()
@@ -44,22 +46,26 @@ export default function GenerateBusinessOrders() {
     userData?.businessOrders?.forEach(order => {
         const time = order.key
 
-
         if (order.status === 'waiting') {
-            res.push(<>
-                <WideCardWithOptions
-                    title={order.authorUsername}
-                    description={`${order.name}, ${order.price} Mc`}
-                    info={toHHMM(time)}
-                    img={<ProfilePicture name={'w'} />}
-                    buttons={<>
-                        <OptionButton onClick={() => { handleConfirm(order) }} img={<Tick />} />
-                        <OptionButton img={<Clock />} />
-                        <OptionButton onClick={() => { handleCancel(order) }} img={<Cross />} />
-                    </>}
-                />
-                <Margin height={'10px'} />
-            </>)
+            res.push(<AnimatePresence key={time}>
+                <motion.div
+                    // layout
+                    {...fadeAnimationHeight}
+                >
+                    <WideCardWithOptions
+                        title={order.authorUsername}
+                        description={`${order.name}, ${order.price} Mc`}
+                        info={toHHMM(time)}
+                        img={<ProfilePicture name={'w'} />}
+                        buttons={<>
+                            <OptionButton onClick={() => { handleConfirm(order) }} img={<Tick />} />
+                            <OptionButton img={<Clock />} />
+                            <OptionButton onClick={() => { handleCancel(order) }} img={<Cross />} />
+                        </>}
+                    />
+                    <Margin height={'10px'} />
+                </motion.div>
+            </AnimatePresence>)
         }
 
     })

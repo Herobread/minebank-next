@@ -22,7 +22,6 @@ export default function GenerateBusinessOrders() {
     res.push(<>
         <Subtext>New orders</Subtext>
         <Margin height={'10px'} />
-
     </>)
 
     const handleConfirm = (order) => {
@@ -45,30 +44,29 @@ export default function GenerateBusinessOrders() {
 
     userData?.businessOrders?.forEach(order => {
         const time = order.key
-
         if (order.status === 'waiting') {
-            res.push(<AnimatePresence key={time}>
-                <motion.div
-                    // layout
-                    {...fadeAnimationHeight}
-                >
-                    <WideCardWithOptions
-                        title={order.authorUsername}
-                        description={`${order.name}, ${order.price} Mc`}
-                        info={toHHMM(time)}
-                        img={<ProfilePicture name={'w'} />}
-                        buttons={<>
-                            <OptionButton onClick={() => { handleConfirm(order) }} img={<Tick />} />
-                            <OptionButton img={<Clock />} />
-                            <OptionButton onClick={() => { handleCancel(order) }} img={<Cross />} />
-                        </>}
-                    />
-                    <Margin height={'10px'} />
-                </motion.div>
-            </AnimatePresence>)
+            res.push(<div key={time}>
+                <WideCardWithOptions
+                    title={order.authorUsername}
+                    description={`${order.name}, ${order.price} Mc`}
+                    info={toHHMM(time)}
+                    img={<ProfilePicture name={'w'} src={order.img} />}
+                    buttons={<>
+                        <OptionButton onClick={() => { handleConfirm(order) }} img={<Tick />} />
+                        <OptionButton img={<Clock />} />
+                        <OptionButton onClick={() => { handleCancel(order) }} img={<Cross />} />
+                    </>}
+                />
+                <Margin height={'10px'} />
+            </div>)
         }
-
     })
+
+    console.log(res)
+    if (res.length === 1) {
+        res = <>
+        </>
+    }
 
     return <>
         {res}

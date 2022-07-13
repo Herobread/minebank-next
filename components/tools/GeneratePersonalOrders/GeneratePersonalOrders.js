@@ -67,16 +67,16 @@ export default function GeneratePersonalOrders() {
         const statusIcon = statusIcons[order.status]
 
 
-        res.push(<>
+        res.push(<div key={time}>
             <WideCardWithOptions
                 title={order.name}
                 description={`From ${order.authorUsername}, ${order.price} Mc`}
                 info={toHHMM(time)}
-                img={<ProfilePicture name={'w'} />}
+                img={<ProfilePicture name={'w'} src={order.img} />}
                 buttons={<OptionButton disabled={true} img={statusIcon} />}
             />
             <Margin height={'10px'} />
-        </>)
+        </div>)
     })
 
     return <div>

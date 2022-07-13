@@ -265,10 +265,9 @@ export const AuthContextProvider = ({ children }) => {
 
         if (sellerUid === buyerUid) {
             throw 'You can`t buy your items'
-
         }
-        let sellerData = await getUserData({ uid: sellerUid })
 
+        let sellerData = await getUserData({ uid: sellerUid })
 
         if (buyerData.personalOrders == null) {
             buyerData.personalOrders = []
@@ -277,6 +276,17 @@ export const AuthContextProvider = ({ children }) => {
             sellerData.businessOrders = []
         }
 
+
+        buyerData.minecoins -= productData.product.price
+
+        buyerData.transactions.push({
+            timestamp: date.getTime(),
+            amount: `-${productData.product.price}`,
+            user: productData.product.name,
+            img: productData.product.img,
+            tags: ['shop', 'out', productData.authorUsername],
+            comment: `Shop, ${productData.authorUsername}`
+        })
 
         buyerData.personalOrders.push({
             sellerUid: sellerUid,
@@ -324,6 +334,8 @@ export const AuthContextProvider = ({ children }) => {
         let buyerData = await getUserData({ uid: buyerUid })
         let sellerData = await getUserData({ uid: sellerUid })
 
+        const date = new Date()
+
         const buyerOrderIndex = buyerData.personalOrders.findIndex(order => {
             return order.key === key
         })
@@ -331,8 +343,33 @@ export const AuthContextProvider = ({ children }) => {
             return order.key === key
         })
 
+        const order = buyerData.personalOrders[buyerOrderIndex]
+        const { price } = order
         buyerData.personalOrders[buyerOrderIndex].status = status
         sellerData.businessOrders[sellerOrderIndex].status = status
+
+        if (status === 'delivered') {
+            const img = buyerData.username ? buyerData.username : null
+            sellerData.minecoins += price
+            sellerData.transactions.push({
+                timestamp: date.getTime(),
+                amount: `+${price}`,
+                user: buyerData.username,
+                img: img,
+                tags: ['shop', 'in'],
+                comment: 'Shop'
+            })
+        } else if (status === 'canceled') {
+            buyerData.minecoins += price
+            buyerData.transactions.push({
+                timestamp: date.getTime(),
+                amount: `+${price}`,
+                user: order.name,
+                img: order.img,
+                tags: ['shop', 'in'],
+                comment: 'Shop refund'
+            })
+        }
 
         await setDoc(doc(db, 'users', sellerUid), sellerData, { merge: true })
         await setDoc(doc(db, 'users', buyerUid), buyerData, { merge: true })

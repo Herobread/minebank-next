@@ -39,7 +39,6 @@ export default function Business() {
     }
 
 
-
     const handleEditProductModalOpen = () => {
         setIsEditProductModalOpened(true)
     }
@@ -60,7 +59,7 @@ export default function Business() {
                 <motion.div key={'Business'} {...fadeAnimations}>
                     <Margin height={'20px'} />
                     <Header
-                        cta={<Button onClick={handleRedirectManage}>Manage</Button>}
+                        cta={<Button onClick={handleRedirectManage}>Orders</Button>}
                         subheader={'Dashboard'}>Business</Header>
                     <Margin height={'20px'} />
                     <SplitPanel>
@@ -81,9 +80,6 @@ export default function Business() {
                     <GenerateBusinessOrders />
 
 
-                    <FlexRow flexDirection={'row-reverse'}>
-                        <Button>View all</Button>
-                    </FlexRow>
                     <Margin height={'10px'} />
                     <Subtext>Your products</Subtext>
                     <Margin height={'10px'} />

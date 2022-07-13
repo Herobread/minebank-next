@@ -3,29 +3,22 @@ import Layout from "@/components/skeleton/Layout";
 import Protected from "@/components/tools/Protected";
 import Button from "@/components/UI/Button";
 import Navbar from "@/components/UI/Navbar";
-import Subtext from "@/components/UI/Subtext";
-import { useAuth } from "@/context/AuthContext";
-import Link from "next/link";
 import { motion } from "framer-motion";
 import Margin from "@/components/skeleton/Margin";
 import VerticalList from "@/components/UI/VerticalList";
-import { fadeAnimations, opacityAnimation } from "@/lib/animations";
+import { fadeAnimations } from "@/lib/animations";
 import { navList } from "@/lib/configs";
 import Header from "@/components/UI/Header";
-import Mc from "@/components/UI/Mc";
-import WideCard from "@/components/UI/WideCard";
-import GenerateProducts from "@/components/tools/GenerateProducts";
 import { useRouter } from "next/router";
+import OptionButton from "@/components/UI/WideCardWithOptions/OptionButton";
+import Cross from '@/icons/cross.svg'
+import GeneratePersonalOrders from "@/components/tools/GeneratePersonalOrders";
 
-
-export default function Shop() {
-    const { userData, shopData } = useAuth()
+export default function Orders() {
     const router = useRouter()
 
-    const availableProductsAmount = shopData?.length
-
-    const handleRedirect = () => {
-        router.push('/shop/orders')
+    const handleRedirectShop = () => {
+        router.push('/shop')
     }
 
     return <div>
@@ -40,16 +33,11 @@ export default function Shop() {
                 <motion.div {...fadeAnimations}>
                     <Margin height={'20px'} />
                     <Header
-                        subheader={`${availableProductsAmount} products found`}
-                        cta={<Button onClick={handleRedirect}>Orders</Button>}
-                    >Shop</Header>
+                        // subheader={'From shop'}
+                        cta={<OptionButton onClick={handleRedirectShop} img={<Cross />} />}
+                    >Shop orders</Header>
                     <Margin height={'20px'} />
-
-                    <GenerateProducts />
-
-                    <Margin height={'10px'} />
-
-                    <Subtext>Want to sell your own products? <Link href='/business'><a>Add product in &apos;business&apos; page</a></Link></Subtext>
+                    <GeneratePersonalOrders />
                 </motion.div>
             </Layout>
         </ContentWrapper >

@@ -255,6 +255,85 @@ export const AuthContextProvider = ({ children }) => {
         })
     }
 
+    const orderProduct = async ({ productId, buyerUid }) => {
+        const date = new Date()
+
+        let buyerData = await getUserData({ uid: buyerUid })
+        let productData = findProduct(productId)
+
+        const sellerUid = productData.authorUid
+
+        if (sellerUid === buyerUid) {
+            throw 'You can`t buy your items'
+
+        }
+        let sellerData = await getUserData({ uid: sellerUid })
+
+
+        if (buyerData.personalOrders == null) {
+            buyerData.personalOrders = []
+        }
+        if (sellerData.businessOrders == null) {
+            sellerData.businessOrders = []
+        }
+
+
+        buyerData.personalOrders.push({
+            sellerUid: sellerUid,
+            buyerUid: buyerUid,
+            productId: productId,
+            key: date.getTime(),
+            name: productData.product.name,
+            price: productData.product.price,
+            status: 'waiting',
+            authorUsername: productData.authorUsername,
+            img: productData.product.img,
+        })
+        sellerData.businessOrders.push({
+            sellerUid: sellerUid,
+            buyerUid: buyerUid,
+            productId: productId,
+            key: date.getTime(),
+            name: productData.product.name,
+            price: productData.product.price,
+            status: 'waiting',
+            authorUsername: buyerData.username,
+            img: productData.product.img,
+        })
+        productData.product.sold += 1
+        productData.product.inStock -= 1
+
+        if (productData.product.inStock < 0) {
+            throw 'Not enough products in stock'
+        }
+
+
+        await setDoc(doc(db, 'users', sellerUid), sellerData, { merge: true })
+        await setDoc(doc(db, 'users', buyerUid), buyerData, { merge: true })
+
+        await setDoc(doc(db, 'products', productId.toString()), productData, { merge: true })
+    }
+
+    const updateOrderStatus = async ({ buyerUid, sellerUid, key, status }) => {
+        let buyerData = await getUserData({ uid: buyerUid })
+        let sellerData = await getUserData({ uid: sellerUid })
+
+        const buyerOrderIndex = buyerData.personalOrders.findIndex(order => {
+            console.log(order.key, key)
+            return order.key === key
+        })
+        const sellerOrderIndex = sellerData.businessOrders.findIndex(order => {
+            console.log(order.key, key)
+            return order.key === key
+        })
+
+        buyerData.personalOrders[buyerOrderIndex].status = status
+        sellerData.businessOrders[sellerOrderIndex].status = status
+
+        await setDoc(doc(db, 'users', sellerUid), sellerData, { merge: true })
+        await setDoc(doc(db, 'users', buyerUid), buyerData, { merge: true })
+    }
+
     return <AuthContext.Provider value={{
         user,
         userData,
@@ -269,7 +348,9 @@ export const AuthContextProvider = ({ children }) => {
         createProduct,
         updateProduct,
         deleteProduct,
-        findProduct
+        findProduct,
+        orderProduct,
+        updateOrderStatus
     }}>
         {loading ? 'Loading' : children}
     </AuthContext.Provider>

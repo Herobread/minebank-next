@@ -118,9 +118,9 @@ export default function Profile() {
 
                         <SubHeader>Details</SubHeader>
                         <Margin height='10px' />
-                        <Text>Email: {user.email}</Text>
+                        <Text>Email: {user?.email}</Text>
                         <Margin height='5px' />
-                        <Text>UID: {user.uid}</Text>
+                        <Text>UID: {user?.uid}</Text>
                         <Margin height='10px' />
                         {/* <Text>Joined on 12 septem</Text> */}
 

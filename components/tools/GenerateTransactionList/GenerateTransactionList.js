@@ -19,7 +19,7 @@ export default function GenerateTransactionList({ data, sort }) {
     let res = []
     let temp = ''
     let today = new Date()
-    let yesterday = new Date();
+    let yesterday = new Date()
     yesterday.setDate(today.getDate() - 1);
 
     data = [...data].reverse()

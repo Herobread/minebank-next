@@ -6,8 +6,17 @@
     transition: 0.2s ease-in-out;
 }
 
+
 .button:hover>svg>path {
     fill: var(--accent1);
+}
+
+.disabled:hover>svg>path {
+    fill: var(--accent2);
+}
+
+.disabled:hover {
+    cursor: not-allowed;
 }
 
 .button>svg>path {

@@ -19,7 +19,7 @@ export default function Navbar() {
                     <Link href='/business'><a>Business</a></Link>
                 </li>
                 <li>
-                    <Link href='/profile'><a>Username</a></Link>
+                    <Link href='/profile'><a>Profile</a></Link>
                 </li>
             </ul>
         </nav>

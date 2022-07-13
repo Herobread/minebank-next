@@ -26,6 +26,7 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import AddProductModal from "@/components/Modals/AddProductModal";
 import GenerateUserProducts from "@/components/tools/GenerateUserProducts";
+import GenerateBusinessOrders from "@/components/tools/GenerateBusinessOrders";
 
 export default function Business() {
     const { userData, user } = useAuth()
@@ -75,45 +76,11 @@ export default function Business() {
                         </Center>
                     </SplitPanel>
                     <Margin height={'10px'} />
-                    <Subtext>New orders</Subtext>
-                    <Margin height={'10px'} />
 
-                    <WideCardWithOptions
-                        title={'WhoOrdered'}
-                        description={'Product, 10 Mc'}
-                        info={'19:48, 06/07'}
-                        img={<ProfilePicture name={'w'} />}
-                        buttons={<>
-                            <OptionButton img={<Tick />} />
-                            <OptionButton img={<Clock />} />
-                            <OptionButton img={<Cross />} />
-                        </>}
-                    />
-                    <Margin height={'10px'} />
-                    <WideCardWithOptions
-                        title={'WhoOrdered'}
-                        description={'Product, 10 Mc'}
-                        info={'19:48, 06/07'}
-                        img={<ProfilePicture name={'w'} />}
-                        buttons={<>
-                            <OptionButton img={<Tick />} />
-                            <OptionButton img={<Clock />} />
-                            <OptionButton img={<Cross />} />
-                        </>}
-                    />
-                    <Margin height={'10px'} />
-                    <WideCardWithOptions
-                        title={'WhoOrdered'}
-                        description={'Product, 10 Mc'}
-                        info={'19:48, 06/07'}
-                        img={<ProfilePicture name={'w'} />}
-                        buttons={<>
-                            <OptionButton img={<Tick />} />
-                            <OptionButton img={<Clock />} />
-                            <OptionButton img={<Cross />} />
-                        </>}
-                    />
-                    <Margin height={'10px'} />
+
+                    <GenerateBusinessOrders />
+
+
                     <FlexRow flexDirection={'row-reverse'}>
                         <Button>View all</Button>
                     </FlexRow>

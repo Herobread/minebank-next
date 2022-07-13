@@ -8,9 +8,7 @@ import VerticalList from "@/components/UI/VerticalList";
 import OptionButton from "@/components/UI/WideCardWithOptions/OptionButton";
 import { fadeAnimations, opacityAnimation } from "@/lib/animations";
 import { navList } from "@/lib/configs";
-
 import { motion } from 'framer-motion'
-
 import Cross from '@/icons/cross.svg'
 import { useRouter } from "next/router";
 import { useAuth } from "@/context/AuthContext";
@@ -27,7 +25,7 @@ import Center from "@/components/skeleton/Center";
 
 export default function ViewItem() {
     const router = useRouter()
-    const { shopData, findProduct } = useAuth()
+    const { user, findProduct, orderProduct } = useAuth()
     const { id } = router.query
 
     const [isLoading, setIsLoading] = useState(false)
@@ -40,7 +38,7 @@ export default function ViewItem() {
     }
 
     const { product, authorUsername } = item
-    const { name, sold, inStock, description } = product
+    const { name, sold, inStock, description, created } = product
 
     const description_ = description ? description : 'No description provided'
 
@@ -52,7 +50,10 @@ export default function ViewItem() {
     const handleBuy = () => {
         setIsLoading(true)
 
-        console.log('Buying')
+        orderProduct({
+            productId: created,
+            buyerUid: user.uid
+        })
 
         setIsLoading(false)
     }

@@ -16,11 +16,6 @@ import Center from "@/components/skeleton/Center";
 import WideCardWithOptions from "@/components/UI/WideCardWithOptions";
 import BigFont from "@/components/tools/BigFont";
 import Mc from "@/components/UI/Mc";
-import ProfilePicture from "@/components/UI/ProfilePicture/ProfilePicture";
-import OptionButton from "@/components/UI/WideCardWithOptions/OptionButton";
-import Tick from '@/icons/tick.svg'
-import Cross from '@/icons/cross.svg'
-import Clock from '@/icons/clock.svg'
 import FlexRow from "@/components/skeleton/FlexRow";
 import { useRouter } from "next/router";
 import { useState } from "react";
@@ -33,11 +28,12 @@ export default function Business() {
     const router = useRouter()
 
     const [isEditProductModalOpened, setIsEditProductModalOpened] = useState(false)
+    const [profit, setProfit] = useState(0)
+    const [soldAmount, setSoldAmount] = useState(0)
 
     const handleRedirectManage = () => {
         router.push('/business/manage')
     }
-
 
     const handleEditProductModalOpen = () => {
         setIsEditProductModalOpened(true)
@@ -45,6 +41,11 @@ export default function Business() {
 
     const handleEditProductModalClose = () => {
         setIsEditProductModalOpened(false)
+    }
+
+    const businessDataCallback = (profit, soldAmount) => {
+        setSoldAmount(soldAmount)
+        setProfit(profit)
     }
 
     return <div>
@@ -65,19 +66,19 @@ export default function Business() {
                     <SplitPanel>
                         <Center isHorizontal={true}>
                             <BigFont>
-                                +100 <Mc>Mc</Mc>
+                                +{profit} <Mc>Mc</Mc>
                             </BigFont>
                         </Center>
                         <Center isHorizontal={true}>
                             <BigFont>
-                                17 <Mc>sold</Mc>
+                                {soldAmount} <Mc>sold</Mc>
                             </BigFont>
                         </Center>
                     </SplitPanel>
                     <Margin height={'10px'} />
 
 
-                    <GenerateBusinessOrders />
+                    <GenerateBusinessOrders callback={businessDataCallback} />
 
 
                     <Margin height={'10px'} />

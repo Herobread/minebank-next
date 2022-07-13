@@ -11,7 +11,7 @@ import toHHMM from 'common/toHHMM'
 import { motion, AnimatePresence } from 'framer-motion'
 import { fadeAnimationHeight } from '@/lib/animations'
 
-export default function GenerateBusinessOrders() {
+export default function GenerateBusinessOrders({ callback }) {
     const { userData, updateOrderStatus } = useAuth()
     let res = []
 
@@ -42,8 +42,18 @@ export default function GenerateBusinessOrders() {
         })
     }
 
+    let profit = 0
+    let soldAmount = 0
+
     userData?.businessOrders?.forEach(order => {
         const time = order.key
+
+        if (order.status === 'delivered') {
+            profit += parseInt(order.price)
+            // profit += order.price
+            soldAmount += 1
+        }
+
         if (order.status === 'waiting') {
             res.push(<div key={time}>
                 <WideCardWithOptions
@@ -61,6 +71,8 @@ export default function GenerateBusinessOrders() {
             </div>)
         }
     })
+
+    callback(profit, soldAmount)
 
     console.log(res)
     if (res.length === 1) {

@@ -15,37 +15,10 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import { motion } from 'framer-motion'
 import TagSelect from "@/components/UI/TagSelect";
+import { navList } from "@/lib/configs";
 
 
 export default function Bank() {
-    const list = [
-        {
-            name: 'Username',
-            isHighlighted: true,
-            to: '/profile'
-        },
-        {
-            name: 'Bank',
-            isHighlighted: false,
-            to: '/bank'
-        },
-        {
-            name: 'Business',
-            isHighlighted: false,
-            to: '/business'
-        },
-        {
-            name: 'Shop',
-            isHighlighted: false,
-            to: '/shop'
-        },
-        {
-            name: 'Orders',
-            isHighlighted: false,
-            to: '/orders'
-        }
-    ]
-
     const selectOptions = [
         {
             name: 'All',
@@ -89,7 +62,7 @@ export default function Bank() {
             <Layout>
                 <div>
                     <Margin height={'95px'} mobile={'0'} />
-                    <VerticalList list={list} />
+                    <VerticalList list={navList} />
                 </div>
                 <motion.div {...fadeAnimations}>
                     <Margin height={'20px'} />

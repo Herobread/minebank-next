@@ -12,7 +12,7 @@ import PanelSelect from "@/components/UI/PanelSelect";
 import Subtext from "@/components/UI/Subtext";
 import VerticalList from "@/components/UI/VerticalList";
 import { useAuth } from "@/context/AuthContext";
-import { formVerifiers } from "@/lib/configs";
+import { formVerifiers, navList } from "@/lib/configs";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
@@ -22,34 +22,6 @@ import OptionButton from "@/components/UI/WideCardWithOptions/OptionButton";
 import Cross from '@/icons/cross.svg'
 
 export default function Transfer() {
-    const list = [
-        {
-            name: 'Username',
-            isHighlighted: true,
-            to: '/profile'
-        },
-        {
-            name: 'Bank',
-            isHighlighted: false,
-            to: '/bank'
-        },
-        {
-            name: 'Business',
-            isHighlighted: false,
-            to: '/business'
-        },
-        {
-            name: 'Shop',
-            isHighlighted: false,
-            to: '/shop'
-        },
-        {
-            name: 'Orders',
-            isHighlighted: false,
-            to: '/orders'
-        }
-    ]
-
     const { control, formState: { errors }, handleSubmit, setValue } = useForm()
     const router = useRouter()
     const { transfer, user, userData } = useAuth()
@@ -102,7 +74,7 @@ export default function Transfer() {
             <Layout>
                 <div>
                     <Margin height={'95px'} mobile={'0'} />
-                    <VerticalList list={list} />
+                    <VerticalList list={navList} />
                 </div>
                 <motion.div {...fadeAnimations}>
                     <Margin height={'20px'} />

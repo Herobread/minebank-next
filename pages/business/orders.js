@@ -10,8 +10,10 @@ import { fadeAnimations } from "@/lib/animations";
 import { navList } from "@/lib/configs";
 import Header from "@/components/UI/Header";
 import { useRouter } from "next/router";
+import OptionButton from "@/components/UI/WideCardWithOptions/OptionButton";
+import Cross from '@/icons/cross.svg'
 
-export default function Shop() {
+export default function Orders() {
     const router = useRouter()
 
     const handleRedirectBusiness = () => {
@@ -29,9 +31,7 @@ export default function Shop() {
                 </div>
                 <motion.div {...fadeAnimations}>
                     <Margin height={'20px'} />
-                    <Header subheader={'Manage'}
-                        cta={<Button onClick={handleRedirectBusiness}>Dashboard</Button>}
-                    >Business</Header>
+                    <Header cta={<OptionButton onClick={handleRedirectBusiness} img={<Cross />} />}>Business orders</Header>
                     <Margin height={'20px'} />
                 </motion.div>
             </Layout>

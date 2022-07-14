@@ -31,8 +31,8 @@ export default function Business() {
     const [profit, setProfit] = useState(0)
     const [soldAmount, setSoldAmount] = useState(0)
 
-    const handleRedirectManage = () => {
-        router.push('/business/manage')
+    const handleRedirect = () => {
+        router.push('/business/orders')
     }
 
     const handleEditProductModalOpen = () => {
@@ -60,7 +60,7 @@ export default function Business() {
                 <motion.div key={'Business'} {...fadeAnimations}>
                     <Margin height={'20px'} />
                     <Header
-                        cta={<Button onClick={handleRedirectManage}>Orders</Button>}
+                        cta={<Button onClick={handleRedirect}>Orders</Button>}
                         subheader={'Dashboard'}>Business</Header>
                     <Margin height={'20px'} />
                     <SplitPanel>

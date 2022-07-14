@@ -124,7 +124,7 @@ export default function ViewItem() {
                 </motion.div>
             </Layout>
 
-            <AddReviewModal isOpen={isAddReviewOpened} onClose={handleAddReviewClose} />
+            <AddReviewModal isOpen={isAddReviewOpened} onClose={handleAddReviewClose} id={id} />
         </ContentWrapper>
     </div >
 }

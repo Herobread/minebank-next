@@ -63,11 +63,12 @@ a:hover {
   color: var(--accent1)
 }
 
-input,
+/* input,
 textarea,
 button,
 select,
-a {
+a { */
+* {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 

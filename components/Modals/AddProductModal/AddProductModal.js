@@ -30,7 +30,7 @@ export default function AddProductModal({ isOpen, onClose }) {
         setIsLoading(false)
     }
 
-    return <AnimatePresence initial={false} exitBeforeEnter={true}>
+    return <AnimatePresence exitBeforeEnter={true}>
         {isOpen &&
             <Modal isOpen={isOpen} onClose={onClose}>
                 <form onSubmit={handleSubmit(onSubmit)}>

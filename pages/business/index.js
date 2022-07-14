@@ -77,26 +77,22 @@ export default function Business() {
                     </SplitPanel>
                     <Margin height={'10px'} />
 
-
                     <GenerateBusinessOrders callback={businessDataCallback} />
 
+                    <motion.div layout>
+                        <Margin height={'10px'} />
+                        <Subtext>Your products</Subtext>
+                        <Margin height={'10px'} />
 
-                    <Margin height={'10px'} />
-                    <Subtext>Your products</Subtext>
-                    <Margin height={'10px'} />
+                        <GenerateUserProducts data={userData} user={user} />
 
+                        <FlexRow flexDirection={'row-reverse'}>
+                            <Button onClick={handleEditProductModalOpen}>Add new</Button>
+                        </FlexRow>
+                    </motion.div>
 
-
-                    <GenerateUserProducts data={userData} user={user} />
-
-
-
-                    <FlexRow flexDirection={'row-reverse'}>
-                        <Button onClick={handleEditProductModalOpen}>Add new</Button>
-                    </FlexRow>
                 </motion.div>
             </Layout>
-
 
 
             <AddProductModal isOpen={isEditProductModalOpened} onClose={handleEditProductModalClose} />

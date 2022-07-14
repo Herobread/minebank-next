@@ -349,7 +349,7 @@ export const AuthContextProvider = ({ children }) => {
         sellerData.businessOrders[sellerOrderIndex].status = status
 
         if (status === 'delivered') {
-            const img = buyerData.username ? buyerData.username : null
+            const img = buyerData.img ? buyerData.img : null
             sellerData.minecoins += price
             sellerData.transactions.push({
                 timestamp: date.getTime(),

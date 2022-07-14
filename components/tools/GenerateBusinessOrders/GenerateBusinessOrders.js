@@ -45,7 +45,11 @@ export default function GenerateBusinessOrders({ callback }) {
     let profit = 0
     let soldAmount = 0
 
-    userData?.businessOrders?.forEach(order => {
+    let data = userData?.businessOrders
+
+    data = [...data].reverse()
+
+    data.forEach(order => {
         const time = order.key
 
         if (order.status === 'delivered') {
@@ -55,7 +59,7 @@ export default function GenerateBusinessOrders({ callback }) {
         }
 
         if (order.status === 'waiting') {
-            res.push(<div key={time}>
+            res.push(<motion.div key={time} {...fadeAnimationHeight}>
                 <WideCardWithOptions
                     title={order.authorUsername}
                     description={`${order.name}, ${order.price} Mc`}
@@ -68,7 +72,7 @@ export default function GenerateBusinessOrders({ callback }) {
                     </>}
                 />
                 <Margin height={'10px'} />
-            </div>)
+            </motion.div>)
         }
     })
 
@@ -80,7 +84,7 @@ export default function GenerateBusinessOrders({ callback }) {
         </>
     }
 
-    return <>
+    return <AnimatePresence>
         {res}
-    </>
+    </AnimatePresence>
 }

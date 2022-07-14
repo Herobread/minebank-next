@@ -22,6 +22,7 @@ import Button from "@/components/UI/Button";
 import WideCard from "@/components/UI/WideCard";
 import WideCardWithOptions from "@/components/UI/WideCardWithOptions";
 import Center from "@/components/skeleton/Center";
+import AddReviewModal from "@/components/Modals/AddReviewModal";
 
 export default function ViewItem() {
     const router = useRouter()
@@ -29,8 +30,10 @@ export default function ViewItem() {
     const { id } = router.query
 
     const [isLoading, setIsLoading] = useState(false)
+    const [isAddReviewOpened, setIsAddReviewOpened] = useState(false)
     const [error, setError] = useState('')
     const [success, setSuccess] = useState('')
+
 
     const item = findProduct(id)
 
@@ -43,6 +46,13 @@ export default function ViewItem() {
 
     const description_ = description ? description : 'No description provided'
 
+    const handleAddReviewClose = () => {
+        setIsAddReviewOpened(false)
+    }
+
+    const handleAddReviewOpen = () => {
+        setIsAddReviewOpened(true)
+    }
 
     const handleReturn = () => {
         router.push('/shop')
@@ -103,7 +113,7 @@ export default function ViewItem() {
                     <Text>Want to share your opinion about this product? Press a button below to add a new review</Text>
                     <Margin height={'10px'} />
                     <FlexRow flexDirection={'row-reverse'}>
-                        <Button>Add review</Button>
+                        <Button onClick={handleAddReviewOpen}>Add review</Button>
                     </FlexRow>
 
                     <Margin height={'20px'} />
@@ -113,6 +123,8 @@ export default function ViewItem() {
 
                 </motion.div>
             </Layout>
+
+            <AddReviewModal isOpen={isAddReviewOpened} onClose={handleAddReviewClose} />
         </ContentWrapper>
     </div >
 }

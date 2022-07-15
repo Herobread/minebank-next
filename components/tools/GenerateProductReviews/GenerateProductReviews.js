@@ -5,11 +5,12 @@ import { Rating } from "react-simple-star-rating"
 import StarEmpty from '@/icons/starEmpty.svg'
 import Star from '@/icons/star.svg'
 import ProfilePicture from "@/components/UI/ProfilePicture/ProfilePicture"
+import toHHMM from "common/toHHMM"
 
 export default function GenerateProductReviews({ reviews }) {
     console.log(reviews)
 
-    if (reviews == null || reviews === []) {
+    if (reviews == null || reviews.length === 0) {
         return <Subtext>No reviews yet</Subtext>
     }
 
@@ -17,14 +18,15 @@ export default function GenerateProductReviews({ reviews }) {
 
     reviews.forEach(review => {
         const { img, by, rating, timestamp, comment } = review
-        console.log(comment)
+
+        // let date = new Date(timestamp)
 
         res.push(<>
             <WideCardWithOptions
                 img={<ProfilePicture name={by} src={img} />}
                 title={by}
                 description={comment || 'aboba'}
-                info={timestamp}
+                // info={toHHMM(timestamp)}
                 buttons={<Rating
                     readonly
                     ratingValue={rating * 20}

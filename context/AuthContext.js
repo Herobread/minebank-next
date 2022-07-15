@@ -353,22 +353,33 @@ export const AuthContextProvider = ({ children }) => {
             sellerData.minecoins += price
             sellerData.transactions.push({
                 timestamp: date.getTime(),
-                amount: `+${price}`,
+                amount: `${price}`,
                 user: buyerData.username,
                 img: img,
                 tags: ['shop', 'in'],
                 comment: 'Shop'
             })
         } else if (status === 'canceled') {
-            buyerData.minecoins += price
+            let productData = findProduct(order.productId)
+
+            console.log(productData)
+
+            productData.sold -= 1
+            productData.inStock += 1
+
+            console.log(productData)
+
+            buyerData.minecoins += parseInt(price)
             buyerData.transactions.push({
                 timestamp: date.getTime(),
-                amount: `+${price}`,
+                amount: `${price}`,
                 user: order.name,
                 img: order.img,
                 tags: ['shop', 'in'],
                 comment: 'Shop refund'
             })
+
+            await setDoc(doc(db, 'products', order.productId.toString()), productData, { merge: true })
         }
 
         await setDoc(doc(db, 'users', sellerUid), sellerData, { merge: true })

@@ -375,6 +375,32 @@ export const AuthContextProvider = ({ children }) => {
         await setDoc(doc(db, 'users', buyerUid), buyerData, { merge: true })
     }
 
+    const addReview = async ({ id, from, review }) => {
+        const { username, img } = from
+        const { rating, comment } = review
+
+        let timestamp = new Date()
+        timestamp = timestamp.getTime()
+
+        let product = await getDoc(doc(db, 'products', id))
+        product = product.data()
+
+        product.reviews.push({
+            by: username,
+            img: img,
+            comment: comment,
+            rating: rating,
+            timestamp: timestamp
+        })
+
+        console.log(product)
+
+        if (rating <= 0)
+            throw 'Rate the product'
+
+        await setDoc(doc(db, 'products', id), product, { merge: true })
+    }
+
     return <AuthContext.Provider value={{
         user,
         userData,
@@ -391,7 +417,8 @@ export const AuthContextProvider = ({ children }) => {
         deleteProduct,
         findProduct,
         orderProduct,
-        updateOrderStatus
+        updateOrderStatus,
+        addReview
     }}>
         {loading ? 'Loading' : children}
     </AuthContext.Provider>

@@ -23,6 +23,7 @@ import WideCard from "@/components/UI/WideCard";
 import WideCardWithOptions from "@/components/UI/WideCardWithOptions";
 import Center from "@/components/skeleton/Center";
 import AddReviewModal from "@/components/Modals/AddReviewModal";
+import GenerateProductReviews from "@/components/tools/GenerateProductReviews";
 
 export default function ViewItem() {
     const router = useRouter()
@@ -41,7 +42,7 @@ export default function ViewItem() {
         return <Subtext>Item not found</Subtext>
     }
 
-    const { product, authorUsername } = item
+    const { product, authorUsername, reviews } = item
     const { name, sold, inStock, description, created } = product
 
     const description_ = description ? description : 'No description provided'
@@ -119,7 +120,8 @@ export default function ViewItem() {
                     <Margin height={'20px'} />
                     <SubHeader>Reviews</SubHeader>
                     <Margin height={'10px'} />
-                    <Text>No reviews yet</Text>
+                    {/* <Text>No reviews yet</Text> */}
+                    <GenerateProductReviews reviews={reviews} />
 
                 </motion.div>
             </Layout>

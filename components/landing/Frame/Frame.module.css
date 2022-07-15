@@ -1,0 +1,7 @@
+.container {
+    height: max(100vh, 600px);
+    display: flex;
+    align-content: center;
+    flex-wrap: wrap;
+    justify-content: center;
+}

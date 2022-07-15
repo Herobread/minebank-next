@@ -13,26 +13,30 @@ import StarEmpty from '@/icons/starEmpty.svg'
 import Star from '@/icons/star.svg'
 import Center from "@/components/skeleton/Center";
 import Text from "@/components/UI/Text";
+import { useAuth } from "@/context/AuthContext";
 
 export default function AddReviewModal({ isOpen, onClose, id }) {
     const { control, formState: { errors }, handleSubmit } = useForm()
+    const { addReview, userData } = useAuth()
 
     const [isLoading, setIsLoading] = useState(false)
     const [success, setSuccess] = useState('')
     const [rating, setRating] = useState(100)
 
     const handleRating = (rate) => {
-        console.log(rate)
         setRating(rate)
-        // other logic
     }
 
     const onSubmit = async (data) => {
         setIsLoading(true)
 
-        console.log(id)
         data.rating = rating / 20
-        console.log(data)
+
+        addReview({
+            id: id,
+            from: userData,
+            review: data
+        })
 
         setIsLoading(false)
     }
@@ -57,7 +61,7 @@ export default function AddReviewModal({ isOpen, onClose, id }) {
                     <Subtext type={'error'}>
                         {errors.comment && errors.comment?.message}
                     </Subtext>
-
+                    <Margin height={'5px'} />
 
                     <Center isHorizontal={true}>
                         <Rating
@@ -68,7 +72,6 @@ export default function AddReviewModal({ isOpen, onClose, id }) {
                             allowHover={true}
                             emptyIcon={<StarEmpty />}
                             fullIcon={<Star />}
-                            fillColor={'#555555'}
                         />
                     </Center>
 

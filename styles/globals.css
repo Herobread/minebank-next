@@ -5,6 +5,7 @@
   font-family: 'Inter', sans-serif;
 
   /* outline: white 1px solid; */
+  /* background-color: #46b84b11; */
 }
 
 body {
@@ -13,7 +14,7 @@ body {
   overflow-y: scroll;
   overflow-x: hidden;
 
-  /* width: 100vw; */
+  width: 100vw;
 }
 
 .black {

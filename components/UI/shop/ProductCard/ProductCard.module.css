@@ -18,11 +18,6 @@
     background-color: var(--accent5);
 }
 
-/* .container:hover img { */
-/* transform: scale(1.1); */
-/* background-color: red; */
-/* } */
-
 .item {
     display: flex;
 
@@ -44,4 +39,11 @@
     position: relative;
     display: flex;
     align-items: center;
+}
+
+.name {
+    /* width: 50%; */
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }

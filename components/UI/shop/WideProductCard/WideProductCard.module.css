@@ -22,6 +22,7 @@
 
 .imgContainer img {
     height: 75%;
+    max-height: 200px;
 }
 
 .name {

@@ -4,6 +4,8 @@
     width: 100vw;
     backdrop-filter: blur(16px);
     background-color: #191919AA;
+
+    z-index: 99;
 }
 
 .container ul {

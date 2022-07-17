@@ -24,6 +24,7 @@ import WideCardWithOptions from "@/components/UI/WideCardWithOptions";
 import Center from "@/components/skeleton/Center";
 import AddReviewModal from "@/components/Modals/AddReviewModal";
 import GenerateProductReviews from "@/components/tools/GenerateProductReviews";
+import YourReview from "@/components/tools/YourReview";
 
 export default function ViewItem() {
     const router = useRouter()
@@ -32,9 +33,9 @@ export default function ViewItem() {
 
     const [isLoading, setIsLoading] = useState(false)
     const [isAddReviewOpened, setIsAddReviewOpened] = useState(false)
+    const [isEditReviewOpened, setIsEditReviewOpened] = useState(false)
     const [error, setError] = useState('')
     const [success, setSuccess] = useState('')
-
 
     const item = findProduct(id)
 
@@ -111,16 +112,14 @@ export default function ViewItem() {
                     <Margin height={'20px'} />
                     <SubHeader>Your review</SubHeader>
                     <Margin height={'10px'} />
-                    <Text>Want to share your opinion about this product? Press a button below to add a new review</Text>
-                    <Margin height={'10px'} />
-                    <FlexRow flexDirection={'row-reverse'}>
-                        <Button onClick={handleAddReviewOpen}>Add review</Button>
-                    </FlexRow>
+
+
+                    <YourReview reviews={reviews} handleAddReviewOpen={handleAddReviewOpen} />
 
                     <Margin height={'20px'} />
                     <SubHeader>Reviews</SubHeader>
+
                     <Margin height={'10px'} />
-                    {/* <Text>No reviews yet</Text> */}
                     <GenerateProductReviews reviews={reviews} />
 
                 </motion.div>

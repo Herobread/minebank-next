@@ -8,8 +8,6 @@ import ProfilePicture from "@/components/UI/ProfilePicture/ProfilePicture"
 import toHHMM from "common/toHHMM"
 
 export default function GenerateProductReviews({ reviews }) {
-    console.log(reviews)
-
     if (reviews == null || reviews.length === 0) {
         return <Subtext>No reviews yet</Subtext>
     }
@@ -25,7 +23,7 @@ export default function GenerateProductReviews({ reviews }) {
             <WideCardWithOptions
                 img={<ProfilePicture name={by} src={img} />}
                 title={by}
-                description={comment || 'aboba'}
+                description={comment || `${rating}/5`}
                 // info={toHHMM(timestamp)}
                 buttons={<Rating
                     readonly

@@ -396,18 +396,30 @@ export const AuthContextProvider = ({ children }) => {
         let product = await getDoc(doc(db, 'products', id))
         product = product.data()
 
-        product.reviews.push({
+
+        if (!img) {
+            img = ''
+        }
+        if (rating <= 0)
+            throw 'Rate the product'
+
+
+        const indexOfReview = product.reviews.findIndex(review => review.by === username)
+
+
+        const newReview = {
             by: username,
             img: img,
             comment: comment,
             rating: rating,
             timestamp: timestamp
-        })
+        }
 
-        console.log(product)
-
-        if (rating <= 0)
-            throw 'Rate the product'
+        if (indexOfReview !== -1) {
+            product.reviews[indexOfReview] = newReview
+        } else {
+            product.reviews.push(newReview)
+        }
 
         await setDoc(doc(db, 'products', id), product, { merge: true })
     }

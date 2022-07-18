@@ -10,7 +10,7 @@ import FlexRow from '@/components/skeleton/FlexRow'
 import Button from '@/components/UI/Button'
 import Subtext from '@/components/UI/Subtext'
 
-export default function YourReview({ reviews, handleAddReviewOpen }) {
+export default function YourReview({ reviews, handleAddReviewOpen, handleEditReviewOpen }) {
     const { user, userData } = useAuth()
 
     const review = reviews.find(review => review.by === userData.username)
@@ -42,10 +42,8 @@ export default function YourReview({ reviews, handleAddReviewOpen }) {
                 fullIcon={<Star />}
             />}
         />
-        <Subtext>New modal for edit is not made yet, but it probably works*</Subtext>
-        <Margin height={'10px'} />
         <FlexRow flexDirection={'row-reverse'}>
-            <Button onClick={handleAddReviewOpen}>Edit review</Button>
+            <Button onClick={handleEditReviewOpen}>Edit review</Button>
         </FlexRow>
     </div>
 }

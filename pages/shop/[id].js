@@ -25,6 +25,7 @@ import Center from "@/components/skeleton/Center";
 import AddReviewModal from "@/components/Modals/AddReviewModal";
 import GenerateProductReviews from "@/components/tools/GenerateProductReviews";
 import YourReview from "@/components/tools/YourReview";
+import EditReviewModal from "@/components/Modals/EditReviewModal";
 
 export default function ViewItem() {
     const router = useRouter()
@@ -54,6 +55,14 @@ export default function ViewItem() {
 
     const handleAddReviewOpen = () => {
         setIsAddReviewOpened(true)
+    }
+
+    const handleEditReviewClose = () => {
+        setIsEditReviewOpened(false)
+    }
+
+    const handleEditReviewOpen = () => {
+        setIsEditReviewOpened(true)
     }
 
     const handleReturn = () => {
@@ -114,7 +123,7 @@ export default function ViewItem() {
                     <Margin height={'10px'} />
 
 
-                    <YourReview reviews={reviews} handleAddReviewOpen={handleAddReviewOpen} />
+                    <YourReview reviews={reviews} handleAddReviewOpen={handleAddReviewOpen} handleEditReviewOpen={handleEditReviewOpen} />
 
                     <Margin height={'20px'} />
                     <SubHeader>Reviews</SubHeader>
@@ -125,6 +134,7 @@ export default function ViewItem() {
                 </motion.div>
             </Layout>
 
+            <EditReviewModal isOpen={isEditReviewOpened} onClose={handleEditReviewClose} id={id} reviews={reviews} />
             <AddReviewModal isOpen={isAddReviewOpened} onClose={handleAddReviewClose} id={id} />
         </ContentWrapper>
     </div >

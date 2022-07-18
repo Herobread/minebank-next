@@ -6,7 +6,7 @@ import Modal from "@/components/UI/Modal";
 import Subtext from "@/components/UI/Subtext";
 import TextArea from "@/components/UI/TextArea";
 import { AnimatePresence } from "framer-motion";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { Rating } from "react-simple-star-rating";
 import StarEmpty from '@/icons/starEmpty.svg'
@@ -15,13 +15,15 @@ import Center from "@/components/skeleton/Center";
 import Text from "@/components/UI/Text";
 import { useAuth } from "@/context/AuthContext";
 
-export default function AddReviewModal({ isOpen, onClose, id }) {
-    const { control, formState: { errors }, handleSubmit } = useForm()
+export default function EditReviewModal({ isOpen, onClose, id, reviews }) {
+    const { control, formState: { errors }, handleSubmit, setValue } = useForm()
     const { addReview, userData } = useAuth()
+
+    const review = reviews.find(review => review.by === userData.username)
 
     const [isLoading, setIsLoading] = useState(false)
     const [success, setSuccess] = useState('')
-    const [rating, setRating] = useState(100)
+    const [rating, setRating] = useState(0)
 
     const handleRating = (rate) => {
         setRating(rate)
@@ -32,23 +34,34 @@ export default function AddReviewModal({ isOpen, onClose, id }) {
 
         data.rating = rating / 20
 
-        addReview({
+        await addReview({
             id: id,
             from: userData,
             review: data
         })
 
-        setSuccess('Review successfully submited')
+        setSuccess('Review updated')
+
         setIsLoading(false)
-        onClose()
     }
+
+    useEffect(() => {
+        console.log(review)
+        if (review !== undefined) {
+            setRating(review.rating * 20)
+            setValue('comment', review.comment, { shouldValidate: true })
+        }
+
+        return () => { }
+    }, [reviews])
+
 
     return <AnimatePresence exitBeforeEnter={true}>
         {
             isOpen &&
             <Modal onClose={onClose} isOpen={isOpen}>
                 <form onSubmit={handleSubmit(onSubmit)}>
-                    <Header>Add review</Header>
+                    <Header>Edit review</Header>
                     <Margin height={'10px'} />
 
                     {/* review */}
@@ -78,9 +91,11 @@ export default function AddReviewModal({ isOpen, onClose, id }) {
                     </Center>
 
                     {success && <Subtext type='ok'>{success}</Subtext>}
+                    {/* <Margin height={'5px'} />
+                    <Margin height={'5px'} /> */}
 
                     <FlexRow flexDirection={'row-reverse'}>
-                        <Button>Submit</Button>
+                        <Button>Save</Button>
                     </FlexRow>
                 </form>
             </Modal>

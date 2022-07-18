@@ -77,7 +77,7 @@ export default function Profile() {
                     <Margin height={'20px'} />
                     <Header
                         subheader={'Your profile'}
-                        cta={<Button onClick={handleClick}>Sign out</Button>}>{userData?.username}</Header>
+                        cta={<Button type={'danger'} onClick={handleClick}>Sign out</Button>}>{userData?.username}</Header>
                     <Margin height={'20px'} />
 
                     <SubHeader>Customise</SubHeader>

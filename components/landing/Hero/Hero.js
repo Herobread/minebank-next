@@ -8,7 +8,7 @@ export default function Hero() {
     return <Frame>
         <div>
             <h1 className={s.header}>Minebank</h1>
-            <p className={s.subheader}>The best diamond managing app</p>
+            <p className={s.subheader}>The diamond managing app</p>
             <Button>Sign up</Button>
         </div>
     </Frame >

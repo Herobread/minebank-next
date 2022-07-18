@@ -24,7 +24,10 @@ export default function GenerateBusinessOrders() {
 
 
     if (userData?.businessOrders == null) {
-        return <Subtext>No new orders found</Subtext>
+        return <>
+            <Margin height={'10px'} />
+            <Subtext>No new orders found</Subtext>
+        </>
     }
 
 

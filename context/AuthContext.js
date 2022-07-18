@@ -76,7 +76,11 @@ export const AuthContextProvider = ({ children }) => {
                 createUserDocument(uid, {
                     minecoins: 100,
                     username: username,
-                    email: email
+                    email: email,
+                    personalOrders: [],
+                    businessOrders: [],
+                    recent: [],
+                    transactions: []
                 })
             })
     }

@@ -2,7 +2,7 @@ import cn from 'common/cn'
 import s from './ProfilePicture.module.css'
 
 export default function ProfilePicture({ name, src, isSharp }) {
-    let style = s.container
+    let style = s.img
 
     if (isSharp) {
         style = cn([s.img, s.sharp])

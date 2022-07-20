@@ -354,7 +354,7 @@ export const AuthContextProvider = ({ children }) => {
 
         if (status === 'delivered') {
             const img = buyerData.img ? buyerData.img : null
-            sellerData.minecoins += price
+            sellerData.minecoins += parseInt(price)
             sellerData.transactions.push({
                 timestamp: date.getTime(),
                 amount: `${price}`,

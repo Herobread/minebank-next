@@ -75,17 +75,19 @@ export default function Login() {
 							/>
 							<Margin height='5px' />
 							<Subtext type='error'>{errors.password && errors.password?.message}</Subtext>
-							<Margin height='5px' />
-
-							<Subtext>Don`t have an account? <Link href='/signup'><a>Sign up</a></Link></Subtext>
 
 							<Margin height='5px' />
 							<Subtext type='error'>{serverErrors ? serverErrors : ''}</Subtext>
 
 							<Margin height='10px' />
-							<FlexRow flexDirection={'row-reverse'}>
-								<Button type='submit' disabled={isLoading}>Log in</Button>
-							</FlexRow>
+							<Button type='wide' disabled={isLoading}>Log in</Button>
+							<Margin height='10px' />
+
+							<Center isHorizontal={true}>
+								<Subtext>
+									<Link href='/reset-password'><a>Forgot password</a></Link> &middot; <Link href='/signup'><a>Sign up</a></Link>
+								</Subtext>
+							</Center>
 						</form>
 					</motion.div>
 				</AnimatePresence>

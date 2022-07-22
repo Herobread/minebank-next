@@ -17,6 +17,10 @@ export default function Button({ disabled, type, children, ...props }) {
         styles.push(s.accent)
     }
 
+    if (type === 'wide') {
+        styles.push(s.wide)
+    }
+
     styles = cn(styles)
 
     return <button

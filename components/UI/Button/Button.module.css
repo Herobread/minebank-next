@@ -50,6 +50,10 @@
     outline: 1px solid var(--accent3);
 }
 
+.wide {
+    width: 100%;
+    padding: 10px 0;
+}
 
 .accent {
     outline: 1px solid var(--accent1);

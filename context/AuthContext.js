@@ -1,5 +1,5 @@
 import { auth, db } from "@/lib/firebase";
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "firebase/auth";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut, sendPasswordResetEmail } from "firebase/auth";
 import { collection, deleteDoc, doc, getDoc, getDocs, limit, onSnapshot, query, runTransaction, setDoc, updateDoc, where } from "firebase/firestore";
 import { createContext, useContext, useEffect, useState } from "react";
 
@@ -93,6 +93,10 @@ export const AuthContextProvider = ({ children }) => {
         setUser(null)
         await signOut(auth)
     }
+
+    const resetPassword = (email) => {
+        return sendPasswordResetEmail(auth, email);
+    };
 
     const updateUserData = async (uid, data) => {
         return await setDoc(doc(db, 'users', uid), data, { merge: true })
@@ -366,12 +370,8 @@ export const AuthContextProvider = ({ children }) => {
         } else if (status === 'canceled') {
             let productData = findProduct(order.productId)
 
-            console.log(productData)
-
             productData.sold -= 1
             productData.inStock += 1
-
-            console.log(productData)
 
             buyerData.minecoins += parseInt(price)
             buyerData.transactions.push({
@@ -438,6 +438,7 @@ export const AuthContextProvider = ({ children }) => {
         transfer,
         login,
         signup,
+        resetPassword,
         logout,
         createProduct,
         updateProduct,

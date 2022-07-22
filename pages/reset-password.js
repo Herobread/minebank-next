@@ -17,18 +17,22 @@ import { fadeAnimationVertical, scrollAnimation } from '@/lib/animations'
 
 export default function Signup() {
     const { control, formState: { errors }, handleSubmit } = useForm()
-    const { signup } = useAuth()
+    const { resetPassword } = useAuth()
 
     const [isLoading, setIsLoading] = useState(false)
     const [serverErrors, setServerErrors] = useState('')
+    const [success, setSuccess] = useState('')
 
     const onSubmit = async (data) => {
         setIsLoading(true)
+        setSuccess('')
+        setServerErrors('')
 
-        await signup(data)
-            .then(res => { console.log(res) })
+        await resetPassword(data.email)
+            .then(res => {
+                setSuccess('Check your email to reset the password')
+            })
             .catch(error => {
-                console.log(error)
                 setServerErrors(error.message)
             })
 
@@ -41,21 +45,9 @@ export default function Signup() {
             <Center>
                 <AnimatePresence>
                     <motion.div key={'signup'} {...fadeAnimationVertical}>
-                        <Header>Welcome!</Header>
+                        <Header>Reset password</Header>
                         <form onSubmit={handleSubmit(onSubmit)}>
-                            <Margin height='20px' />
-
-                            {/* username */}
-                            <Controller
-                                defaultValue=''
-                                name='username'
-                                control={control}
-                                rules={formVerifiers.username}
-                                render={({ field }) => <Input label={'Username'} {...field} />}
-                            />
-                            <Margin height='5px' />
-                            <Subtext type='error'>{errors.username && errors.username?.message}</Subtext>
-                            <Margin height='5px' />
+                            <Margin height='10px' />
 
                             {/* email */}
                             <Controller
@@ -69,32 +61,31 @@ export default function Signup() {
                             <Subtext type='error'>{errors.email && errors.email?.message}</Subtext>
                             <Margin height='5px' />
 
-                            {/* password */}
-                            <Controller
-                                defaultValue=''
-                                name='password'
-                                control={control}
-                                rules={formVerifiers.password}
-                                render={({ field }) => <Input label={'Password'} type='password' {...field} />}
-                            />
                             <Margin height='5px' />
-                            <Subtext type='error'>{errors.password && errors.password?.message}</Subtext>
-                            <Margin height='5px' />
-
-                            <Margin height='10px' />
-                            <Button type='wide' disabled={isLoading}>Sign up</Button>
+                            <FlexRow flexDirection={'row-reverse'}>
+                                <Button type='wide' disabled={isLoading}>Send email</Button>
+                            </FlexRow>
                             <Margin height='10px' />
 
                             <Center isHorizontal={true}>
                                 <Subtext>
-                                    Already have an account? <Link href='/login'><a>Log in</a></Link>
+                                    <Link href='/login'><a>Log in</a></Link> &middot; <Link href='/signup'><a>Sign up</a></Link>
                                 </Subtext>
                             </Center>
 
-                            <Margin height='5px' />
-                            <Subtext type='error'>{serverErrors && serverErrors}</Subtext>
                             <Margin height='10px' />
 
+                            <Center isHorizontal={true}>
+                                <Subtext type={'ok'}>
+                                    {success && success}
+                                </Subtext>
+                            </Center>
+
+                            <Center isHorizontal={true}>
+                                <Subtext type='error'>{serverErrors && serverErrors}</Subtext>
+                            </Center>
+
+                            <Margin height='5px' />
                         </form>
                     </motion.div>
                 </AnimatePresence>

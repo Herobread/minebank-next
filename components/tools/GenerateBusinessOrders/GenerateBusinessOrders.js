@@ -78,7 +78,6 @@ export default function GenerateBusinessOrders({ callback }) {
 
     callback(profit, soldAmount)
 
-    console.log(res)
     if (res.length === 1) {
         res = <>
         </>

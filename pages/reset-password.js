@@ -62,9 +62,9 @@ export default function Signup() {
                             <Margin height='5px' />
 
                             <Margin height='5px' />
-                            <FlexRow flexDirection={'row-reverse'}>
+                            <Center isHorizontal={true}>
                                 <Button type='wide' disabled={isLoading}>Send email</Button>
-                            </FlexRow>
+                            </Center>
                             <Margin height='10px' />
 
                             <Center isHorizontal={true}>

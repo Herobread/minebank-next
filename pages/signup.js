@@ -82,7 +82,9 @@ export default function Signup() {
                             <Margin height='5px' />
 
                             <Margin height='10px' />
-                            <Button type='wide' disabled={isLoading}>Sign up</Button>
+                            <Center isHorizontal={true}>
+                                <Button type='submit' disabled={isLoading}>Sign up</Button>
+                            </Center>
                             <Margin height='10px' />
 
                             <Center isHorizontal={true}>

@@ -47,12 +47,14 @@ export default function EditProductModal({ isOpen, onClose, data }) {
 
     const [isLoading, setIsLoading] = useState(false)
     const [success, setSuccess] = useState('')
+    const [error, setError] = useState('')
     const [submitType, setSubmitType] = useState('save')
 
     const onSubmit = async (data) => {
         setIsLoading(true)
+        setSuccess('')
+        setError('')
 
-        console.log(data)
         if (submitType === 'save') {
             const data_ = {
                 product: {
@@ -63,32 +65,36 @@ export default function EditProductModal({ isOpen, onClose, data }) {
             }
 
             await updateProduct(id, data_)
-
-            setSuccess('Successfully updated product info')
-            setIsLoading(false)
+                .then(() => {
+                    setSuccess('Successfully updated product info')
+                })
+                .catch(err => {
+                    setError(err)
+                })
+                .finally(() => {
+                    setIsLoading(false)
+                })
 
             return
         }
 
         if (submitType === 'delete') {
+            setSuccess('')
+
             await deleteProduct(id)
 
-            setSuccess('Product successfully deleted')
             handleClose()
             setIsLoading(false)
-            setSuccess('')
 
             return
         }
     }
 
     const handleSave = () => {
-        console.log('save')
         setSubmitType('save')
     }
 
     const handleDelete = () => {
-        console.log('delete')
         setSubmitType('delete')
     }
 
@@ -179,6 +185,7 @@ export default function EditProductModal({ isOpen, onClose, data }) {
                     <Margin height={'5px'} />
 
                     <Subtext type={'ok'}>{success && success}</Subtext>
+                    <Subtext type={'error'}>{error && error}</Subtext>
 
                     <Margin height={'10px'} />
                     <FlexRow flexDirection={'row-reverse'}>

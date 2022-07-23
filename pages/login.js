@@ -80,7 +80,9 @@ export default function Login() {
 							<Subtext type='error'>{serverErrors ? serverErrors : ''}</Subtext>
 
 							<Margin height='10px' />
-							<Button type='wide' disabled={isLoading}>Log in</Button>
+							<Center isHorizontal={true}>
+								<Button type='submit' disabled={isLoading}>Log in</Button>
+							</Center>
 							<Margin height='10px' />
 
 							<Center isHorizontal={true}>

@@ -223,6 +223,10 @@ export const AuthContextProvider = ({ children }) => {
     const createProduct = async (uid, userData, data) => {
         let { name, price, inStock, img, description } = data
 
+        if (price < 1) {
+            throw 'Price must be at least 1 Mc'
+        }
+
         description ??= ''
 
         let timestamp = new Date()
@@ -249,6 +253,13 @@ export const AuthContextProvider = ({ children }) => {
     }
 
     async function updateProduct(id, data) {
+        const { price } = data.product
+
+        if (price < 1) {
+            console.log('no')
+            throw 'Price must be at least 1 Mc'
+        }
+
         return await updateDoc(doc(db, "products", id), data, { merge: true })
     }
 

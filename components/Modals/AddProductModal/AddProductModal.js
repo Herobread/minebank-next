@@ -17,17 +17,27 @@ export default function AddProductModal({ isOpen, onClose }) {
     const { control, formState: { errors }, handleSubmit } = useForm()
     const [isLoading, setIsLoading] = useState(false)
     const [success, setSuccess] = useState('')
+    const [error, setError] = useState('')
 
     const { createProduct, user, userData } = useAuth()
 
-    const onSubmit = (data) => {
+    const onSubmit = async (data) => {
         setIsLoading(true)
+        setSuccess('')
+        setError('')
+
         const { name } = data
 
-        createProduct(user.uid, userData, data)
-
-        setSuccess(`Successfully created ${name}`)
-        setIsLoading(false)
+        await createProduct(user.uid, userData, data)
+            .then(() => {
+                setSuccess(`Successfully created ${name}`)
+            })
+            .catch(err => {
+                setError(`${err}`)
+            })
+            .finally(() => {
+                setIsLoading(false)
+            })
     }
 
     return <AnimatePresence exitBeforeEnter={true}>
@@ -117,6 +127,7 @@ export default function AddProductModal({ isOpen, onClose }) {
                     <Margin height={'5px'} />
 
                     <Subtext type={'ok'}>{success && success}</Subtext>
+                    <Subtext type={'error'}>{error && error}</Subtext>
 
                     <Margin height={'10px'} />
                     <FlexRow flexDirection={'row-reverse'}>

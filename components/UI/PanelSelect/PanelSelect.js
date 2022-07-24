@@ -5,7 +5,7 @@ import s from './PanelSelect.module.css'
 export default function PanelSelect({ data, selected, callback }) {
     let res = []
 
-    if (!data) {
+    if (data.length === 0) {
         return <Subtext>Send money to someone, to save them to quick access here</Subtext>
     }
 

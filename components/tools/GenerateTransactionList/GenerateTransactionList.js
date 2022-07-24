@@ -1,16 +1,24 @@
 import Margin from "@/components/skeleton/Margin"
+import Art from "@/components/UI/Art"
 import ProfilePicture from "@/components/UI/ProfilePicture/ProfilePicture"
 import Subtext from "@/components/UI/Subtext"
 import WideCard from "@/components/UI/WideCard"
 import { fadeAnimationVertical } from "@/lib/animations"
 import twoDigits from "common/twoDigits"
 import { motion, AnimatePresence } from 'framer-motion'
+import TransferImg from '@/art/transfer.svg'
+import SearchImg from '@/art/search.svg'
 
 export default function GenerateTransactionList({ data, sort }) {
-    if (!data) {
+    console.log(data)
+    if (data.length === 0) {
         return <div>
-            <Margin height={'11px'} />
-            <Subtext>You haven`t made any transactions yet.</Subtext>
+            <Margin height={'50px'} />
+            <Art img={<TransferImg />}>
+                <Subtext>You haven`t made any transactions yet.</Subtext>
+                <Margin height={'10px'} />
+                <Subtext>Transfer money by pressing the transfer button on the top</Subtext>
+            </Art>
         </div>
     }
 
@@ -23,8 +31,6 @@ export default function GenerateTransactionList({ data, sort }) {
     yesterday.setDate(today.getDate() - 1);
 
     data = [...data].reverse()
-
-    // let length = data.length - 1
 
     data = data.filter(transaction => {
         return sort === 'all' || transaction.tags.includes(sort)
@@ -91,9 +97,13 @@ export default function GenerateTransactionList({ data, sort }) {
     })
 
     if (!res.length) {
-        res.push(<motion.div layout key={'notransactions'} {...fadeAnimationVertical}>
-            <Margin height={'11px'} />
-            <Subtext key={'notransactions'}>No transactions found</Subtext>
+        res = (<motion.div layout key={'notransactions'} {...fadeAnimationVertical}>
+            <Margin height={'50px'} />
+            <Art img={<SearchImg />}>
+                <Subtext>No transactions found with this filter</Subtext>
+                <Margin height={'10px'} />
+                <Subtext>Try doing some more different transactions or change filter</Subtext>
+            </Art>
         </motion.div>
         )
     }

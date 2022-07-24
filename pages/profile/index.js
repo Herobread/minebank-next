@@ -59,7 +59,7 @@ export default function Profile() {
 
     useEffect(() => {
         setValue('username', userData?.username)
-        setValue('img', userData?.img)
+        setValue('img', userData?.img || '')
         return () => { }
     }, [userData])
 

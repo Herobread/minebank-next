@@ -17,6 +17,7 @@ export default function GenerateProductReviews({ reviews }) {
     reviews.forEach(review => {
         const { img, by, rating, timestamp, comment } = review
 
+        console.log(review)
         // let date = new Date(timestamp)
 
         res.push(<>

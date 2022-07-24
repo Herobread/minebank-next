@@ -17,7 +17,7 @@ import { useAuth } from "@/context/AuthContext";
 
 export default function AddReviewModal({ isOpen, onClose, id }) {
     const { control, formState: { errors }, handleSubmit } = useForm()
-    const { addReview, userData } = useAuth()
+    const { addReview, userData, user } = useAuth()
 
     const [isLoading, setIsLoading] = useState(false)
     const [success, setSuccess] = useState('')
@@ -34,6 +34,7 @@ export default function AddReviewModal({ isOpen, onClose, id }) {
 
         addReview({
             id: id,
+            byUid: user.uid,
             from: userData,
             review: data
         })

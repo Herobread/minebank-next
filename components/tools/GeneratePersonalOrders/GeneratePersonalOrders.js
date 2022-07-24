@@ -8,6 +8,8 @@ import Clock from '@/icons/clock.svg'
 import toHHMM from "common/toHHMM"
 import ProfilePicture from "@/components/UI/ProfilePicture/ProfilePicture"
 import OptionButton from "@/components/UI/WideCardWithOptions/OptionButton"
+import OrderImg from '@/art/order.svg'
+import Art from "@/components/UI/Art"
 
 export default function GeneratePersonalOrders() {
     const { userData } = useAuth()
@@ -19,8 +21,15 @@ export default function GeneratePersonalOrders() {
 
     let res = []
 
-    if (userData?.personalOrders == null) {
-        return <Subtext>No orders found</Subtext>
+    if (userData?.personalOrders == null || userData?.personalOrders.length === 0) {
+        return <>
+            <Margin height={'10px'} />
+            <Art img={<OrderImg />}>
+                <Subtext>You don`t have any ordes</Subtext>
+                <Margin height={'10px'} />
+                <Subtext>Try ordering something in the shop</Subtext>
+            </Art>
+        </>
     }
 
     let data = userData?.personalOrders

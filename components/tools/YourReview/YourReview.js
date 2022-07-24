@@ -13,7 +13,7 @@ import Subtext from '@/components/UI/Subtext'
 export default function YourReview({ reviews, handleAddReviewOpen, handleEditReviewOpen }) {
     const { user, userData } = useAuth()
 
-    const review = reviews.find(review => review.by === userData.username)
+    const review = reviews.find(review => review.byUid === user.uid)
 
     if (review == undefined) {
         return <>

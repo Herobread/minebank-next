@@ -133,7 +133,6 @@ export default function GenerateBusinessOrders() {
         }
     })
 
-    console.log(res)
     if (res.length === 1) {
         res = <>
         </>

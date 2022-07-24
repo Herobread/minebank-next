@@ -256,7 +256,6 @@ export const AuthContextProvider = ({ children }) => {
         const { price } = data.product
 
         if (price < 1) {
-            console.log('no')
             throw 'Price must be at least 1 Mc'
         }
 
@@ -401,7 +400,7 @@ export const AuthContextProvider = ({ children }) => {
         await setDoc(doc(db, 'users', buyerUid), buyerData, { merge: true })
     }
 
-    const addReview = async ({ id, from, review }) => {
+    const addReview = async ({ id, byUid, from, review }) => {
         const { username, img } = from
         const { rating, comment } = review
 
@@ -419,11 +418,11 @@ export const AuthContextProvider = ({ children }) => {
             throw 'Rate the product'
 
 
-        const indexOfReview = product.reviews.findIndex(review => review.by === username)
-
+        const indexOfReview = product.reviews.findIndex(review => review.byUid === byUid)
 
         const newReview = {
             by: username,
+            byUid: byUid,
             img: img,
             comment: comment,
             rating: rating,

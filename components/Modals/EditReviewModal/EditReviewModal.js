@@ -17,9 +17,9 @@ import { useAuth } from "@/context/AuthContext";
 
 export default function EditReviewModal({ isOpen, onClose, id, reviews }) {
     const { control, formState: { errors }, handleSubmit, setValue } = useForm()
-    const { addReview, userData } = useAuth()
+    const { addReview, userData, user } = useAuth()
 
-    const review = reviews.find(review => review.by === userData.username)
+    const review = reviews.find(review => review.byUid === user.uid)
 
     const [isLoading, setIsLoading] = useState(false)
     const [success, setSuccess] = useState('')
@@ -36,6 +36,7 @@ export default function EditReviewModal({ isOpen, onClose, id, reviews }) {
 
         await addReview({
             id: id,
+            byUid: user.uid,
             from: userData,
             review: data
         })

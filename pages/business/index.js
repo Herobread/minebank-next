@@ -84,11 +84,7 @@ export default function Business() {
                         <Subtext>Your products</Subtext>
                         <Margin height={'10px'} />
 
-                        <GenerateUserProducts data={userData} user={user} />
-
-                        <FlexRow flexDirection={'row-reverse'}>
-                            <Button onClick={handleEditProductModalOpen}>Add new</Button>
-                        </FlexRow>
+                        <GenerateUserProducts data={userData} user={user} addNew={handleEditProductModalOpen} />
                     </motion.div>
 
                 </motion.div>

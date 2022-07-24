@@ -8,8 +8,13 @@ import { useAuth } from "@/context/AuthContext"
 import { useState } from "react"
 import Edit from '@/icons/edit.svg'
 import Mc from "@/components/UI/Mc"
+import Art from "@/components/UI/Art"
+import BoxImg from '@/art/box.svg'
+import Center from "@/components/skeleton/Center"
+import Button from "@/components/UI/Button"
+import FlexRow from "@/components/skeleton/FlexRow"
 
-export default function GenerateUserProducts({ user, data }) {
+export default function GenerateUserProducts({ user, data, addNew }) {
     const { uid } = user
     const { shopData } = useAuth()
 
@@ -25,8 +30,20 @@ export default function GenerateUserProducts({ user, data }) {
         return
     })
 
-    if (filtered == null) {
-        return <Subtext>No products found</Subtext>
+    console.log(filtered)
+
+    if (!filtered || filtered.length === 0) {
+        return <>
+            <Art img={<BoxImg />}>
+                <Subtext>You don`t have any products</Subtext>
+                <Margin height={'10px'} />
+                <Subtext>Add a product by pressing the button below</Subtext>
+                <Margin height={'20px'} />
+                <Center isHorizontal={true}>
+                    <Button onClick={addNew}>Add new</Button>
+                </Center>
+            </Art>
+        </>
     }
 
     filtered.forEach((item, i) => {
@@ -57,5 +74,8 @@ export default function GenerateUserProducts({ user, data }) {
     return <div>
         {res}
         <EditProductModal data={productModalData} isOpen={isProductModalOpened} onClose={handleProductModalClose} />
+        <FlexRow flexDirection={'row-reverse'}>
+            <Button onClick={addNew}>Add new</Button>
+        </FlexRow>
     </div>
 }

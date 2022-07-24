@@ -10,8 +10,7 @@ import TransferImg from '@/art/transfer.svg'
 import SearchImg from '@/art/search.svg'
 
 export default function GenerateTransactionList({ data, sort }) {
-    console.log(data)
-    if (data.length === 0) {
+    if (!data || data.length === 0) {
         return <div>
             <Margin height={'50px'} />
             <Art img={<TransferImg />}>

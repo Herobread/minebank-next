@@ -10,6 +10,8 @@ import Clock from '@/icons/clock.svg'
 import toHHMM from 'common/toHHMM'
 import { motion, AnimatePresence } from 'framer-motion'
 import { fadeAnimationHeight } from '@/lib/animations'
+import Art from '@/components/UI/Art'
+import OrderImg from '@/art/order.svg'
 
 export default function GenerateBusinessOrders() {
     const { userData, updateOrderStatus } = useAuth()
@@ -23,10 +25,14 @@ export default function GenerateBusinessOrders() {
     yesterday.setDate(today.getDate() - 1);
 
 
-    if (userData?.businessOrders == null) {
+    if (!userData?.businessOrders || userData?.businessOrders.length === 0) {
         return <>
             <Margin height={'10px'} />
-            <Subtext>No new orders found</Subtext>
+            <Art img={<OrderImg />}>
+                <Subtext>You don`t have any ordes</Subtext>
+                <Margin height={'10px'} />
+                <Subtext>Try promoting your products</Subtext>
+            </Art>
         </>
     }
 

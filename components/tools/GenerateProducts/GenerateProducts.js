@@ -13,6 +13,7 @@ export default function GenerateProducts() {
 
     shopData?.forEach(item => {
         let id = item.product.created
+
         res.push(<ProductCard
             onClick={() => { handleOpen(id) }}
             data={item}
@@ -22,6 +23,8 @@ export default function GenerateProducts() {
     const handleOpen = (id) => {
         router.push(`/shop/${id}`)
     }
+
+
 
     return <ShopGrid>
         {res}

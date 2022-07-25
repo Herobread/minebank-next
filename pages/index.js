@@ -1,4 +1,5 @@
 import Hero from '@/components/landing/Hero'
+import ThreeCards from '@/components/landing/ThreeCards'
 import ContentWrapper from '@/components/skeleton/ContentWrapper'
 import Header from '@/components/UI/Header'
 import Navbar from '@/components/UI/Navbar'
@@ -8,7 +9,6 @@ export default function Home() {
     return <div>
         <Navbar />
         <Hero />
-        <Hero />
-        <Hero />
+        <ThreeCards />
     </div>
 }

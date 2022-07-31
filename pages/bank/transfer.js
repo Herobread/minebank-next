@@ -125,7 +125,7 @@ export default function Transfer() {
                         <Margin height='5px' />
 
                         <Subtext type='error'>{error && error}</Subtext>
-                        <Subtext type='ok'>{success && success}</Subtext>
+                        <Subtext timeout={5000} changeContent={setSuccess} type='ok'>{success && success}</Subtext>
 
                         <Margin height='5px' />
                         <FlexRow flexDirection={'row-reverse'}>

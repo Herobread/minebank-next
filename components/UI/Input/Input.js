@@ -13,7 +13,7 @@ export default function Input({ label, ...props }) {
     const { type } = props
     const passwordButtonType = isVisible ? <View className={s.icon} onClick={handleShow} /> : <ViewClosed className={s.icon} onClick={handleShow} />
     const passwordButton = type === 'password' ? passwordButtonType : ''
-    const typeOfInput = (isVisible && type === 'password') || type === 'text' || type === undefined ? 'text' : 'password'
+    let typeOfInput = (isVisible && type === 'password') || type === 'text' || type === undefined ? 'text' : 'password'
 
     return <div className={s.container}>
         <label className={s.label}>

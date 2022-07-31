@@ -18,6 +18,7 @@ import FlexRow from "@/components/skeleton/FlexRow";
 import { useRouter } from "next/router";
 import Text from "@/components/UI/Text";
 import SubHeader from "@/components/UI/SubHeader";
+import FileInput from "@/components/UI/FileInput";
 
 export default function Profile() {
     const { control, formState: { errors }, handleSubmit, setValue } = useForm()
@@ -108,9 +109,12 @@ export default function Profile() {
                         <Subtext type='error'>{errors.img && errors.img?.message}</Subtext>
                         <Margin height='5px' />
 
-                        <Subtext timeout={4000} type='ok'>{success && success}</Subtext>
+                        <Subtext timeout={5000} changeContent={setSuccess} type='ok'>{success && success}</Subtext>
+
                         <Subtext type='error'>{serverError && serverError}</Subtext>
                         <Margin height='5px' />
+
+                        {/* <FileInput /> */}
 
                         <FlexRow flexDirection={'row-reverse'}>
                             <Button type='submit' disabled={isLoading}>Save</Button>

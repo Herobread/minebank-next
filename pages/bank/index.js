@@ -39,7 +39,7 @@ export default function Bank() {
         {
             name: 'Out',
             value: 'out'
-        },
+        }
     ]
 
     const [filter, setFilter] = useState('all')

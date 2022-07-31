@@ -4,28 +4,33 @@ import s from './Subtext.module.css'
 import { AnimatePresence, motion } from 'framer-motion'
 import { fadeAnimationHeight, fadeAnimations } from '@/lib/animations'
 
-export default function Subtext({ type, children, timeout }) {
+export default function Subtext({ type, children, timeout, changeContent }) {
+    // const [isShown, setIsShown] = useState(true)
+    timeout ??= 0
 
-    const [isShown, setIsShown] = useState(true)
-    // timeout ??= 0
+    // changeContent is needed because it makes it work multiple times
+    // if I used isShown it would need some kind of forced rerender
 
-    // useEffect(() => {
-    //     console.log(timeout)
-    //     if (timeout)
-    //         setTimeout(() => {
-    //             setIsShown(false)
-    //         }, timeout);
+    useEffect(() => {
+        let timeout_
 
-    //     return () => { }
-    // }, [timeout])
+        if (timeout)
+            timeout_ = setTimeout(() => {
+                // setIsShown(false)
+                changeContent('')
+            }, timeout)
+
+        return () => {
+            // setIsShown(true)
+            clearTimeout(timeout_)
+        }
+    }, [children])
 
     type = cn([s.text, s[type]])
 
     return <AnimatePresence>
-        {
-            isShown && <motion.div key={children} layout {...fadeAnimationHeight}>
-                <p className={type}>{children}</p>
-            </motion.div>
-        }
+        <motion.div key={children} layout {...fadeAnimationHeight}>
+            <p className={type}>{children}</p>
+        </motion.div>
     </AnimatePresence>
 }

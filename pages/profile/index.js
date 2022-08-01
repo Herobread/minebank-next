@@ -21,8 +21,8 @@ import SubHeader from "@/components/UI/SubHeader";
 import FileInput from "@/components/UI/FileInput";
 
 export default function Profile() {
-    const { control, formState: { errors }, handleSubmit, setValue } = useForm()
-    const { logout, user, userData, updateUserData, getUserUid } = useAuth()
+    const { control, formState: { errors }, handleSubmit, setValue, register } = useForm()
+    const { logout, user, userData, updateUserData, uploadImage, getUserUid } = useAuth()
     const router = useRouter()
 
     const [isLoading, setisLoading] = useState(false)
@@ -37,10 +37,22 @@ export default function Profile() {
     const onSubmit = async (data) => {
         setisLoading(true)
 
+        const img = data.img[0]
+
         const usernameOwner = await getUserUid(data.username)
 
         const isAvailableName = !usernameOwner
         const isSameName = usernameOwner === user.uid
+        let imgUrl = ''
+
+        await uploadImage({
+            img: img,
+            path: `profilePic/${user.uid}`
+        }).then(res => {
+            imgUrl = res
+        })
+
+        data.img = imgUrl
 
         if (isAvailableName || isSameName) {
             await updateUserData(user.uid, data)
@@ -60,10 +72,9 @@ export default function Profile() {
 
     useEffect(() => {
         setValue('username', userData?.username)
-        setValue('img', userData?.img || '')
+        // setValue('img', userData?.img || '')
         return () => { }
     }, [userData])
-
 
     return <div>
         <Protected requiredUserType={'user'} />
@@ -97,14 +108,10 @@ export default function Profile() {
                         <Subtext type='error'>{errors.username && errors.username?.message}</Subtext>
                         <Margin height='5px' />
 
+
                         {/* img */}
-                        <Controller
-                            defaultValue=''
-                            name='img'
-                            control={control}
-                            rules={formVerifiers.url}
-                            render={({ field }) => <Input label={'Profile image url'} {...field} />}
-                        />
+                        <FileInput name="img" control={control} label={'Profile picture'} />
+
                         <Margin height='5px' />
                         <Subtext type='error'>{errors.img && errors.img?.message}</Subtext>
                         <Margin height='5px' />
@@ -113,8 +120,6 @@ export default function Profile() {
 
                         <Subtext type='error'>{serverError && serverError}</Subtext>
                         <Margin height='5px' />
-
-                        {/* <FileInput /> */}
 
                         <FlexRow flexDirection={'row-reverse'}>
                             <Button type='submit' disabled={isLoading}>Save</Button>

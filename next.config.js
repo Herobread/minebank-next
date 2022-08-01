@@ -8,7 +8,10 @@ const nextConfig = {
       use: ['@svgr/webpack'],
     })
     return config
-  }
+  },
+  images: {
+    domains: ['firebasestorage.googleapis.com'],
+  },
 }
-
+//firebasestorage.googleapis.com
 module.exports = nextConfig

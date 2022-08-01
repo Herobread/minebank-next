@@ -1,6 +1,7 @@
-import { auth, db } from "@/lib/firebase";
+import { auth, db, storage } from "@/lib/firebase";
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut, sendPasswordResetEmail } from "firebase/auth";
 import { collection, deleteDoc, doc, getDoc, getDocs, limit, onSnapshot, query, runTransaction, setDoc, updateDoc, where } from "firebase/firestore";
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { createContext, useContext, useEffect, useState } from "react";
 
 const AuthContext = createContext({})
@@ -438,6 +439,21 @@ export const AuthContextProvider = ({ children }) => {
         await setDoc(doc(db, 'products', id), product, { merge: true })
     }
 
+    const uploadImage = async ({ img, path }) => {
+        const imgRef = ref(storage, path)
+        let url = ''
+
+        await uploadBytes(imgRef, img)
+
+        await getDownloadURL(imgRef)
+            .then(res => {
+                console.log(`sus ${res}`)
+                url = res
+            })
+
+        return url
+    }
+
     return <AuthContext.Provider value={{
         user,
         userData,
@@ -456,7 +472,8 @@ export const AuthContextProvider = ({ children }) => {
         findProduct,
         orderProduct,
         updateOrderStatus,
-        addReview
+        addReview,
+        uploadImage
     }}>
         {loading ? 'Loading' : children}
     </AuthContext.Provider>

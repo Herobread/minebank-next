@@ -1,4 +1,5 @@
 import cn from 'common/cn'
+import Image from 'next/image'
 import s from './ProfilePicture.module.css'
 
 export default function ProfilePicture({ name, src, isSharp }) {
@@ -10,7 +11,7 @@ export default function ProfilePicture({ name, src, isSharp }) {
 
     if (src) {
         return <div className={s.container}>
-            <img className={style} src={src} />
+            <Image className={style} src={src} height={50} width={50} />
         </div>
     }
 

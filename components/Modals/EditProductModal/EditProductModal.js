@@ -2,6 +2,7 @@ import FlexRow from "@/components/skeleton/FlexRow";
 import Margin from "@/components/skeleton/Margin";
 import Split from "@/components/skeleton/Split";
 import Button from "@/components/UI/Button";
+import FileInput from "@/components/UI/FileInput";
 import Header from "@/components/UI/Header";
 import Input from "@/components/UI/Input";
 import Modal from "@/components/UI/Modal";
@@ -39,7 +40,7 @@ export default function EditProductModal({ isOpen, onClose, data }) {
         setValue('name', name, { shouldValidate: true })
         setValue('price', price, { shouldValidate: true })
         setValue('inStock', inStock, { shouldValidate: true })
-        setValue('img', img, { shouldValidate: true })
+        // setValue('img', img, { shouldValidate: true })
         setValue('description', description, { shouldValidate: true })
 
         return () => { }
@@ -54,7 +55,6 @@ export default function EditProductModal({ isOpen, onClose, data }) {
         setIsLoading(true)
         setSuccess('')
         setError('')
-
         if (submitType === 'save') {
             const data_ = {
                 product: {
@@ -155,18 +155,13 @@ export default function EditProductModal({ isOpen, onClose, data }) {
                     <Margin height={'5px'} />
 
 
-                    {/* inStock */}
-                    <Controller
-                        defaultValue=''
-                        name='img'
-                        control={control}
-                        rules={formVerifiers.required}
-                        render={({ field }) => <Input label={'Link to the image'} {...field} />}
-                    />
+                    {/* img */}
+                    <FileInput name="img" control={control} label={'Product img'} initialImg={img} />
+
                     <Margin height={'5px'} />
-                    <Subtext type={'error'}>
+                    {/* <Subtext type={'error'}>
                         {errors.img && errors.img?.message}
-                    </Subtext>
+                    </Subtext> */}
                     <Margin height={'5px'} />
 
 

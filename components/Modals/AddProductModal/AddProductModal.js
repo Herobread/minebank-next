@@ -2,6 +2,7 @@ import FlexRow from "@/components/skeleton/FlexRow";
 import Margin from "@/components/skeleton/Margin";
 import Split from "@/components/skeleton/Split";
 import Button from "@/components/UI/Button";
+import FileInput from "@/components/UI/FileInput";
 import Header from "@/components/UI/Header";
 import Input from "@/components/UI/Input";
 import Modal from "@/components/UI/Modal";
@@ -97,14 +98,16 @@ export default function AddProductModal({ isOpen, onClose }) {
                     <Margin height={'5px'} />
 
 
-                    {/* inStock */}
-                    <Controller
+                    {/* img */}
+                    <FileInput name="img" control={control} label={'Product img'} initialImg={''} />
+
+                    {/* <Controller
                         defaultValue=''
                         name='img'
                         control={control}
                         rules={formVerifiers.required}
                         render={({ field }) => <Input label={'Link to the image'} {...field} />}
-                    />
+                    /> */}
                     <Margin height={'5px'} />
                     <Subtext type={'error'}>
                         {errors.img && errors.img?.message}

@@ -14,16 +14,12 @@ export default function Input({ control, name, label, initialImg, ...props }) {
     const [imgUrl, setImgUrl] = useState('')
 
     useEffect(() => {
-
-        if (initialImg) {
+        if (initialImg && !imgUrl) {
             setImgUrl(initialImg)
-        } else if (img) {
-            setImgUrl(URL.createObjectURL(img[0]))
         }
 
         return () => { }
     }, [initialImg, img])
-
 
 
     return <>
@@ -42,12 +38,16 @@ export default function Input({ control, name, label, initialImg, ...props }) {
                     </div>
                 }
                 <input
+                    {...props}
                     className={s.input}
                     type='file'
                     img={img}
                     onChange={(e) => {
-                        setImg(e.target.files);
-                        field.onChange(e.target.files);
+                        setImg(e.target.files)
+
+                        setImgUrl(URL.createObjectURL(e.target.files[0]))
+
+                        field.onChange(e.target.files)
                     }}
                 />
             </div>

@@ -224,9 +224,16 @@ export const AuthContextProvider = ({ children }) => {
     const createProduct = async (uid, userData, data) => {
         let { name, price, inStock, img, description } = data
 
+        if (img == null) {
+            throw 'You need to choose an image for the product'
+        }
+
+        img = img[0]
+
         if (price < 1) {
             throw 'Price must be at least 1 Mc'
         }
+
 
         description ??= ''
 
@@ -234,6 +241,11 @@ export const AuthContextProvider = ({ children }) => {
         timestamp = timestamp.getTime()
 
         const id = timestamp.toString()
+
+        const imgUrl = await uploadImage({
+            img: img,
+            path: `products/${id}`
+        })
 
         let productData = {
             authorUid: uid,
@@ -243,7 +255,7 @@ export const AuthContextProvider = ({ children }) => {
                 name: name,
                 price: parseInt(price),
                 inStock: parseInt(inStock),
-                img: img,
+                img: imgUrl,
                 description: description,
                 created: parseInt(timestamp)
             },
@@ -255,6 +267,16 @@ export const AuthContextProvider = ({ children }) => {
 
     async function updateProduct(id, data) {
         const { price } = data.product
+        console.log('updating')
+
+        const img = data.product.img[0]
+
+        if (img) {
+            data.product.img = await uploadImage({
+                img: img,
+                path: `products/${id}`,
+            })
+        }
 
         if (price < 1) {
             throw 'Price must be at least 1 Mc'

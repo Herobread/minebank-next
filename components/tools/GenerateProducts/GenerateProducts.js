@@ -36,18 +36,15 @@ export default function GenerateProducts() {
         />)
     })
 
-    rex.push(<>
-        <Margin height={'10px'} />
-        <Subtext>Want to sell your own products? <Link href='/business'><a>Add product in business page</a></Link></Subtext>
-    </>)
-
     const handleOpen = (id) => {
         router.push(`/shop/${id}`)
     }
 
-
-
-    return <ShopGrid>
-        {res}
-    </ShopGrid>
+    return <>
+        <ShopGrid>
+            {res}
+        </ShopGrid>
+        <Margin height={'10px'} />
+        <Subtext>Want to sell your own products? <Link href='/business'><a>Add product in business page</a></Link></Subtext>
+    </>
 }

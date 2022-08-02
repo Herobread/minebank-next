@@ -30,8 +30,6 @@ export default function GenerateUserProducts({ user, data, addNew }) {
         return
     })
 
-    console.log(filtered)
-
     if (!filtered || filtered.length === 0) {
         return <>
             <Art img={<BoxImg />}>

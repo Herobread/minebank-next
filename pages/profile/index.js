@@ -96,6 +96,13 @@ export default function Profile() {
                     {/* <Margin height={'10px'} /> */}
 
                     <form onSubmit={handleSubmit(onSubmit)}>
+                        {/* img */}
+                        <FileInput name="img" control={control} label={'Profile picture'} initialImg={userData?.img} />
+
+                        <Margin height='5px' />
+                        <Subtext type='error'>{errors.img && errors.img?.message}</Subtext>
+                        <Margin height='5px' />
+
                         {/* username */}
                         <Controller
                             defaultValue=''
@@ -109,12 +116,7 @@ export default function Profile() {
                         <Margin height='5px' />
 
 
-                        {/* img */}
-                        <FileInput name="img" control={control} label={'Profile picture'} />
 
-                        <Margin height='5px' />
-                        <Subtext type='error'>{errors.img && errors.img?.message}</Subtext>
-                        <Margin height='5px' />
 
                         <Subtext timeout={5000} changeContent={setSuccess} type='ok'>{success && success}</Subtext>
 

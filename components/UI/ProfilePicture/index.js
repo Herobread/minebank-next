@@ -1,1 +1,1 @@
-export { default } from 'ProfilePicture'
+export { default } from './ProfilePicture'

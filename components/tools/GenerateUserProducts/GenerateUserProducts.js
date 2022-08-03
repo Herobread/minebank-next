@@ -48,7 +48,6 @@ export default function GenerateUserProducts({ user, data, addNew }) {
         const { product } = item
 
         res.push(<div key={i}>
-            {product.img}
             <WideCardWithOptions
                 title={product.name}
                 description={<span> {`${product.price} Mc`} &middot;{` ${product.inStock} in stock`}</span>}

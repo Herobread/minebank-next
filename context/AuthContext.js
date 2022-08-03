@@ -406,8 +406,8 @@ export const AuthContextProvider = ({ children }) => {
         } else if (status === 'canceled') {
             let productData = findProduct(order.productId)
 
-            productData.sold -= 1
-            productData.inStock += 1
+            productData.product.sold -= 1
+            productData.product.inStock += 1
 
             buyerData.minecoins += parseInt(price)
             buyerData.transactions.push({

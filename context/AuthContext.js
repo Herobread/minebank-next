@@ -266,14 +266,11 @@ export const AuthContextProvider = ({ children }) => {
     }
 
     async function updateProduct(id, data) {
-        const { price } = data.product
-        console.log('updating')
+        let { price, img } = data.product
 
-        const img = data.product.img[0]
-
-        if (img) {
+        if (typeof img !== 'string' || 'undefined') {
             data.product.img = await uploadImage({
-                img: img,
+                img: img[0],
                 path: `products/${id}`,
             })
         }
@@ -319,6 +316,12 @@ export const AuthContextProvider = ({ children }) => {
 
 
         buyerData.minecoins -= productData.product.price
+
+        if (buyerData.minecoins < 0) {
+            const difference = -1 * buyerData.minecoins
+
+            throw `You don\`t have enough money to buy ${productData.product.name}. You need ${difference} Mc more.`
+        }
 
         buyerData.transactions.push({
             timestamp: date.getTime(),

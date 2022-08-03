@@ -40,7 +40,7 @@ export default function EditProductModal({ isOpen, onClose, data }) {
         setValue('name', name, { shouldValidate: true })
         setValue('price', price, { shouldValidate: true })
         setValue('inStock', inStock, { shouldValidate: true })
-        // setValue('img', img, { shouldValidate: true })
+        setValue('img', img, { shouldValidate: true })
         setValue('description', description, { shouldValidate: true })
 
         return () => { }

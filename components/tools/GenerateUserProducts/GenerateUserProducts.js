@@ -48,9 +48,10 @@ export default function GenerateUserProducts({ user, data, addNew }) {
         const { product } = item
 
         res.push(<div key={i}>
+            {product.img}
             <WideCardWithOptions
                 title={product.name}
-                description={product.price + ' Mc'}
+                description={<span> {`${product.price} Mc`} &middot;{` ${product.inStock} in stock`}</span>}
                 info={`${product.sold} sold`}
                 img={<ProfilePicture isSharp={true} name={product.name} src={product.img} />}
                 buttons={<OptionButton onClick={() => { handleProductModalOpen(i) }} img={<Edit />} />}
@@ -61,6 +62,7 @@ export default function GenerateUserProducts({ user, data, addNew }) {
 
     const handleProductModalOpen = (id) => {
         setProductModalData(filtered[id])
+        console.log(filtered[id])
 
         setIsProductModalOpened(true)
     }

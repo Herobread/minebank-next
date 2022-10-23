@@ -15,11 +15,11 @@ import { useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 
 import { AnimatePresence, motion } from 'framer-motion'
-import { fadeAnimationHeight, fadeAnimationVertical, scrollAnimation } from '@/lib/animations'
+import { fadeAnimationVertical } from '@/lib/animations'
 
-export default function Login() {
+export default function PasswordLess() {
 	const { control, formState: { errors }, handleSubmit } = useForm()
-	const { login } = useAuth()
+	const { sendEmail } = useAuth()
 	const router = useRouter()
 
 	const [isLoading, setIsLoading] = useState(false)
@@ -32,13 +32,16 @@ export default function Login() {
 
 		let ok = true
 
-		await login(data)
+		await sendEmail(data.email)
 			.catch(error => {
 				setServerErrors(error.message)
 				ok = false
 			})
-		if (ok)
-			router.push(destination)
+
+		console.log(ok)
+		
+		// if (ok)
+			// router.push(destination)
 
 		setIsLoading(false)
 	}
@@ -63,33 +66,21 @@ export default function Login() {
 							/>
 							<Margin height='5px' />
 							<Subtext type='error'>{errors.email && errors.email?.message}</Subtext>
-							<Margin height='5px' />
 
-							{/* password */}
-							<Controller
-								defaultValue=''
-								name='password'
-								control={control}
-								rules={formVerifiers.password}
-								render={({ field }) => <Input label={'Password'} type='password' {...field} />}
-							/>
-							<Margin height='5px' />
-							<Subtext type='error'>{errors.password && errors.password?.message}</Subtext>
 
 							<Margin height='5px' />
 							<Subtext type='error'>{serverErrors ? serverErrors : ''}</Subtext>
 
-							<Margin height='10px' />
+							<Margin height='5px' />
 							<Center isHorizontal={true}>
-								<Button type='submit' disabled={isLoading}>Log in</Button>
+								<Button type='submit' disabled={isLoading}>Send email</Button>
 							</Center>
 							<Margin height='10px' />
 
 							<Center isHorizontal={true}>
 								<Subtext>
-									<Link href='/reset-password'><a>Forgot password </a></Link>
-									&middot; <Link href='/signup'><a>Sign up </a></Link>
-									{/* &middot; <Link href='/passwordless'><a>Passwordless login</a></Link> */}
+									<Link href='/reset-password'><a>Forgot password</a></Link> &middot;
+									<Link href='/signup'><a>Sign up</a></Link>
 								</Subtext>
 							</Center>
 						</form>

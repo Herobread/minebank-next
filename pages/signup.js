@@ -89,7 +89,8 @@ export default function Signup() {
 
                             <Center isHorizontal={true}>
                                 <Subtext>
-                                    Already have an account? <Link href='/login'><a>Log in</a></Link>
+                                    <Link href='/login'><a>Log in </a></Link>
+                                    {/* &middot; <Link href='/passwordless'><a>Passwordless login</a></Link> */}
                                 </Subtext>
                             </Center>
 

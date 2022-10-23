@@ -11,7 +11,14 @@ export default function ProfilePicture({ name, src, isSharp }) {
 
     if (src) {
         return <div className={s.container}>
-            <Image className={style} src={src} height={50} width={50} />
+            <Image
+                className={style}
+                src={src}
+                height={50}
+                width={50}
+                objectFit='cover'
+                alt={`${name}'s profile picture`}
+            />
         </div>
     }
 

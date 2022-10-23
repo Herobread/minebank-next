@@ -1,5 +1,5 @@
 import { auth, db, storage } from "@/lib/firebase";
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut, sendPasswordResetEmail } from "firebase/auth";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut, sendPasswordResetEmail, sendSignInLinkToEmail } from "firebase/auth";
 import { collection, deleteDoc, doc, getDoc, getDocs, limit, onSnapshot, query, runTransaction, setDoc, updateDoc, where } from "firebase/firestore";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { createContext, useContext, useEffect, useState } from "react";
@@ -89,6 +89,30 @@ export const AuthContextProvider = ({ children }) => {
     const login = async ({ email, password }) => {
         return await signInWithEmailAndPassword(auth, email, password)
     }
+
+    // const sendEmail = async (email) => {
+
+    //     const hostname = window.location.hostname;
+    //     console.log(hostname)
+
+    //     const actionCodeSettings = {
+    //         url: `https://${hostname}/confirmPasswordless/`,
+    //         handleCodeInApp: true,
+    //         // dynamicLinkDomain: `localhost`
+    //     }
+
+    //     console.log(`sending to ${email}`)
+
+    //     await sendSignInLinkToEmail(auth, email, actionCodeSettings)
+    //         .then(() => {
+    //             window.localStorage.setItem('emailForSignIn', email)
+    //             console.log(`send to ${email}`)
+    //             console.log('ok')
+    //         })
+    //         .catch((err) => {
+    //             throw err
+    //         })
+    // }
 
     const logout = async () => {
         setUser(null)
@@ -480,6 +504,7 @@ export const AuthContextProvider = ({ children }) => {
     }
 
     return <AuthContext.Provider value={{
+        auth,
         user,
         userData,
         shopData,
@@ -489,6 +514,7 @@ export const AuthContextProvider = ({ children }) => {
         transfer,
         login,
         signup,
+        // sendEmail,
         resetPassword,
         logout,
         createProduct,

@@ -1,0 +1,49 @@
+.container {
+    aspect-ratio: 1/1;
+
+    display: grid;
+    grid-template-rows: 35px 1fr 35px;
+
+    background-color: var(--accent6);
+
+    cursor: pointer;
+
+}
+
+.container img {
+    transition: all 0.1s ease-in-out;
+}
+
+.container:hover {
+    background-color: var(--accent5);
+}
+
+.item {
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.img {
+    padding: 16px;
+    position: absolute;
+    max-height: 100%;
+    border-radius: 3px;
+}
+
+.imgContainer {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.name {
+    /* width: 50%; */
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}

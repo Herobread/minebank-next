@@ -1,0 +1,17 @@
+.container {
+    list-style-type: none;
+}
+
+.item {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+
+    padding: 5px 0;
+
+    color: var(--accent3);
+}
+
+.highlight {
+    color: var(--accent1);
+}

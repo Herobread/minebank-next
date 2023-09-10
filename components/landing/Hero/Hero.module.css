@@ -1,0 +1,29 @@
+.subheader {
+    font-weight: 700;
+    font-size: 15px;
+    line-height: 18px;
+
+    text-align: center;
+}
+
+.header {
+    font-weight: 700;
+    font-size: 178px;
+    line-height: 179px;
+
+    background-image: linear-gradient(107deg, #BCE31E 0%, #26DE23 50%, #BCE31E 100%);
+    background-clip: text;
+    color: transparent;
+
+    text-align: center;
+    text-shadow: 0px 0px 250px #00FF63;
+
+    background-size: 200% auto;
+    animation: shine 2s linear infinite;
+}
+
+@keyframes shine {
+    to {
+        background-position: 200% center;
+    }
+}

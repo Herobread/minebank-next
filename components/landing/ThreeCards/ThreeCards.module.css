@@ -1,0 +1,16 @@
+.container {
+    padding: 20px;
+    width: 200px;
+    background: #111111;
+    border-radius: 5px;
+}
+
+.wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 40px;
+}

@@ -1,0 +1,28 @@
+{
+  "name": "minebank-next",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "firebase": "^9.8.4",
+    "formidable": "^2.0.1",
+    "framer-motion": "^6.3.16",
+    "next": "12.1.6",
+    "next-pwa": "^5.5.5",
+    "nprogress": "^0.2.0",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-hook-form": "^7.32.2",
+    "react-simple-star-rating": "4.0.5"
+  },
+  "devDependencies": {
+    "@svgr/webpack": "^6.2.1",
+    "eslint": "8.18.0",
+    "eslint-config-next": "12.1.6"
+  }
+}

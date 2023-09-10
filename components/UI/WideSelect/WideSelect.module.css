@@ -1,0 +1,46 @@
+.container {
+    width: 100%;
+    background-color: var(--accent5);
+    color: var(--accent3);
+    border-radius: 8px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.button {
+    width: 100%;
+    padding: 8px 2px;
+
+    cursor: pointer;
+    border-radius: 8px;
+    background-color: var(--accent5);
+    color: var(--accent2);
+    border: none;
+    flex: 1 1 auto;
+
+    transition: 0.1s ease-in-out;
+}
+
+.button:hover {
+    background-color: var(--accent4);
+    padding: 0 30px;
+}
+
+.active {
+    background-color: var(--accent6);
+    cursor: not-allowed;
+
+    color: var(--accent1);
+}
+
+.active:hover {
+    background-color: var(--accent6);
+    padding: 8px 2px;
+}
+
+@media screen and (max-width:700px) {
+    .button:hover {
+        padding: 0 10px;
+    }
+}

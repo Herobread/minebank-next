@@ -1,0 +1,30 @@
+.header {
+    font-style: normal;
+    font-weight: 700;
+    font-size: 32px;
+    /* line-height: 32px; */
+
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.subheader {
+    color: var(--accent2);
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 22px;
+}
+
+.container {
+    display: grid;
+
+    grid-template-columns: 1fr auto;
+}
+
+.cta {
+    display: flex;
+    justify-content: right;
+    align-items: center;
+}

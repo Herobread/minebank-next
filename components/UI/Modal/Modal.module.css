@@ -1,0 +1,32 @@
+.container {
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 100vw;
+    height: 100vh;
+
+    background-color: rgb(var(--accent6-rgb), 0.6);
+    backdrop-filter: blur(16px);
+
+    z-index: 1000;
+}
+
+.modal {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: clamp(50%, 600px, 100%);
+    padding: 20px;
+
+    max-height: 90vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    background-color: var(--accent5);
+    border-radius: 10px;
+}

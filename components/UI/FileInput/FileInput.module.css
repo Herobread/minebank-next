@@ -1,0 +1,63 @@
+.container {
+    width: 100%;
+}
+
+.label {
+    color: var(--accent2);
+    font-size: 14px;
+    line-height: 30px;
+}
+
+.input {
+    width: 100%;
+    height: 70px;
+    min-width: none;
+    padding: 9px;
+    color: var(--accent1);
+    background-color: transparent;
+    outline: 1px solid var(--accent3);
+    border-radius: 5px;
+    outline-style: dashed;
+
+    transition: 0.2s ease-in-out;
+}
+
+.inputContainer {
+    position: relative;
+    border: none;
+    /* outline: 1px solid var(--accent3); */
+    /* border-radius: 5px; */
+    /* outline-style: dashed; */
+}
+
+.input::file-selector-button {
+    background-color: transparent;
+    border: none;
+    outline: 1px solid var(--accent3);
+    border-radius: 5px;
+    padding: 4px 10px;
+    margin-right: 9px;
+    cursor: pointer;
+    transition: 0.2s ease-in-out;
+}
+
+.input::file-selector-button:hover {
+    outline: 1px solid var(--accent1);
+}
+
+/* .input:hover, */
+.input:focus {
+    color: var(--accent1);
+    border: none;
+    outline: 1px solid var(--accent1);
+}
+
+.imgContainer {
+    position: absolute;
+    right: 10px;
+    margin: 10px 0;
+}
+
+.imgContainer span {
+    border-radius: 5px;
+}

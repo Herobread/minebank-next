@@ -1,0 +1,100 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: 'Inter', sans-serif;
+
+  /* outline: white 1px solid; */
+  /* background-color: #46b84b11; */
+}
+
+body {
+  background-color: #191919;
+  color: white;
+  overflow-y: scroll;
+  overflow-x: hidden;
+
+  /* width: 100vw; */
+}
+
+.black {
+  background-color: #000000;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+
+  transition: 0.2s ease-in-out;
+}
+
+a:hover {
+  color: white;
+}
+
+.mc {
+  font-weight: 200;
+}
+
+:root {
+  color-scheme: dark;
+
+  --accent1: #FFFFFF;
+  --accent2: #9A9A9A;
+  --accent3: #666666;
+  --accent4: #444444;
+  --accent5: #222222;
+  --accent6: #1E1E1E;
+  --accent7: #111111;
+
+  --accent-1: #000000;
+  --accent-2: #191919;
+
+  --accent1-rgb: 255, 255, 255;
+  --accent2-rgb: 154, 154, 154;
+  --accent3-rgb: 102, 102, 102;
+  --accent4-rgb: 68, 68, 68;
+  --accent5-rgb: 34, 34, 34;
+  --accent6-rgb: 17, 17, 17;
+
+  --red: tomato;
+
+  --accent-1-rgb: 0, 0, 0;
+  /* --accent-2-rgb: #191919; */
+}
+
+::selection {
+  background: var(--accent4);
+  color: var(--accent1)
+}
+
+/* input,
+textarea,
+button,
+select,
+a { */
+* {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+body.loading * {
+  transition: none !important;
+}
+
+#nprogress .bar {
+  background: lime !important;
+}
+
+#nprogress .peg {
+  box-shadow: 0 0 10px #FFBB00, 0 0 5px #FFBB00 !important;
+}
+
+img {
+  image-rendering: optimizeSpeed;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: -o-crisp-edges;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: pixelated;
+  image-rendering: optimize-contrast;
+  -ms-interpolation-mode: nearest-neighbor;
+}

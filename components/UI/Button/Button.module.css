@@ -1,0 +1,72 @@
+.button {
+    height: fit-content;
+
+    padding: 6px 20px;
+
+    background-color: transparent;
+    outline: 1px solid var(--accent3);
+
+    color: var(--accent1);
+    border: none;
+    border-radius: 6px;
+
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 17px;
+
+    transition: 0.2s ease-in-out;
+
+    outline-offset: -1px;
+
+    cursor: pointer;
+}
+
+.button:focus {
+    outline: 1px solid var(--accent1);
+}
+
+.button:hover {
+    outline: 1px solid var(--accent1);
+}
+
+.button:active {
+    transition: 0s ease-in-out;
+    background-color: var(--accent3);
+}
+
+.disabled {
+    cursor: not-allowed;
+
+    outline: 1px solid var(--accent3);
+    color: var(--accent3);
+}
+
+.disabled:active {
+    background-color: transparent;
+}
+
+.disabled:hover,
+.disabled:focus {
+    outline: 1px solid var(--accent3);
+}
+
+.wide {
+    width: 100%;
+    padding: 10px 0;
+}
+
+.accent {
+    outline: 1px solid var(--accent1);
+    background-color: var(--accent1);
+    color: var(--accent-1);
+}
+
+.accent:hover {
+    color: var(--accent1);
+    background-color: transparent;
+}
+
+.danger:hover {
+    color: var(--red);
+    outline: 1px solid var(--red);
+}
